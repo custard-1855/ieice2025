@@ -1,0 +1,55 @@
+\documentclass{classes/resume}
+
+\title{
+	title
+}
+
+\author{
+	○○大学 ○○学科 ○○専攻 学籍番号 名前
+}
+
+\begin{document}
+\maketitle
+
+\section{はじめに}
+本稿では，○○について述べる．
+\subsection{その次に}
+本節では，○○について述べる．
+\subsubsection{最後に}
+最後に，○○について述べる．
+\Fig{fig:fig1}に示すように，○○である．
+\Table{tab:sample}に示すように，○○である．
+
+% 図の挿入
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figures/dummy.pdf}
+    \caption{図の説明 \cite{ref:nomura2022uwb} \cite{ref:青空文庫Aozo22:online}}
+    \label{fig:fig1}
+\end{figure}
+
+
+To be, or not to be: that is the question.
+
+
+\begin{table}[h]
+    \centering
+    \caption{Sample Table}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        1 & 2 & 3 \\
+        \hline
+        4 & 5 & 6 \\
+        \hline
+        7 & 8 & 9 \\
+        \hline
+    \end{tabular}
+    \label{tab:sample}
+\end{table}
+
+\section{結論}
+結論として，○○について述べた．
+
+\subfile{sections/references}
+
+\end{document}

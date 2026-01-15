@@ -1,0 +1,29 @@
+\documentclass[preview,border=5pt]{standalone}
+
+% 日本語対応
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage[haranoaji,no-math,deluxe]{luatexja-preset}
+
+% 表関連
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% チェックマーク
+\usepackage{amssymb}
+
+\begin{document}
+\begin{table}[htbp]
+ \begin{center}
+   \begin{tabular}{|l|r|r|r|}
+    \hline
+    CNN        & PSDS1 & PSDS2 & mpAUC \\
+    \hline
+    -          & 0.375 & 0.581 & 0.709 \\
+    \checkmark & 0.373 & 0.596 & 0.745 \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{table}
+\end{document}

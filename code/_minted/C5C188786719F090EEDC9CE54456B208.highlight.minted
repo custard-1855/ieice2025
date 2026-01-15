@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{torch}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{torch}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{nn}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{torch}\PYG{n+nn}{.}\PYG{n+nn}{distributions}\PYG{n+nn}{.}\PYG{n+nn}{beta}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{Beta}
+\end{MintedVerbatim}

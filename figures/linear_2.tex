@@ -1,0 +1,46 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=1.2cm,
+    box/.style={rectangle, draw, thick, minimum width=3cm, minimum height=0.8cm, align=center},
+    arrow/.style={-Stealth, thick}
+]
+
+% RNN Output
+\node[box] (rnn) {RNN Output\\(B, T, 256)};
+
+% Dropout
+\node[box, below=of rnn] (dropout) {Dropout};
+
+% Dense layers (parallel processing)
+\node[box, below left=1.5cm and 2cm of dropout] (dense) {Dense Layer\\(256 → C)};
+\node[box, below right=1.5cm and 2cm of dropout] (dense_softmax) {Dense Layer\\(256 → C)};
+
+% Activations
+\node[box, below=of dense] (sigmoid) {Sigmoid\\(Strong)};
+\node[box, below=of dense_softmax] (softmax) {Softmax\\(Attention)};
+
+% Weighted sum
+\node[box, below=2cm of dropout] (weighted) {重み付き和\\$\frac{\sum(\text{Strong} \times \text{Attention})}{\sum \text{Attention}}$};
+
+% Outputs
+\node[box, below=of sigmoid, yshift=-0.5cm] (strong_out) {強予測\\(B, C, T)};
+\node[box, below=of weighted] (weak_out) {弱予測\\(B, C)};
+
+% Arrows
+\draw[arrow] (rnn) -- (dropout);
+\draw[arrow] (dropout) -| (dense);
+\draw[arrow] (dropout) -| (dense_softmax);
+\draw[arrow] (dense) -- (sigmoid);
+\draw[arrow] (dense_softmax) -- (softmax);
+\draw[arrow] (sigmoid) -- (strong_out);
+\draw[arrow] (sigmoid) -- (weighted);
+\draw[arrow] (softmax) -- (weighted);
+\draw[arrow] (weighted) -- (weak_out);
+
+\end{tikzpicture}
+\end{document}

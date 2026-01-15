@@ -1,0 +1,102 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{compute\PYGZus{}cmt\PYGZus{}confidence\PYGZus{}weights}\PYG{p}{(}
+    \PYG{n+nb+bp}{self}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{index\PYGZus{}weak}\PYG{p}{:} \PYG{n+nb}{int}\PYG{p}{,}
+\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n+nb}{tuple}\PYG{p}{[}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{]}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Compute confidence weights based on teacher\PYGZsq{}s certainty.}
+
+\PYG{l+s+sd}{    Correction: High confidence for both positive (near 1) and negative (near 0) predictions.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{use\PYGZus{}neg\PYGZus{}sample}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{} use neg\PYGZus{}sample \PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{\PYGZsh{} Unlabeled部分のマスク生成}
+        \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+        \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+
+        \PYG{n}{pos\PYGZus{}mask\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mf}{1.0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{neg\PYGZus{}mask\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}
+
+        \PYG{n}{pos\PYGZus{}mask\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mf}{1.0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{neg\PYGZus{}mask\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Unlabeled部分の信頼度計算}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{pos\PYGZus{}mask\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{*} \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{neg\PYGZus{}mask\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mf}{1.0} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{+} \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled}
+
+        \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{pos\PYGZus{}mask\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{*} \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{neg\PYGZus{}mask\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mf}{1.0} \PYG{o}{\PYGZhy{}} \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{+} \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled}
+
+        \PYG{c+c1}{\PYGZsh{} Labeled部分は常に信頼度1.0}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}labeled} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}labeled} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} 結合（pos/negは後でスケーリングに使用）}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}pos} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}w\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}neg} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{zeros\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}w} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}w\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+        \PYG{n}{c\PYGZus{}s\PYGZus{}pos} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}s\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}neg} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{zeros\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,} \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}s\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{} CMT \PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{\PYGZsh{} Unlabeled部分のみ計算（labeled部分はy\PYGZus{}tildeが元のy\PYGZus{}wなので除外）}
+        \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+        \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+        \PYG{n}{y\PYGZus{}tilde\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+        \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}tilde\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}
+
+        \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{*} \PYG{n}{y\PYGZus{}tilde\PYGZus{}w\PYGZus{}unlabeled}
+        \PYG{n}{y\PYGZus{}w\PYGZus{}expanded} \PYG{o}{=} \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{unsqueeze}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{expand\PYGZus{}as}\PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{*} \PYG{n}{y\PYGZus{}w\PYGZus{}expanded} \PYG{o}{*} \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}unlabeled}
+
+        \PYG{c+c1}{\PYGZsh{} Labeled部分は常に信頼度1.0}
+        \PYG{n}{c\PYGZus{}w\PYGZus{}labeled} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s\PYGZus{}labeled} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} 結合}
+        \PYG{n}{c\PYGZus{}w} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}w\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}s\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+    \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{use\PYGZus{}neg\PYGZus{}sample} \PYG{o+ow}{and} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{pos\PYGZus{}neg\PYGZus{}scale}\PYG{p}{:}  \PYG{c+c1}{\PYGZsh{} 正例と負例の量を調整}
+        \PYG{c+c1}{\PYGZsh{} Unlabeled部分のみの正例と負例の総重みを計算}
+        \PYG{n}{pos\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{clamp}\PYG{p}{(}\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}6}\PYG{p}{)}
+        \PYG{n}{neg\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{clamp}\PYG{p}{(}\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}6}\PYG{p}{)}
+
+        \PYG{n}{pos\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{clamp}\PYG{p}{(}\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}6}\PYG{p}{)}
+        \PYG{n}{neg\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{clamp}\PYG{p}{(}\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mf}{1e\PYGZhy{}6}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Unlabeled部分のみをスケーリング}
+        \PYG{k}{if} \PYG{n}{pos\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{\PYGZlt{}} \PYG{n}{neg\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} 負例が多い → 負例を縮小}
+            \PYG{n}{scale\PYGZus{}factor} \PYG{o}{=} \PYG{n}{neg\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{pos\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled}
+            \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled\PYGZus{}scaled} \PYG{o}{=} \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{+} \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{scale\PYGZus{}factor}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} 正例が多い → 正例を縮小}
+            \PYG{n}{scale\PYGZus{}factor} \PYG{o}{=} \PYG{n}{pos\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{neg\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled}
+            \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled\PYGZus{}scaled} \PYG{o}{=} \PYG{n}{c\PYGZus{}w\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{scale\PYGZus{}factor} \PYG{o}{+} \PYG{n}{c\PYGZus{}w\PYGZus{}neg\PYGZus{}unlabeled}
+
+        \PYG{k}{if} \PYG{n}{pos\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{\PYGZlt{}} \PYG{n}{neg\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{:}
+            \PYG{n}{scale\PYGZus{}factor} \PYG{o}{=} \PYG{n}{neg\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{pos\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled}
+            \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled\PYGZus{}scaled} \PYG{o}{=} \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{+} \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{scale\PYGZus{}factor}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{scale\PYGZus{}factor} \PYG{o}{=} \PYG{n}{pos\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{neg\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled}
+            \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled\PYGZus{}scaled} \PYG{o}{=} \PYG{n}{c\PYGZus{}s\PYGZus{}pos\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{scale\PYGZus{}factor} \PYG{o}{+} \PYG{n}{c\PYGZus{}s\PYGZus{}neg\PYGZus{}unlabeled}
+
+        \PYG{c+c1}{\PYGZsh{} Labeledとスケール済みUnlabeledを結合}
+        \PYG{n}{c\PYGZus{}w} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}w\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}w\PYGZus{}unlabeled\PYGZus{}scaled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{c\PYGZus{}s} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c\PYGZus{}s\PYGZus{}labeled}\PYG{p}{,} \PYG{n}{c\PYGZus{}s\PYGZus{}unlabeled\PYGZus{}scaled}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} ログを更新（スケール前の値を記録）}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/pos\PYGZus{}neg\PYGZus{}ratio\PYGZus{}weak}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{pos\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{neg\PYGZus{}sum\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/pos\PYGZus{}neg\PYGZus{}ratio\PYGZus{}strong}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{pos\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{/} \PYG{n}{neg\PYGZus{}sum\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{c\PYGZus{}w}\PYG{p}{,} \PYG{n}{c\PYGZus{}s}
+\end{MintedVerbatim}

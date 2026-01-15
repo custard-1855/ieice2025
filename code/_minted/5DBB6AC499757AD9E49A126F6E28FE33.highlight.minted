@@ -1,0 +1,61 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{apply\PYGZus{}cmt\PYGZus{}postprocessing}\PYG{p}{(}
+    \PYG{n+nb+bp}{self}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{y\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{index\PYGZus{}weak}\PYG{p}{:} \PYG{n+nb}{int}\PYG{p}{,}
+\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n+nb}{tuple}\PYG{p}{[}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{]}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Apply Confident Mean Teacher postprocessing only unlabeled data.}
+
+\PYG{l+s+sd}{    y\PYGZus{}w: (batch, classes)}
+\PYG{l+s+sd}{    y\PYGZus{}s: (batch, classes, frames)}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} (unlabeled\PYGZus{}batch, classes)}
+    \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{=} \PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{n}{index\PYGZus{}weak}\PYG{p}{:}\PYG{p}{]}  \PYG{c+c1}{\PYGZsh{} (unlabeled\PYGZus{}batch, classes, frames)}
+
+    \PYG{k}{if} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{use\PYGZus{}neg\PYGZus{}sample}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} Weak (clip\PYGZhy{}level)}
+        \PYG{n}{y\PYGZus{}tilde\PYGZus{}w} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}
+            \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}pos}\PYG{p}{,}
+            \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 正例 → 1.0}
+            \PYG{n}{torch}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}
+                \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}neg}\PYG{p}{,}
+                \PYG{n}{torch}\PYG{o}{.}\PYG{n}{zeros\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 負例 → 0.0}
+                \PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 中間値 → そのまま（後で信頼度0）}
+            \PYG{p}{)}\PYG{p}{,}
+        \PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Strong (frame\PYGZhy{}level) \PYGZhy{} Weak制約なし、独立判定}
+        \PYG{n}{y\PYGZus{}s\PYGZus{}binary} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}
+            \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{\PYGZgt{}}\PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}pos}\PYG{p}{,}
+            \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 正例 → 1.0}
+            \PYG{n}{torch}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}
+                \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}neg}\PYG{p}{,}
+                \PYG{n}{torch}\PYG{o}{.}\PYG{n}{zeros\PYGZus{}like}\PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 負例 → 0.0}
+                \PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{,}  \PYG{c+c1}{\PYGZsh{} 中間値 → そのまま（後で信頼度0）}
+            \PYG{p}{)}\PYG{p}{,}
+        \PYG{p}{)}
+
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{y\PYGZus{}tilde\PYGZus{}w} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}w\PYGZus{}unlabeled} \PYG{o}{\PYGZgt{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}clip}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} clip}
+        \PYG{n}{y\PYGZus{}w\PYGZus{}expanded} \PYG{o}{=} \PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{o}{.}\PYG{n}{unsqueeze}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{expand\PYGZus{}as}\PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{p}{)}
+        \PYG{n}{y\PYGZus{}s\PYGZus{}binary} \PYG{o}{=} \PYG{n}{y\PYGZus{}w\PYGZus{}expanded} \PYG{o}{*} \PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled} \PYG{o}{\PYGZgt{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{phi\PYGZus{}frame}\PYG{p}{)}\PYG{o}{.}\PYG{n}{float}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} frame}
+
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}list} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+    \PYG{n}{original\PYGZus{}device} \PYG{o}{=} \PYG{n}{y\PYGZus{}s}\PYG{o}{.}\PYG{n}{device}
+    \PYG{n}{y\PYGZus{}s\PYGZus{}numpy} \PYG{o}{=} \PYG{n}{y\PYGZus{}s\PYGZus{}binary}\PYG{o}{.}\PYG{n}{detach}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{cpu}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{numpy}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} y\PYGZus{}s\PYGZus{}binary: (batch, classes, frames)}
+
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{y\PYGZus{}s\PYGZus{}unlabeled}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{sample} \PYG{o}{=} \PYG{n}{y\PYGZus{}s\PYGZus{}numpy}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} (classes, frames) \PYGZhy{}\PYGZgt{} (frames, classes)}
+        \PYG{n}{filtered} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{median\PYGZus{}filter}\PYG{p}{(}\PYG{n}{sample}\PYG{p}{)}
+        \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{filtered}\PYG{p}{)}
+
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}np} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{stack}\PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}list}\PYG{p}{,} \PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} (batch, frames, classes)}
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}tensor} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{from\PYGZus{}numpy}\PYG{p}{(}\PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}np}\PYG{p}{)}\PYG{o}{.}\PYG{n}{to}\PYG{p}{(}\PYG{n}{original\PYGZus{}device}\PYG{p}{)}
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s} \PYG{o}{=} \PYG{n}{y\PYGZus{}tilde\PYGZus{}s\PYGZus{}tensor}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZgt{} (batch, classes, frames)}
+
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}w} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{y\PYGZus{}w}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{n}{y\PYGZus{}tilde\PYGZus{}s} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{cat}\PYG{p}{(}\PYG{p}{(}\PYG{n}{y\PYGZus{}s}\PYG{p}{[}\PYG{p}{:}\PYG{n}{index\PYGZus{}weak}\PYG{p}{]}\PYG{p}{,} \PYG{n}{y\PYGZus{}tilde\PYGZus{}s}\PYG{p}{)}\PYG{p}{,} \PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{y\PYGZus{}tilde\PYGZus{}w}\PYG{p}{,} \PYG{n}{y\PYGZus{}tilde\PYGZus{}s}
+\end{MintedVerbatim}

@@ -1,0 +1,11 @@
+class,MT,CMT,CMT-scale
+Alarm_bell_ringing,0.868,0.937,0.947
+Blender,0.870,0.885,0.920
+Cat,0.881,0.929,0.911
+Dishes,0.501,0.641,0.602
+Dog,0.848,0.893,0.883
+Electric_shaver_toothbrush,0.965,0.989,0.984
+Frying,0.958,0.948,0.970
+Running_water,0.887,0.902,0.912
+Speech,0.775,0.853,0.862
+Vacuum_cleaner,0.901,0.912,0.948

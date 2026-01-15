@@ -1,0 +1,12 @@
+class,mpauc,dataset,model
+birds_singing,0.9685,MAESTRO,teacher
+children voices,0.8677,MAESTRO,teacher
+car,0.8655,MAESTRO,teacher
+metro approaching,0.8070,MAESTRO,teacher
+metro leaving,0.7557,MAESTRO,teacher
+footsteps,0.6961,MAESTRO,teacher
+people talking,0.6625,MAESTRO,teacher
+large_vehicle,0.6589,MAESTRO,teacher
+cutlery and dishes,0.5839,MAESTRO,teacher
+brakes_squeaking,0.3978,MAESTRO,teacher
+wind_blowing,0.3241,MAESTRO,teacher

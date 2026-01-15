@@ -1,0 +1,100 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Main MixStyle Classes}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{BasicMixStyleWrapper}\PYG{p}{(}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{Module}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Wrapper for pure MixStyle without attention mechanism.}
+
+\PYG{l+s+sd}{    This is used for baseline experiments that only apply}
+\PYG{l+s+sd}{    basic MixStyle augmentation without frequency\PYGZhy{}wise attention.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{channels}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{        }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Initialize BasicMixStyleWrapper.}
+
+\PYG{l+s+sd}{        Args:}
+\PYG{l+s+sd}{            channels: Not used, but kept for API compatibility}
+\PYG{l+s+sd}{            **kwargs: Not used, but kept for API compatibility}
+
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{n+nb}{super}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
+        \PYG{c+c1}{\PYGZsh{} No parameters needed \PYGZhy{} just wraps mix\PYGZus{}style function}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{x}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{        }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Forward pass applying pure MixStyle.}
+
+\PYG{l+s+sd}{        Args:}
+\PYG{l+s+sd}{            x: Input features (Batch, Channels, Frame, Frequency)}
+
+\PYG{l+s+sd}{        Returns:}
+\PYG{l+s+sd}{            Output features with pure MixStyle applied}
+
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{k}{return} \PYG{n}{mix\PYGZus{}style}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)}
+
+
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{FrequencyAttentionMixStyle}\PYG{p}{(}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{Module}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}CNN\PYGZhy{}based frequency attention MixStyle.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        channels: Number of input channels}
+\PYG{l+s+sd}{        **kwargs: Configuration options}
+\PYG{l+s+sd}{            \PYGZhy{} attn\PYGZus{}type: Attention network architecture}
+\PYG{l+s+sd}{                * \PYGZdq{}default\PYGZdq{}: Shallow 2\PYGZhy{}layer CNN}
+
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{channels}\PYG{p}{,} \PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n+nb}{super}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{channels} \PYG{o}{=} \PYG{n}{channels}
+
+        \PYG{c+c1}{\PYGZsh{} Configuration options}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{attention\PYGZus{}type} \PYG{o}{=} \PYG{n}{kwargs}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{attn\PYGZus{}type}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{default}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Calculate intermediate channel dimensions}
+        \PYG{n}{specific\PYGZus{}channels} \PYG{o}{=} \PYG{n}{channels} \PYG{k}{if} \PYG{n}{channels} \PYG{o}{==} \PYG{l+m+mi}{1} \PYG{k}{else} \PYG{n}{channels} \PYG{o}{/}\PYG{o}{/} \PYG{l+m+mi}{2}
+
+        \PYG{c+c1}{\PYGZsh{} Build attention network}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{attention\PYGZus{}network} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{\PYGZus{}build\PYGZus{}attention\PYGZus{}network}\PYG{p}{(}
+            \PYG{n}{channels}\PYG{p}{,}
+            \PYG{n}{specific\PYGZus{}channels}\PYG{p}{,}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{attention\PYGZus{}type}\PYG{p}{,}
+        \PYG{p}{)}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{\PYGZus{}build\PYGZus{}attention\PYGZus{}network}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{in\PYGZus{}channels}\PYG{p}{,} \PYG{n}{mid\PYGZus{}channels}\PYG{p}{,} \PYG{n}{attn\PYGZus{}type}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{        }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Build attention network based on specified architecture.}
+
+\PYG{l+s+sd}{        Args:}
+\PYG{l+s+sd}{            in\PYGZus{}channels: Input channel dimension}
+\PYG{l+s+sd}{            mid\PYGZus{}channels: Intermediate channel dimension}
+
+\PYG{l+s+sd}{        Returns:}
+\PYG{l+s+sd}{            Constructed attention network module}
+
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{k}{if} \PYG{n}{attn\PYGZus{}type} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{default}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+            \PYG{n}{network} \PYG{o}{=} \PYG{n}{nn}\PYG{o}{.}\PYG{n}{Sequential}\PYG{p}{(}
+                \PYG{n}{nn}\PYG{o}{.}\PYG{n}{Conv1d}\PYG{p}{(}\PYG{n}{in\PYGZus{}channels}\PYG{p}{,} \PYG{n}{mid\PYGZus{}channels}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{padding}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}
+                \PYG{n}{nn}\PYG{o}{.}\PYG{n}{ReLU}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
+                \PYG{n}{nn}\PYG{o}{.}\PYG{n}{Conv1d}\PYG{p}{(}\PYG{n}{mid\PYGZus{}channels}\PYG{p}{,} \PYG{n}{in\PYGZus{}channels}\PYG{p}{,} \PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}
+            \PYG{p}{)}
+            \PYG{c+c1}{\PYGZsh{} Initialize final layer bias to 1.0 to avoid sigmoid saturation at 0.5}
+            \PYG{c+c1}{\PYGZsh{} sigmoid(1.0) = 0.73, providing bias towards mixed features}
+            \PYG{n}{nn}\PYG{o}{.}\PYG{n}{init}\PYG{o}{.}\PYG{n}{constant\PYGZus{}}\PYG{p}{(}\PYG{n}{network}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{.}\PYG{n}{bias}\PYG{p}{,} \PYG{l+m+mf}{1.0}\PYG{p}{)}
+            \PYG{k}{return} \PYG{n}{network}
+
+    \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{forward}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{x}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{        }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Forward pass.}
+
+\PYG{l+s+sd}{        Args:}
+\PYG{l+s+sd}{            x: Input features (Batch, Channels, Frame, Frequency)}
+
+\PYG{l+s+sd}{        Returns:}
+\PYG{l+s+sd}{            Output features with frequency\PYGZhy{}wise MixStyle applied}
+
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{n}{x\PYGZus{}avg} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} (B, C, F)}
+        \PYG{n}{attn\PYGZus{}logits} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{attention\PYGZus{}network}\PYG{p}{(}\PYG{n}{x\PYGZus{}avg}\PYG{p}{)}
+
+        \PYG{n}{attn\PYGZus{}weights} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{sigmoid}\PYG{p}{(}\PYG{n}{attn\PYGZus{}logits}\PYG{p}{)}\PYG{o}{.}\PYG{n}{unsqueeze}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} (B, C, 1, F)}
+        \PYG{n}{x\PYGZus{}mixed} \PYG{o}{=} \PYG{n}{mix\PYGZus{}style}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{attn\PYGZus{}weights}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{able}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n}{x} \PYG{o}{+} \PYG{n}{x\PYGZus{}mixed}
+\end{MintedVerbatim}

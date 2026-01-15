@@ -1,0 +1,11 @@
+class,psds,dataset,model,scenario
+Electric_shaver_toothbrush,0.9841,DESED,teacher,scenario2
+Frying,0.9702,DESED,teacher,scenario2
+Vacuum_cleaner,0.9483,DESED,teacher,scenario2
+Alarm_bell_ringing,0.9468,DESED,teacher,scenario2
+Blender,0.9201,DESED,teacher,scenario2
+Running_water,0.9124,DESED,teacher,scenario2
+Cat,0.9107,DESED,teacher,scenario2
+Dog,0.8829,DESED,teacher,scenario2
+Speech,0.8622,DESED,teacher,scenario2
+Dishes,0.6018,DESED,teacher,scenario2

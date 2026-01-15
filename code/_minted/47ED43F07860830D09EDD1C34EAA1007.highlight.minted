@@ -1,0 +1,28 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{compute\PYGZus{}cmt\PYGZus{}consistency\PYGZus{}loss}\PYG{p}{(}
+    \PYG{n+nb+bp}{self}\PYG{p}{,}
+    \PYG{n}{student\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{student\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{teacher\PYGZus{}pseudo\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{teacher\PYGZus{}pseudo\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{confidence\PYGZus{}w}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+    \PYG{n}{confidence\PYGZus{}s}\PYG{p}{:} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,}
+\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n+nb}{tuple}\PYG{p}{[}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{,} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{Tensor}\PYG{p}{]}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Compute weighted BCE loss.\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{c+c1}{\PYGZsh{} Weak Loss}
+    \PYG{n}{bce\PYGZus{}w} \PYG{o}{=} \PYG{n}{F}\PYG{o}{.}\PYG{n}{binary\PYGZus{}cross\PYGZus{}entropy}\PYG{p}{(}\PYG{n}{student\PYGZus{}w}\PYG{p}{,} \PYG{n}{teacher\PYGZus{}pseudo\PYGZus{}w}\PYG{p}{,} \PYG{n}{reduction}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{none}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{weighted\PYGZus{}bce\PYGZus{}w} \PYG{o}{=} \PYG{n}{confidence\PYGZus{}w} \PYG{o}{*} \PYG{n}{bce\PYGZus{}w}
+    \PYG{n}{loss\PYGZus{}w\PYGZus{}con} \PYG{o}{=} \PYG{n}{weighted\PYGZus{}bce\PYGZus{}w}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Strong Loss}
+    \PYG{n}{bce\PYGZus{}s} \PYG{o}{=} \PYG{n}{F}\PYG{o}{.}\PYG{n}{binary\PYGZus{}cross\PYGZus{}entropy}\PYG{p}{(}\PYG{n}{student\PYGZus{}s}\PYG{p}{,} \PYG{n}{teacher\PYGZus{}pseudo\PYGZus{}s}\PYG{p}{,} \PYG{n}{reduction}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{none}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{weighted\PYGZus{}bce\PYGZus{}s} \PYG{o}{=} \PYG{n}{confidence\PYGZus{}s} \PYG{o}{*} \PYG{n}{bce\PYGZus{}s}
+    \PYG{n}{loss\PYGZus{}s\PYGZus{}con} \PYG{o}{=} \PYG{n}{weighted\PYGZus{}bce\PYGZus{}s}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}
+
+    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/confidence\PYGZus{}weak\PYGZus{}mean}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{confidence\PYGZus{}w}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/confidence\PYGZus{}weak\PYGZus{}std}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{confidence\PYGZus{}w}\PYG{o}{.}\PYG{n}{std}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/confidence\PYGZus{}strong\PYGZus{}mean}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{confidence\PYGZus{}s}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{train/cmt/confidence\PYGZus{}strong\PYGZus{}std}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{confidence\PYGZus{}s}\PYG{o}{.}\PYG{n}{std}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{loss\PYGZus{}w\PYGZus{}con}\PYG{p}{,} \PYG{n}{loss\PYGZus{}s\PYGZus{}con}
+\end{MintedVerbatim}

@@ -1,0 +1,135 @@
+\documentclass[tikz,border=5mm]{standalone}
+\usepackage{luatexja}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds, calc, shapes.geometric}
+
+\begin{document}
+
+\tikzset{
+    block/.style={
+        rectangle,
+        draw=black,
+        thick,
+        fill=#1,
+        minimum width=2.8cm,
+        minimum height=1cm,
+        font=\small,
+        text centered,
+        rounded corners=3pt
+    },
+    block/.default=blue!15,
+    datablock/.style={
+        block=green!15,
+        minimum width=2.2cm
+    },
+    modelblock/.style={
+        block=orange!20,
+        minimum width=2.5cm
+    },
+    lossblock/.style={
+        block=red!15,
+        minimum width=2.2cm
+    },
+    arrow/.style={
+        -Stealth,
+        thick
+    },
+    dashedarrow/.style={
+        -Stealth,
+        thick,
+        dashed
+    },
+    loopbox/.style={
+        rectangle,
+        draw=black!60,
+        thick,
+        rounded corners=5pt,
+        fill=gray!5
+    },
+    looplabel/.style={
+        rectangle,
+        fill=gray!30,
+        font=\footnotesize\bfseries,
+        inner sep=3pt,
+        rounded corners=2pt
+    },
+    note/.style={
+        font=\footnotesize,
+        text=gray!70
+    }
+}
+
+\begin{tikzpicture}[node distance=1.2cm and 1.5cm]
+% === データ ===
+\node[block=green!15, minimum width=8cm] (databox) {データ};
+
+% === 前処理 ===
+\node[block=cyan!15, below=1.5cm of databox, minimum width=8cm] (preprocess) {前処理: Mel Spectrogram + Data Augmentation};
+
+% === モデル層 ===
+\node[modelblock, below=1.5cm of preprocess, xshift=-2.5cm] (student) {モデル: Student};
+\node[modelblock, below=1.5cm of preprocess, xshift=2.5cm] (teacher) {モデル: Teacher};
+
+% モデルをまとめるボックス
+\begin{scope}[on background layer]
+    \node[loopbox, fill=orange!5, fit=(student)(teacher), inner sep=15pt] (modelbox) {};
+\end{scope}
+\node[looplabel, fill=orange!20] at (modelbox.north) {Mean Teacher};
+
+% === 出力層 ===
+\node[block=purple!15, below=1.2cm of student] (pred_s) {強・弱予測};
+\node[block=purple!15, below=1.2cm of teacher] (pred_t) {強・弱予測};
+
+% === 損失計算 ===
+\node[lossblock, below=1.5cm of $(pred_s)!0.5!(pred_t)$] (loss) {損失計算};
+
+% 損失の詳細
+\node[block=red!10, below=0.8cm of loss, minimum width=10cm, minimum height=1.5cm] (lossdetail) {
+    \begin{tabular}{ccc}
+        BCE Loss & + & Consistency Loss \\
+        (強/弱) & & (Student $\leftrightarrow$ Teacher, 強/弱)
+    \end{tabular}
+};
+
+% === 更新 ===
+\node[block=yellow!20, below=1.2cm of lossdetail, xshift=-2.5cm] (bp) {Backpropagation\\(Student更新)};
+\node[block=yellow!20, below=1.2cm of lossdetail, xshift=2.5cm] (ema) {EMA\\(Teacher更新)};
+
+% === 矢印 ===
+% データ→前処理
+\draw[arrow] (databox.south) -- (preprocess.north);
+
+% 前処理→モデル
+\draw[arrow] (preprocess.south) -- ++(0,-0.5) -| (student.north);
+\draw[arrow] (preprocess.south) -- ++(0,-0.5) -| (teacher.north);
+
+% モデル→予測
+\draw[arrow] (student.south) -- (pred_s.north);
+\draw[arrow] (teacher.south) -- (pred_t.north);
+
+% 予測→損失
+\draw[arrow] (pred_s.south) -- ++(0,-0.5) -| (loss.north west);
+\draw[arrow] (pred_t.south) -- ++(0,-0.5) -| (loss.north east);
+
+% 損失→詳細
+\draw[arrow] (loss.south) -- (lossdetail.north);
+
+% 詳細→更新
+\draw[arrow] (lossdetail.south) -- ++(0,-0.4) -| (bp.north);
+\draw[arrow] (lossdetail.south) -- ++(0,-0.4) -| (ema.north);
+
+% 更新→モデル (フィードバックループ)
+\draw[dashedarrow, blue!60] (bp.west) -- ++(-1,0) |- node[note, pos=0.25, left] {Adam} (student.west);
+\draw[dashedarrow, orange!60] (ema.east) -- ++(1,0) |- node[note, pos=0.25, right] {指数移動平均} (teacher.east);
+
+% === エポックループ表示 ===
+\begin{scope}[on background layer]
+    \node[loopbox, draw=black!40, fill=blue!3, 
+          fit=(preprocess)(modelbox)(pred_s)(pred_t)(loss)(lossdetail)(bp)(ema), 
+          inner xsep=25pt, inner ysep=15pt] (epochloop) {};
+\end{scope}
+\node[looplabel, fill=blue!15, anchor=north east] at (epochloop.north east) {×150 epochs};
+
+\end{tikzpicture}
+
+\end{document}

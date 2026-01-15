@@ -1,0 +1,12 @@
+class,MT,CMT,CMT-scale
+birds_singing,0.971,0.969,0.972
+brakes_squeaking,0.416,0.398,0.463
+car,0.825,0.866,0.817
+children voices,0.916,0.868,0.881
+cutlery and dishes,0.595,0.584,0.617
+footsteps,0.681,0.696,0.710
+large_vehicle,0.653,0.659,0.681
+metro approaching,0.833,0.807,0.782
+metro leaving,0.768,0.756,0.740
+people talking,0.665,0.662,0.662
+wind_blowing,0.599,0.324,0.744

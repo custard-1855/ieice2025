@@ -1,0 +1,59 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{calc\PYGZus{}weighted\PYGZus{}stats}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{attn\PYGZus{}map}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Attentionマップを重みとして平均と標準偏差を計算.}
+
+\PYG{l+s+sd}{    x: [Batch, Channel, Time, Freq]}
+\PYG{l+s+sd}{    attn\PYGZus{}map: [Batch, Channel, 1, Freq]}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{EPSILON} \PYG{o}{=} \PYG{l+m+mf}{1e\PYGZhy{}6}
+    \PYG{n}{attn\PYGZus{}sum} \PYG{o}{=} \PYG{n}{attn\PYGZus{}map}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{keepdim}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{o}{+} \PYG{n}{EPSILON}
+
+    \PYG{c+c1}{\PYGZsh{} 1. 重み付き平均}
+    \PYG{n}{mean} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x} \PYG{o}{*} \PYG{n}{attn\PYGZus{}map}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{keepdim}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{o}{/} \PYG{n}{attn\PYGZus{}sum}
+
+    \PYG{c+c1}{\PYGZsh{} 2. 重み付き分散}
+    \PYG{n}{var} \PYG{o}{=} \PYG{p}{(}\PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{mean}\PYG{p}{)} \PYG{o}{*}\PYG{o}{*} \PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{attn\PYGZus{}map}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{keepdim}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{o}{/} \PYG{n}{attn\PYGZus{}sum}
+    \PYG{n}{std} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{var} \PYG{o}{+} \PYG{n}{EPSILON}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{mean}\PYG{p}{,} \PYG{n}{std}
+
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{mix\PYGZus{}style}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{attn\PYGZus{}map}\PYG{p}{,} \PYG{n}{use\PYGZus{}attn}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}バッチ間で統計量を混合し,データ拡張を実施.}
+
+\PYG{l+s+sd}{    Args:}
+\PYG{l+s+sd}{        x: Input features (batch\PYGZus{}size, n\PYGZus{}channels, n\PYGZus{}frames, n\PYGZus{}freq)}
+
+\PYG{l+s+sd}{    Returns:}
+\PYG{l+s+sd}{        Augmented features with mixed statistics}
+
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{AUGMENTATION\PYGZus{}PROB} \PYG{o}{=} \PYG{l+m+mf}{0.5}
+    \PYG{k}{if} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{rand}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{item}\PYG{p}{(}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{n}{AUGMENTATION\PYGZus{}PROB}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{x}
+    \PYG{n}{EPSILON} \PYG{o}{=} \PYG{l+m+mf}{1e\PYGZhy{}6}
+
+    \PYG{k}{if} \PYG{n}{use\PYGZus{}attn} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{able}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{n}{x\PYGZus{}mean}\PYG{p}{,} \PYG{n}{x\PYGZus{}std} \PYG{o}{=} \PYG{n}{calc\PYGZus{}weighted\PYGZus{}stats}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{attn\PYGZus{}map}\PYG{p}{)}
+
+    \PYG{n}{x\PYGZus{}mean} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{keepdim}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n}{x\PYGZus{}var} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{var}\PYG{p}{(}\PYG{n}{dim}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{keepdim}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n}{x\PYGZus{}std} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x\PYGZus{}var} \PYG{o}{+} \PYG{n}{EPSILON}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{p}{)}
+
+    \PYG{n}{x\PYGZus{}normed} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{x\PYGZus{}mean}\PYG{p}{)} \PYG{o}{/} \PYG{n}{x\PYGZus{}std}
+
+    \PYG{c+c1}{\PYGZsh{} バッチ内で異なる統計量を得る}
+    \PYG{n}{B} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{size}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{n}{perm} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{randperm}\PYG{p}{(}\PYG{n}{B}\PYG{p}{,} \PYG{n}{device}\PYG{o}{=}\PYG{n}{x}\PYG{o}{.}\PYG{n}{device}\PYG{p}{)}
+    \PYG{n}{mu2}\PYG{p}{,} \PYG{n}{sig2} \PYG{o}{=} \PYG{n}{x\PYGZus{}mean}\PYG{p}{[}\PYG{n}{perm}\PYG{p}{]}\PYG{p}{,} \PYG{n}{x\PYGZus{}std}\PYG{p}{[}\PYG{n}{perm}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} Beta分布に基づき混合}
+    \PYG{n}{BETA\PYGZus{}ALPHA} \PYG{o}{=} \PYG{l+m+mf}{0.1}
+    \PYG{n}{lam} \PYG{o}{=} \PYG{n}{Beta}\PYG{p}{(}\PYG{n}{BETA\PYGZus{}ALPHA}\PYG{p}{,} \PYG{n}{BETA\PYGZus{}ALPHA}\PYG{p}{)}\PYG{o}{.}\PYG{n}{sample}\PYG{p}{(}\PYG{p}{(}\PYG{n}{B}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n}{lam} \PYG{o}{=} \PYG{n}{lam}\PYG{o}{.}\PYG{n}{to}\PYG{p}{(}\PYG{n}{device}\PYG{o}{=}\PYG{n}{x}\PYG{o}{.}\PYG{n}{device}\PYG{p}{)}
+
+    \PYG{n}{mixed\PYGZus{}mean} \PYG{o}{=} \PYG{n}{lam} \PYG{o}{*} \PYG{n}{x\PYGZus{}mean} \PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{lam}\PYG{p}{)} \PYG{o}{*} \PYG{n}{mu2}
+    \PYG{n}{mixed\PYGZus{}std} \PYG{o}{=} \PYG{n}{lam} \PYG{o}{*} \PYG{n}{x\PYGZus{}std} \PYG{o}{+} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{lam}\PYG{p}{)} \PYG{o}{*} \PYG{n}{sig2}
+
+    \PYG{k}{return} \PYG{n}{x\PYGZus{}normed} \PYG{o}{*} \PYG{n}{mixed\PYGZus{}std} \PYG{o}{+} \PYG{n}{mixed\PYGZus{}mean}
+\end{MintedVerbatim}

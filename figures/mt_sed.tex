@@ -1,0 +1,166 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric, calc, backgrounds, fit}
+\usepackage{luatexja}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    >={Latex[width=3mm,length=3mm]},
+    font=\sffamily\small,
+    % スタイル定義
+    data block/.style={rectangle, draw=none, fill=gray!10, text centered, rounded corners, minimum height=0.8cm, minimum width=2.5cm},
+    model block/.style={rectangle, draw, thick, dashed, inner sep=10pt, rounded corners},
+    layer/.style={rectangle, draw=none, fill=gray!40, minimum height=0.2cm, minimum width=2.5cm},
+    arrow/.style={->, thick, draw=gray!80},
+    loss line/.style={<->, thick, densely dotted, draw=red!70},
+    ema arrow/.style={->, very thick, draw=orange!80},
+    label text/.style={font=\footnotesize, align=center}
+]
+
+% --- 色の定義 ---
+\definecolor{studentColor}{RGB}{245, 183, 121} % オレンジ系
+\definecolor{teacherColor}{RGB}{149, 196, 230} % 青系
+\definecolor{labelColor}{RGB}{169, 209, 142}   % 緑系
+
+% ==========================
+% 1. 入力データ (左側)
+% ==========================
+\node[data block, fill=labelColor, yshift=1cm] (weak_label) {ラベル付き音声};
+\node[data block, fill=yellow!20, below=0.3cm of weak_label] (unlabeled) {ラベルなし音声};
+
+% ==========================
+% 2. Student Model (中央下)
+% ==========================
+\node[right=3cm of unlabeled, yshift=2cm] (student_center) {};
+
+% Studentのレイヤー表現
+\node[layer, fill=studentColor, minimum width=3cm] (s_l1) at (student_center) {};
+\node[layer, fill=studentColor, minimum width=3cm, above=0.15cm of s_l1] (s_l2) {};
+\node[layer, fill=studentColor, minimum width=3cm, above=0.15cm of s_l2] (s_l3) {};
+% Dropoutの灰色バー (Student) - 新しい独立した棒
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l1.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l1.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l1.west)+(2.3,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l2.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l2.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l2.west)+(2.3,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l3.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l3.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l3.west)+(2.3,0)$) {};
+
+% Student枠
+\node[model block, draw=studentColor!80, fit=(s_l1)(s_l3), label={[text=studentColor!80]below:\textbf{Student Model}}] (student_box) {};
+
+% ==========================
+% 3. Teacher Model (右側下)
+% ==========================
+\node[right=6cm of student_center] (teacher_center) {};
+
+% Teacherのレイヤー表現
+\node[layer, fill=teacherColor, minimum width=3cm] (t_l1) at (teacher_center) {};
+\node[layer, fill=teacherColor, minimum width=3cm, above=0.15cm of t_l1] (t_l2) {};
+\node[layer, fill=teacherColor, minimum width=3cm, above=0.15cm of t_l2] (t_l3) {};
+% Dropoutの灰色バー (Teacher) - Studentと同じ位置
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l1.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l1.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l1.west)+(2.3,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l2.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l2.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l2.west)+(2.3,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l3.west)+(0.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l3.west)+(1.5,0)$) {};
+\node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l3.west)+(2.3,0)$) {};
+
+% Teacher枠
+\node[model block, draw=teacherColor!80, fit=(t_l1)(t_l3), label={[text=teacherColor!80, name=teacher_label]below:\textbf{Teacher Model}}] (teacher_box) {};
+
+% ==========================
+% 4. 出力: フレームレベル (Frame-level)
+% ==========================
+% Student Frame Output
+\node[above=1.5cm of student_box] (s_frame_base) {};
+\foreach \x in {-1.2, -0.9, ..., 1.2} {
+    \draw[fill=studentColor, draw=none] ($(s_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
+}
+\draw[gray] ($(s_frame_base)+(-1.3,0)$) -- ($(s_frame_base)+(1.55,0)$);
+\node[label text, left=1.4cm of s_frame_base] (s_frame_lbl) {強予測 確率};
+
+% Teacher Frame Output
+\node[above=1.5cm of teacher_box] (t_frame_base) {};
+\foreach \x in {-1.2, -0.9, ..., 1.2} {
+    \draw[fill=teacherColor, draw=none] ($(t_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
+}
+\draw[gray] ($(t_frame_base)+(-1.3,0)$) -- ($(t_frame_base)+(1.55,0)$);
+
+% ==========================
+% 5. プーリング (Pooling)
+% ==========================
+\draw[->, thick, gray!60] ($(s_frame_base)+(0,0.6)$) -- ($(s_frame_base)+(0,1.2)$);
+
+\draw[->, thick, gray!60] ($(t_frame_base)+(0,0.6)$) -- ($(t_frame_base)+(0,1.2)$);
+
+% ==========================
+% 6. 出力: クリップレベル (Clip-level)
+% ==========================
+% Student Clip Output (Bar chart)
+\node[above=1.4cm of s_frame_base] (s_clip_base) {};
+\draw[fill=studentColor, draw=none] ($(s_clip_base)+(-1,0)$) rectangle ++(0.3, 0.8);
+\draw[fill=studentColor, draw=none] ($(s_clip_base)+(-0.5,0)$) rectangle ++(0.3, 0.2);
+\draw[fill=studentColor, draw=none] ($(s_clip_base)+(0,0)$) rectangle ++(0.3, 0.9);
+\draw[fill=studentColor, draw=none] ($(s_clip_base)+(0.5,0)$) rectangle ++(0.3, 0.4);
+\draw[gray] ($(s_clip_base)+(-1.2,0)$) -- ($(s_clip_base)+(1.2,0)$);
+\node[label text, left=1.4cm of s_clip_base] (s_clip_lbl) {弱予測 確率};
+
+% Teacher Clip Output
+\node[above=1.4cm of t_frame_base] (t_clip_base) {};
+\draw[fill=teacherColor, draw=none] ($(t_clip_base)+(-1,0)$) rectangle ++(0.3, 0.8);
+\draw[fill=teacherColor, draw=none] ($(t_clip_base)+(-0.5,0)$) rectangle ++(0.3, 0.25);
+\draw[fill=teacherColor, draw=none] ($(t_clip_base)+(0,0)$) rectangle ++(0.3, 0.85);
+\draw[fill=teacherColor, draw=none] ($(t_clip_base)+(0.5,0)$) rectangle ++(0.3, 0.35);
+\draw[gray] ($(t_clip_base)+(-1.2,0)$) -- ($(t_clip_base)+(1.2,0)$);
+
+% ==========================
+% 7. 正解ラベル (Ground Truth)
+% ==========================
+\node[above=1.0cm of s_clip_base] (gt_base) {};
+\node[data block, fill=labelColor!30, minimum width=2.5cm, minimum height=0.6cm] at (gt_base) (gt_box) {正解ラベル (Tags)};
+\node[above=0cm of gt_box, font=\scriptsize] {Dog, Car (時間情報なし)};
+
+% ==========================
+% 7.5. 弱予測と強予測を囲む枠
+% ==========================
+\node[draw=red!50, densely dotted, thick, rounded corners, fit=(s_clip_lbl)(s_frame_lbl), inner sep=5pt] (pred_group) {};
+
+% ==========================
+% 8. 矢印と接続
+% ==========================
+
+% Input -> Models
+\draw[arrow] (weak_label.east) -- ++(0.3,0) |- (student_box.west);
+\draw[arrow] (unlabeled.east) -- ++(0.8,0) |- (student_box.west);
+\coordinate (teacher_input) at ($(teacher_box.south west)+(0.3,-0.8)$);
+\draw[arrow] (unlabeled.east) -- ++(0.8,0) |- (teacher_input) -- ($(teacher_box.south west)+(0.3,0)$);
+
+% Models -> Outputs
+\draw[arrow] (student_box.north) -- (s_frame_base.south);
+\draw[arrow] (teacher_box.north) -- (t_frame_base.south);
+
+% EMA Update
+\draw[ema arrow] (student_box.east) -- node[above, font=\bfseries\footnotesize, align=center] {EMA更新} (teacher_box.west);
+
+% ==========================
+% 9. ロス（コスト）の表示
+% ==========================
+
+% Classification Cost
+\draw[loss line] (s_clip_lbl.north) to[bend left=20] node[left, font=\bfseries, text=red!70] {分類損失} (gt_box.west);
+
+% Consistency Cost (中央に1本: 弱予測と強予測の間)
+\coordinate (consistency_left) at ($(s_clip_base)!0.5!(s_frame_base) + (1.5,0)$);
+\coordinate (consistency_right) at ($(t_clip_base)!0.5!(t_frame_base) + (-1.5,0)$);
+\draw[loss line] (consistency_left) -- node[above, font=\bfseries, text=red!70, fill=white] {一貫性損失} (consistency_right);
+
+\end{tikzpicture}
+\end{document}

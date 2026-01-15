@@ -1,0 +1,68 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{luatexja-fontspec}
+\setmainjfont{Noto Sans CJK JP}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, calc, fit, backgrounds}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=0.8cm and 1.5cm,
+    box/.style={draw, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, font=\small},
+    process/.style={box, fill=blue!15},
+    cnn/.style={box, fill=orange!25, minimum width=2.8cm},
+    stats/.style={box, fill=green!20},
+    output/.style={box, fill=purple!15},
+    arrow/.style={-{Stealth[length=2mm]}, thick},
+    dasharrow/.style={-{Stealth[length=2mm]}, thick, dashed},
+    label/.style={font=\scriptsize, align=center},
+]
+
+% --- Input ---
+\node[process] (input) {入力 $\mathbf{X}$\\{\scriptsize (B, C, T, F)}};
+\coordinate[below=0.6cm of input] (split);
+
+% === Left path: CNN Attention ===
+\node[cnn, below left=0.8cm and 0.4cm of split] (pool) {時間平均\\{\scriptsize mean(dim=T)}};
+\node[cnn, below=0.6cm of pool] (cnn) {CNN\\{\scriptsize Conv1D → ReLU → Conv1D}};
+\node[cnn, below=0.6cm of cnn] (sigmoid) {Sigmoid\\{\scriptsize $\rightarrow$ Frequency importance $\mathbf{A}$}};
+
+% === Right path: Statistics ===
+\node[stats, below right=0.8cm and 0.4cm of split] (weighted) {重み付統計量\\{\scriptsize $\mu_w, \sigma_w = f(\mathbf{X}, \mathbf{A})$}};
+\node[stats, below=0.6cm of weighted] (mix) {統計量の混合\\{\scriptsize $\tilde{\mu} = \lambda\mu_1 + (1{-}\lambda)\mu_2$}\\{\scriptsize $\tilde{\sigma} = \lambda\sigma_1 + (1{-}\lambda)\sigma_2$}};
+% 修正箇所: [below=0.6cm of mix] の閉じ括弧を修正
+\node[stats, below=0.6cm of mix] (style) {スタイル生成\\{\scriptsize $\mathbf{X}_{mix} = \frac{\mathbf{X}-\mu}{\sigma} \cdot \tilde{\sigma} + \tilde{\mu}$}};
+
+% === Output with residual ===
+\node[output, below=6.2cm of split] (residual) {残差接続\\{\scriptsize $\mathbf{Y} = \mathbf{X} + \mathbf{X}_{mix}$}};
+\node[process, below=0.6cm of residual] (output) {出力 $\mathbf{Y}$};
+
+% === Arrows ===
+\draw[arrow] (input) -- (split);
+\draw[arrow] (split) -| (pool);
+\draw[arrow] (split) -| (weighted);
+
+\draw[arrow] (pool) -- (cnn);
+\draw[arrow] (cnn) -- (sigmoid);
+% Importance 表記を削除
+\draw[arrow] (sigmoid.east) -- ++(0.4,0) |- (weighted.west);
+
+\draw[arrow] (weighted) -- (mix);
+\draw[arrow] (mix) -- (style);
+
+\draw[arrow] (style.south) -- ++(0,-0.5) -| (residual.east);
+
+% 残差接続 (大きく迂回させて重複を回避)
+\draw[dasharrow] (input.west) -- ++(-2.5,0) |- node[left, pos=0.25, label] {元の信号} (residual.west);
+
+\draw[arrow] (residual) -- (output);
+
+% === Background boxes ===
+\begin{scope}[on background layer]
+    \node[draw=orange!60, fill=orange!5, rounded corners, fit=(pool)(cnn)(sigmoid), inner sep=10pt, label={[font=\footnotesize, orange!80!black]above:(1) Frequency importance learning}] {};
+    \node[draw=green!60, fill=green!5, rounded corners, fit=(weighted)(mix)(style), inner sep=10pt, label={[font=\footnotesize, green!50!black]above:(2) Weighted statistics mixing}] {};
+\end{scope}
+
+
+\end{tikzpicture}
+\end{document}

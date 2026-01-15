@@ -1,0 +1,47 @@
+%! TEX root = ../main.tex
+\documentclass[main]{subfiles}
+
+\begin{document}
+\chapter{評価実験}
+    \label{評価実験}
+\section{評価指標}
+    \label{評価指標}
+本研究では、データセットの特性に応じて異なる評価指標を採用する。
+DESEDデータセットではPolyphonic Sound Detection Score（PSDS）\cite{bilen2020framework}のシナリオ1及び2を用い、
+MAESTRO RealデータセットではmpAUC（Macro-averaged Partial AUC）を主要な指標とする。\par
+
+PSDSは、混同行列に基づくROC（Receiver Operating Characteristic）曲線を拡張したPSD-ROC曲線を用いて算出される。
+通常のROC曲線は、縦軸に真陽性率（TPR）、横軸に偽陽性率（FPR）をとるが、
+PSD-ROC曲線では横軸に単位時間あたりの誤検知数（Effective False Positive Rate）を採用する点が異なる。
+
+PSDSには目的に応じたシナリオが存在する。
+シナリオ1（$PSDS_1$）は時間的な正確さを重視し、イベントの検知区間が正解と厳密に一致することを求める一方、クラス分類の誤りには比較的寛容である。
+対照的に、シナリオ2（$PSDS_2$）はイベントのクラス分類性能を重視し、時間的なズレに対する許容範囲が広く設定されている。
+
+本研究では、時間精度の向上とイベント分類の最適化を段階的に分離することを想定しており、現段階では正確なクラス分類を優先課題としている。
+したがって、$PSDS_2$を最重要指標と位置付けるが、モデルの総合的な挙動を把握するため$PSDS_1$も併せて評価する。\par
+
+一方、MAESTRO Realの評価に用いるmpAUCは、ROC曲線の全領域ではなく、誤検知率が低い領域（低FPR領域）に限定して曲線下面積（AUC）を算出する指標である。
+これは、実用上許容できない高い誤検知率の領域を評価から除外することで、モデルの信頼性をより厳密に評価するためである。
+
+\section{実験内容}
+    \label{実験内容}
+ベースラインに対する精度の向上幅及び各要素の有効性を示すため、本研究では3つの実験を行う。\par 
+まず、手法間の比較を行う。ベースライン（Mean Teacher）、先行研究（CMT）、及び提案手法の派生形である$CMT_{neg}$と$CMT_{scale}$を対象とし、それぞれの識別性能を評価する。\par
+ 次に、アーキテクチャの検討を行う。MixStyleを既存モデルに直接適用する場合と、軽量CNNを介して統合する場合とで、精度の変化を比較する。 \par
+ 最後に、構成要素の比較を行う。主要な3つのモデル（Mean Teacher, CMT, $CMT_{scale}$）に対し、MixStyleのみ・SEBBsのみ・両方を適用した条件で実験を行い、
+ 各モジュールの導入効果を検証する。\par
+
+% また、可視化としてUMAPとGrad-CAMを利用する。UMAPは次元圧縮の手法の一つで、膨大な次元数を持つ特徴ベクトルを二次元平面上に描画するために用いる。
+% Grad-CAMはモデルが画像のどこに注目したかを可視化する。今回はメルスペクトログラムの時間及び周波数のどこに注目しているかを見る。\par
+
+データセットとして、DESEDとMAESTRO Realを使用する。\par
+また、実験環境は以下の通り：
+\begin{itemize}
+    \item OS: Ubuntu 24.04.3 LTS (Noble Numbat) 
+    \item Kernel: 6.14.0-36-generic
+	\item CPU: AMD Ryzen 7 5700X 8-Core Processor, x86\_64
+	\item GPU: NVIDIA GeForce RTX 4070, 12282 MiB
+	\item RAM: 15GiB
+\end{itemize}
+\end{document}

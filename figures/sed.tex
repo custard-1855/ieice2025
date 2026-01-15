@@ -1,0 +1,75 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric}
+
+\begin{document}
+
+\tikzset{
+    model box/.style={rectangle, draw, thick, fill=orange!15, minimum width=6cm, minimum height=1.2cm, rounded corners, font=\sffamily\bfseries},
+    output box/.style={rectangle, draw, thick, fill=white, minimum width=5cm, align=center, font=\small\sffamily},
+    event line/.style={draw, line width=2.5pt, color=#1, |-|},
+    label text/.style={font=\small\sffamily\bfseries},
+    axis text/.style={font=\scriptsize\sffamily}
+}
+
+\begin{tikzpicture}[>=Stealth, node distance=1.2cm]
+
+% 図の中心を x=6 と想定して配置します
+
+% --- 1. Input Layer (Top): Log Mel Spectrogram ---
+\node[label text, anchor=south] at (6, 9.1) {Input: Log Mel Spectrogram (example)};
+
+
+% スペクトログラム画像（幅7.5cm、中央揃え）
+\node[anchor=south west, inner sep=0] (spec_img) at (2.25, 7) {
+    \includegraphics[width=7.5cm, height=2cm]{logmel.png}
+};
+
+% 画像の枠線（幅7.5cm, 高さ2cm, 中央揃え）
+\draw[gray!50] (2.25,7) rectangle (9.75,9);
+
+
+% --- 2. SED Model (Middle) ---
+% 全体の中央 (x=6) に配置
+\node[model box] (model) at (6, 5.5) {SED Model};
+
+% 画像の下端からモデルへ垂直に矢印
+\draw[->, thick, gray] (6, 7) -- (model.north);
+
+
+% --- 3. Predictions (Bottom) ---
+
+% モデルからPredictionセクションへ垂直に矢印
+\draw[->, thick] (model.south) -- (6, 4.3);
+
+% --- 3a. Frame-level Prediction ---
+% ラベルを中央揃え
+\node[label text] (pred_label) at (6, 4.0) {Prediction (example)};
+
+% 時間軸を中央付近に配置 (x=3 から x=9 の 6cm幅)
+\coordinate (frame_axis_start) at (3, 1.5);
+\draw[->, thick] (frame_axis_start) -- ++(6.5,0) node[right, axis text] {Time};
+
+% イベントの配置を軸に合わせて調整
+% Event A: Dog (x=3.5 から 6.0)
+\draw[event line=red] (3.5, 2.2) -- (6.0, 2.2) 
+    node[midway, above, font=\sffamily\bfseries\scriptsize, color=red] {Dog};
+\draw[dashed, red!50] (3.5, 2.2) -- (3.5, 1.5) node[below, black, axis text] {Onset};
+\draw[dashed, red!50] (6.0, 2.2) -- (6.0, 1.5) node[below, black, axis text] {Offset};
+
+% Event B: Car (x=6.5 から 7.5)
+\draw[event line=blue] (6.5, 2.8) -- (7.5, 2.8)
+    node[midway, above, font=\sffamily\bfseries\scriptsize, color=blue] {Car};
+\draw[dashed, blue!50] (6.5, 2.8) -- (6.5, 1.5);
+\draw[dashed, blue!50] (7.5, 2.8) -- (7.5, 1.5);
+
+% --- 3b. Clip-level Prediction ---
+% クリップ予測の範囲（Time軸全体に対応）- 数直線の上に配置
+\draw[event line=violet, line width=2pt] (3, 3.4) -- (9, 3.4);
+
+% DogとCarのラベルをクリップ予測バーの上に表示
+\node[font=\sffamily\bfseries\scriptsize, color=violet] at (6, 3.4) [above] {Dog, Car};
+
+\end{tikzpicture}
+\end{document}

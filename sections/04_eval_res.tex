@@ -1,0 +1,150 @@
+%! TEX root = ../main.tex
+\documentclass[main]{subfiles}
+
+\begin{document}
+\chapter{実験結果と考察}
+ 実験結果について整理する。
+
+\begin{table}[htbp]
+ \begin{center}
+   \begin{tabular}{|l|r|r|r|}
+    \hline
+    Model                       & PSDS1 & PSDS2 & mpAUC \\
+    \hline
+    Mean Teacher(MT)            & 0.369 & 0.581 & 0.720 \\
+    Confident Mean Teacher(CMT) & 0.297 & 0.60  & 0.689 \\
+    $CMT_{neg}$                     & 0.369 & 0.543 & 0.661 \\
+    $CMT_{scale}$                 & 0.368 & 0.621 & 0.699 \\
+    \hline
+  \end{tabular}
+   \caption{Mean Teacher比較}
+   \label{table:mtAcc}
+\end{center}
+\end{table}
+
+表\ref{table:mtAcc}に各手法の精度比較を示す。Mean Teacher（MT）と比較して、CMTはPSDS2が向上した一方で、PSDS1及びmpAUCは低下した。
+これに対し、$CMT_{neg}$ではCMTで見られたPSDS1の低下は改善されたものの、その他の指標においては精度が悪化した。
+$CMT_{scale}$は、MTと同等のPSDS1を維持しつつ、PSDS2においてはCMTを上回る性能を示した。ただし、mpAUCに関してはMTには及ばなかった。\par
+
+考察として、CMTにおけるPSDS1の低下は、非イベント区間の情報（負例）が欠落したことで、時間的な予測が不安定になったことに起因すると考えられる。
+$CMT_{neg}$では負例を導入することでこの問題を解消したが、正例に対して負例の割合が過多となり、逆にクラス分類（PSDS2など）の予測が不安定化した。
+以上の結果から、$CMT_{scale}$における正例と負例の量的バランスの調整が、時間精度とクラス分類精度の双方を安定化させるために有効であったと結論づけられる。\par
+
+\begin{table}[htbp]
+ \begin{center}
+   \begin{tabular}{|l|r|r|r|}
+    \hline
+    CNN        & PSDS1 & PSDS2 & mpAUC \\
+    \hline
+    -          & 0.375 & 0.581 & 0.709 \\
+    \checkmark & 0.373 & 0.596 & 0.745 \\
+    \hline
+  \end{tabular}
+  \caption{MixStyle+CNNの有無}
+  \label{table:mixstyle}
+\end{center}
+\end{table}
+ MixStyleについて、表\ref{table:mixstyle}より、CNNによる重み付けを行うと、PSDS2とmpAUCが向上した。なお、半教師あり学習手法としてMean Teacherを使用している。
+%  半教師あり学習はどうなっているかを加筆
+ これはドメイン汎化が上手く促されたことによるものか、データ拡張の適用による入力の変化で一貫性の制約が強くなったためと考えられる。
+ ただし、 提案手法で述べたように、実際には重みづけが働いていない可能性がある。従来のMixStyleは混合した特徴量のみを用いるが、本稿では残差接続を行なっており、これが摂動として働き、精度が向上したことも考えられる。 \par
+
+ \begin{table}[htbp]
+ \begin{center}
+   \begin{tabular}{|l|r|r|r|r|r|}
+    \hline
+    MT-type & MixStyle   & SEBBs      & PSDS1 & PSDS2 & mpAUC \\
+    \hline
+    MT & \checkmark & -          & 0.382 & 0.607 & 0.704 \\
+    MT & -          & \checkmark & 0.374 & 0.582 & 0.719 \\
+    MT & \checkmark & \checkmark & 0.375 & 0.596 & 0.734 \\
+    \hline
+    CMT & \checkmark & -          & 0.387 & 0.637 & 0.722 \\
+    CMT & -          & \checkmark & 0.303 & 0.60 & 0.718 \\
+    CMT & \checkmark & \checkmark & 0.386 & 0.635 & 0.737 \\
+    \hline
+    $CMT_{scale}$  & \checkmark & -          & 0.393 & 0.632 & 0.727 \\
+    $CMT_{scale}$  & -          & \checkmark & 0.374 & 0.623 & 0.722 \\
+    $CMT_{scale}$  & \checkmark & \checkmark & 0.391 & 0.631 & 0.733 \\
+    \hline
+  \end{tabular}
+  \caption{総合比較}
+  \label{table:mergeAcc}
+\end{center}
+\end{table}
+
+表\ref{table:mergeAcc}に、MT、CMT、$CMT_{scale}$を各拡張モジュールと併用した場合の結果を示す。 
+MixStyleとの併用において、MTとCMTはPSDS1及びPSDS2が向上した一方で、mpAUCは低下した。
+これに対し、$CMT_{scale}$は全ての指標において向上が見られた。\par 
+
+MixStyleの適用により、DESED（合成音・実録音）のみならず、性質の異なるMAESTRO（実録音）に対しても汎化性能の向上が期待されたが、
+mpAUCに関しては低下するケースも見られた。 
+PSDS1、2の向上については、MixStyleが特徴空間に摂動を与えることで、TeacherモデルとStudentモデル間により一貫性を学習させた結果であると考えられる。\par
+
+一方、SEBBsの適用効果は限定的であり、mpAUC以外には差が見られなかった。
+SEBBsによる後処理の平滑化で時間精度の向上が期待されたが、DESEDではその傾向は確認されなかった。
+この要因として、ベースモデルとの相性が考えられる。
+先行研究においても特定のアーキテクチャではSEBBsによる精度向上が見られないことが報告されており、今回用いたCRNNにおいても同様の傾向が示されたと推察される。\par
+
+一連の結果より、正例に加え負例を活用する$CMT_{neg}$及び$CMT_{scale}$の有効性が示された。
+また、MixStyleと軽量CNNによる重み付けも、精度向上に一定の寄与をすることが確認された。
+ただし、CRNNに対するSEBBsの効果は本実験の範囲では確認されなかった。\par 
+
+結論として、提案手法であるCMT、MixStyle、SEBBsの3つを統合したモデルは、MTと比較して全ての指標を向上させた。
+しかしながら、時間精度とクラス分類性能の両立という観点では、SEBBsを除いた構成（$CMT_{scale}$  + MixStyle）であっても十分な性能が得られる。\par
+
+
+最後に、クラスごとの詳細な精度評価を行う。表\ref{table:classWise-PSDS}、\ref{table:classWise-mpAUC}に各クラスにおける$PSDS_2$及びmpAUCの結果を示す。\par
+本研究の将来的な目標である異常検知において、異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」のクラスに着目する。
+ベースラインのMTと比較して、提案手法である$CMT_{scale}$ は、流水の$PSDS_2$において$0.88$から$0.91$へ、足音のmpAUCにおいて$0.68$から$0.71$へと、それぞれ精度の向上を達成した。
+特定のクラスだけでなく、全体的な傾向としても提案手法による性能向上が確認された。
+
+ \begin{table}[htbp]
+  \centering
+  \small
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    class & MT & CMT & $CMT_{scale}$  \\
+    \hline
+    Alarm\_bell\_ringing & 0.868 & 0.937 & \textbf{0.947} \\
+    Blender & 0.870 & 0.885 & \textbf{0.920} \\
+    Cat & 0.881 & \textbf{0.929} & 0.911 \\
+    Dishes & 0.501 & \textbf{0.641} & 0.602 \\
+    Dog & 0.848 & \textbf{0.893} & 0.883 \\
+    Electric\_shaver\_... & 0.965 & \textbf{0.989} & 0.984 \\
+    Frying & 0.958 & 0.948 & \textbf{0.970} \\
+    Running\_water & 0.887 & 0.902 & \textbf{0.912} \\
+    Speech & 0.775 & 0.853 & \textbf{0.862} \\
+    Vacuum\_cleaner & 0.901 & 0.912 & \textbf{0.948} \\
+    \hline
+    \end{tabular}
+    \caption{クラス別 PSDS}
+    \label{table:classWise-PSDS}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    class & MT & CMT & $CMT_{scale}$  \\
+    \hline
+    birds\_singing & 0.971 & 0.969 & \textbf{0.972} \\
+    brakes\_squeaking & 0.416 & 0.398 & \textbf{0.463} \\
+    car & 0.825 & \textbf{0.866} & 0.817 \\
+    children voices & \textbf{0.916} & 0.868 & 0.881 \\
+    cutlery and dishes & 0.595 & 0.584 & \textbf{0.617} \\
+    footsteps & 0.681 & 0.696 & \textbf{0.710} \\
+    large\_vehicle & 0.653 & 0.659 & \textbf{0.681} \\
+    metro approaching & \textbf{0.833} & 0.807 & 0.782 \\
+    metro leaving & \textbf{0.768} & 0.756 & 0.740 \\
+    people talking & \textbf{0.665} & 0.662 & 0.662 \\
+    wind\_blowing & 0.599 & 0.324 & \textbf{0.744} \\
+    \hline
+    \end{tabular}
+    \caption{クラス別 mpAUC}
+    \label{table:classWise-mpAUC}
+  \end{minipage}
+\end{table}
+ \end{document}

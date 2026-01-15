@@ -1,0 +1,44 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{luatexja-fontspec}
+\setmainjfont{Noto Sans CJK JP}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=0.9cm,
+    startstop/.style={rectangle, rounded corners, draw, fill=red!20, minimum width=3cm, minimum height=0.8cm, align=center},
+    process/.style={rectangle, draw, fill=blue!20, minimum width=3.5cm, minimum height=0.8cm, align=center},
+    decision/.style={diamond, draw, fill=yellow!20, minimum width=2.5cm, minimum height=1cm, align=center, aspect=2},
+    arrow/.style={-{Stealth[length=2mm]}, thick},
+    loopbox/.style={draw, dashed, thick, rounded corners, inner sep=10pt}
+]
+
+% Nodes
+\node[startstop] (start) {評価開始};
+\node[process, below=of start] (getdata) {評価データ取得};
+\node[process, below=of getdata] (model) {生徒 / 教師 モデルの予測};
+\node[decision, below=of model] (sebbs) {SEBBs適用?};
+\node[process, below left=0.7cm and -0.5cm of sebbs] (tuning) {SEBBs Tuning};
+\node[process, below=0.5cm of tuning] (sebbspred) {SEBBsでの後処理};
+\node[process, below=2.8cm of sebbs] (psds) {PSDS 算出};
+\node[decision, below=of psds] (more) {未処理データ残存?};
+\node[startstop, below=of more] (end) {後処理結果を出力};
+
+% Arrows
+\draw[arrow] (start) -- (getdata);
+\draw[arrow] (getdata) -- (model);
+\draw[arrow] (model) -- (sebbs);
+\draw[arrow] (sebbs) -- node[left, font=\small] {Yes} (tuning);
+\draw[arrow] (tuning) -- (sebbspred);
+\draw[arrow] (sebbspred) |- (psds);
+\draw[arrow] (sebbs.east) -- ++(0.8,0) node[above, font=\small] {No} |- (psds.east);
+\draw[arrow] (psds) -- (more);
+\draw[arrow] (more.west) -- ++(-1.5,0) node[above, font=\small] {Yes} |- (getdata.west);
+\draw[arrow] (more) -- node[right, font=\small] {No} (end);
+
+% Loop annotation
+\node[font=\footnotesize\itshape, gray] at ($(getdata.west)+(-1.8,0)$) {Loop};
+
+\end{tikzpicture}
+\end{document}

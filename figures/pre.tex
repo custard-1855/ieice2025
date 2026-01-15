@@ -1,0 +1,59 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usepackage{luatexja}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit}
+
+\begin{document}
+
+\tikzset{
+    process/.style={
+        rectangle,
+        rounded corners,
+        minimum width=3cm,
+        minimum height=1cm,
+        text centered,
+        draw=black,
+        fill=blue!20,
+        font=\small
+    },
+    arrow/.style={
+        thick,
+        -Stealth,
+        >=stealth
+    },
+    label/.style={
+        font=\footnotesize,
+        text width=3.5cm,
+        align=center
+    }
+}
+
+\begin{tikzpicture}[node distance=0.5cm and 0.5cm]
+
+% 一列目（左から右）
+\node (audio) [process] {音声信号\\44 kHz};
+
+\node (resample) [process, right=of audio] {リサンプリング};
+
+\node (audio16) [process, right=of resample] {音声信号\\16 kHz};
+
+\node (stft) [process, right=of audio16] {短時間フーリエ変換\\(STFT)};
+
+% 二列目（右から左に折り返し）
+\node (mel) [process, below=1cm of stft] {メルフィルタバンク\\適用};
+
+\node (logmel) [process, left=of mel] {対数変換};
+
+\node (output) [process, left=of logmel] {対数メル\\スペクトログラム};
+
+% Arrows
+\draw [arrow] (audio) -- (resample);
+\draw [arrow] (resample) -- (audio16);
+\draw [arrow] (audio16) -- (stft);
+\draw [arrow] (stft) -- (mel);
+\draw [arrow] (mel) -- (logmel);
+\draw [arrow] (logmel) -- (output);
+
+\end{tikzpicture}
+
+\end{document}
