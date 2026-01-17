@@ -1,4 +1,4 @@
-\documentclass[paper]{classes/ieicej}
+\documentclass[technicalreport]{classes/ieicej}
 % \usepackage[dvipdfmx]{graphicx,xcolor}
 % %\usepackage[dvips]{graphicx}
 \usepackage[fleqn]{amsmath}
@@ -9,7 +9,22 @@
 %\usepackage{bm}
 \usepackage{subfiles}
 \usepackage{url}
-\usepackage{hyperref}
+% ieicej.clsのciteコマンドとhyperrefは互換性がないため、hyperrefのcite関連機能を無効化
+\usepackage[dvipdfmx,hidelinks,unicode,pdfusetitle,hyperfootnotes=false]{hyperref}
+% hyperrefがbibciteを上書きしないようにする
+\makeatletter
+\let\hyper@bib@natlinkstart\@gobble
+\let\hyper@bib@natlinkend\relax
+\let\hyper@citelink@start\@gobble
+\let\hyper@citelink@end\relax
+\renewcommand{\hyper@natlinkstart}[1]{}%
+\renewcommand{\hyper@natlinkend}{}%
+\renewcommand{\hyper@natanchorstart}[1]{}%
+\renewcommand{\hyper@natanchorend}{}%
+% bibciteをhyperrefから保護
+\let\orig@bibcite\bibcite
+\renewcommand{\bibcite}[2]{\expandafter\gdef\csname b@#1\endcsname{#2}}
+\makeatother
 
 \setcounter{page}{1}
 
@@ -75,7 +90,7 @@
 
 %% 著者紹介・顔写真の掲載はC分冊の場合は任意です．
 \begin{biography}
-\profile*{学生員}{竹本 志恩}{}
+\profile*{正会員}{竹本 志恩}{} %学生会員か不明
 %\profile{会員種別}{名前}{紹介文}% 顔写真あり
 %\profile*{会員種別}{名前}{紹介文}% 顔写真なし
 \end{biography}

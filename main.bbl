@@ -1,24 +1,20 @@
 \begin{thebibliography}{10}
 
 \bibitem{blackman2016ambient}
-S. Blackman, C. Matlo, C. Bobrovitskiy, A. Waldoch, M.L. Fang, P. Jackson, A.
-  Mihailidis, L. Nyg{\aa}rd, A. Astell, and A. Sixsmith,
+S. Blackman, C. Matlo, C. Bobrovitskiy, A. Waldoch, M.L. Fang, P. Jackson, A. Mihailidis, L. Nyg{\aa}rd, A. Astell, and A. Sixsmith,
 ``Ambient assisted living technologies for aging well: a scoping review,''
 Journal of Intelligent Systems,
 vol.25, no.1, pp.55--69, 2016.
 
 \bibitem{guerra2023ambient}
-B.M.V. Guerra, E. Torti, E. Marenzi, M. Schmid, S. Ramat, F. Leporati, and G.
-  Danese,
-``Ambient assisted living for frail people through human activity recognition:
-  state-of-the-art, challenges and future directions,''
+B.M.V. Guerra, E. Torti, E. Marenzi, M. Schmid, S. Ramat, F. Leporati, and G. Danese,
+``Ambient assisted living for frail people through human activity recognition: state-of-the-art, challenges and future directions,''
 Frontiers in neuroscience,
 vol.17, p.1256682, 2023.
 
 \bibitem{bouchabou2021survey}
 D. Bouchabou, S.M. Nguyen, C. Lohr, B. LeDuc, and I. Kanellos,
-``A survey of human activity recognition in smart homes based on iot sensors
-  algorithms: Taxonomies, challenges, and opportunities with deep learning,''
+``A survey of human activity recognition in smart homes based on iot sensors algorithms: Taxonomies, challenges, and opportunities with deep learning,''
 Sensors,
 vol.21, no.18, p.6037, 2021.
 
@@ -36,79 +32,65 @@ vol.38, no.5, pp.67--83, 2021.
 
 \bibitem{turpault2019sound}
 N. Turpault, R. Serizel, A.P. Shah, and J. Salamon,
-``Sound event detection in domestic environments with weakly labeled data and
-  soundscape synthesis,''
+``Sound event detection in domestic environments with weakly labeled data and soundscape synthesis,''
 Workshop on Detection and Classification of Acoustic Scenes and Events,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2019.
+pp.1--5, 2019.
 
 \bibitem{serizel2020sound}
 R. Serizel, N. Turpault, A. Shah, and J. Salamon,
 ``Sound event detection in synthetic domestic environments,''
-ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal
-  Processing (ICASSP)IEEE,
-pp.86--90 2020.
+Proc.\ ICASSP,
+pp.86--90, 2020.
 
 \bibitem{martin2023strong}
 I. Mart{\'\i}n-Morat{\'o} and A. Mesaros,
-``Strong labeling of sound events using crowdsourced weak labels and annotator
-  competence estimation,''
+``Strong labeling of sound events using crowdsourced weak labels and annotator competence estimation,''
 IEEE/ACM transactions on audio, speech, and language processing,
 vol.31, pp.902--914, 2023.
 
 \bibitem{schmid2024improving}
 F. Schmid, P. Primus, T. Morocutti, J. Greif, and G. Widmer,
-``Improving audio spectrogram transformers for sound event detection through
-  multi-stage training,''
-arXiv preprint arXiv:2408.00791,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2024.
+``Improving audio spectrogram transformers for sound event detection through multi-stage training,''
+arXiv:2408.00791, 2024.
 
 \bibitem{tarvainen2017mean}
 A. Tarvainen and H. Valpola,
-``Mean teachers are better role models: Weight-averaged consistency targets
-  improve semi-supervised deep learning results,''
-Advances in neural information processing systems,
-vol.30, pp.\textbullet\textbullet--\textbullet\textbullet, 2017.
+``Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results,''
+Advances in Neural Information Processing Systems,
+vol.30,
+pp.1195--1204, 2017.
 
 \bibitem{xiao2023multi}
 S. Xiao, X. Zhang, and P. Zhang,
-``Multi-dimensional frequency dynamic convolution with confident mean teacher
-  for sound event detection,''
-ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal
-  Processing (ICASSP)IEEE,
-pp.1--5 2023.
+``Multi-dimensional frequency dynamic convolution with confident mean teacher for sound event detection,''
+Proc.\ ICASSP,
+pp.1--5, 2023.
 
 \bibitem{11036061}
 Z. Niu, Q. Wu, and Y. Hu,
-``Sat-sed: Semi-supervised sound event detection by pseudo-labeling with
-  self-adaptive threshold strategy,''
-2025 IEEE 6th International Seminar on Artificial Intelligence, Networking and
-  Information Technology (AINIT),
+``Sat-sed: Semi-supervised sound event detection by pseudo-labeling with self-adaptive threshold strategy,''
+2025 IEEE 6th International Seminar on Artificial Intelligence, Networking and Information Technology (AINIT),
 pp.1743--1748, 2025.
 
 \bibitem{zhou2021domain}
 K. Zhou, Y. Yang, Y. Qiao, and T. Xiang,
 ``Domain generalization with mixstyle,''
-arXiv preprint arXiv:2104.02008,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2021.
+Proc.\ ICLR,
+pp.1--15, 2021.
 
 \bibitem{xiao2024fmsg}
 Y. Xiao, H. Yin, J. Bai, and R.K. Das,
-``Fmsg-jless submission for dcase 2024 task4 on sound event detection with
-  heterogeneous training dataset and potentially missing labels,''
-arXiv preprint arXiv:2407.00291,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2024.
+``Fmsg-jless submission for dcase 2024 task4 on sound event detection with heterogeneous training dataset and potentially missing labels,''
+arXiv:2407.00291, 2024.
 
 \bibitem{kim2022domain}
 B. Kim, S. Yang, J. Kim, H. Park, J. Lee, and S. Chang,
-``Domain generalization with relaxed instance frequency-wise normalization for
-  multi-device acoustic scene classification,''
-arXiv preprint arXiv:2206.12513,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2022.
+``Domain generalization with relaxed instance frequency-wise normalization for multi-device acoustic scene classification,''
+arXiv:2206.12513, 2022.
 
 \bibitem{ebbers2024sound}
 J. Ebbers, F.G. Germain, G. Wichern, and J.L. Roux,
 ``Sound event bounding boxes,''
-arXiv preprint arXiv:2406.04212,
-pp.\textbullet\textbullet--\textbullet\textbullet, 2024.
+arXiv:2406.04212, 2024.
 
 \end{thebibliography}
