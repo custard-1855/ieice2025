@@ -3,7 +3,7 @@
 %%  for the Transactions of the Institute of Electronics, Information 
 %%   and Communication Engineers by ULS and Company, 1999-2023.
 %% E-mail: ieice-div@uls.co.jp, teppei@uls.co.jp
-\NeedsTeXFormat{pLaTeX2e}
+% \NeedsTeXFormat{pLaTeX2e}
 \ProvidesClass{ieicej}
 %%[1999/04/28 v1.0 for Transactions of IEICE]
 %%[1999/07/12 v1.0 new release for Transactions of IEICE]
@@ -94,6 +94,7 @@
 \newcounter{@paper}
 \newcommand{\@ptsize}{}
 \newif\if@restonecol
+\newcount\hour \newcount\minute % 謎のカウンタを追加
 \hour\time \divide\hour by 60\relax
 \@tempcnta\hour \multiply\@tempcnta 60\relax
 \minute\time \advance\minute-\@tempcnta
