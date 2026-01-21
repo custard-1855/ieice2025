@@ -1,0 +1,25 @@
+%! TEX root = ../main.tex
+\documentclass[main]{subfiles}
+
+\begin{document}
+\section{実験}
+    \label{実験}
+ベースラインに対する精度の向上幅及び各要素の有効性を示すため，本稿では3つの実験を行う．\par 
+まず，手法間の比較を行う．ベースライン（Mean Teacher），先行研究（CMT），及び提案手法の派生形である$CMT_{neg}$と$CMT_{scale}$を対象とし，それぞれの識別性能を評価する．\par
+ 次に，アーキテクチャの検討を行う．MixStyleを既存モデルに直接適用する場合と，軽量CNNを介して統合する場合とで，精度の変化を比較する． \par
+ 最後に，構成要素の比較を行う．主要な3つのモデル（Mean Teacher, CMT, $CMT_{scale}$）に対し，MixStyleのみ・SEBBsのみ・両方を適用した条件で実験を行い，
+ 各モジュールの導入効果を検証する．\par
+
+% また，可視化としてUMAPとGrad-CAMを利用する．UMAPは次元圧縮の手法の一つで，膨大な次元数を持つ特徴ベクトルを二次元平面上に描画するために用いる．
+% Grad-CAMはモデルが画像のどこに注目したかを可視化する．今回はメルスペクトログラムの時間及び周波数のどこに注目しているかを見る．\par
+
+データセットとして，DESEDとMAESTRO Realを使用する．\par
+また，実験環境は以下の通り：
+\begin{itemize}
+    \item OS: Ubuntu 24.04.3 LTS (Noble Numbat) 
+    \item Kernel: 6.14.0-36-generic
+	\item CPU: AMD Ryzen 7 5700X 8-Core Processor, x86\_64
+	\item GPU: NVIDIA GeForce RTX 4070, 12282 MiB
+	\item RAM: 15GiB
+\end{itemize}
+\end{document}

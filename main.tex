@@ -45,11 +45,6 @@
 \jalcdoi{???????????}% ← このままにしておいてください
 
 \begin{document}
-\begin{abstract}
-プライバシーに配慮した高齢者見守りに向け，音響イベント検出の実環境適用を目指す．
-本研究では，モデルパラメータを増大させずに精度を向上させるため，信頼度を用いた半教師あり学習を改良し，ドメイン汎化手法のアーキテクチャを検討した後，後処理手法含む三手法を統合した．
-実験の結果，モデル規模を維持したまま先行研究を上回る精度を達成し，提案手法の有効性を確認した．
-\end{abstract}
 
 \begin{keyword}
 %和文キーワード 4〜5語
@@ -62,37 +57,16 @@
 \end{ekeyword}
 \maketitle
 
-% These commands are not defined in ieicej.cls - use \jtitle, \etitle, and \authorlist instead
-%\title{実環境を見据えた\\ 音による行動認識モデルの精度向上}
-%\author{竹本 志恩 }
-%\studentid{1F10220127}
-%\supervisor{川原 亮一 教授}
-% \date{2025年 11月 30日}
-
-\section{まえがき}
-% \subfile{sections/00_abstract.tex}
 \subfile{sections/01_introduction.tex}
-% \subfile{sections/02_main_issue.tex}
-% \subfile{sections/03_eval_exp.tex}
-% \subfile{sections/04_eval_res.tex}
-% \subfile{sections/05_discussion.tex}
+\subfile{sections/02_related_research.tex}
+\subfile{sections/03_baseline.tex}
+\subfile{sections/04_proposal.tex}
+\subfile{sections/05_experiment.tex}
+\subfile{sections/06_results_discussion.tex}
+\subfile{sections/07_tail.tex}
 
 
 \ack %% 謝辞
-
 \bibliographystyle{sieicej}
 \bibliography{references}
-
-
-\appendix
-% \section{}
-% \subfile{sections/appendix.tex}
-
-%% 著者紹介・顔写真の掲載はC分冊の場合は任意です．
-\begin{biography}
-\profile*{正会員}{竹本 志恩}{} %学生会員か不明
-%\profile{会員種別}{名前}{紹介文}% 顔写真あり
-%\profile*{会員種別}{名前}{紹介文}% 顔写真なし
-\end{biography}
-
 \end{document}

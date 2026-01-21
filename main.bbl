@@ -30,24 +30,6 @@ A. Mesaros, T. Heittola, T. Virtanen, and M.D. Plumbley,
 IEEE Signal Processing Magazine,
 vol.38, no.5, pp.67--83, 2021.
 
-\bibitem{turpault2019sound}
-N. Turpault, R. Serizel, A.P. Shah, and J. Salamon,
-``Sound event detection in domestic environments with weakly labeled data and soundscape synthesis,''
-Workshop on Detection and Classification of Acoustic Scenes and Events,
-pp.1--5, 2019.
-
-\bibitem{serizel2020sound}
-R. Serizel, N. Turpault, A. Shah, and J. Salamon,
-``Sound event detection in synthetic domestic environments,''
-Proc.\ ICASSP,
-pp.86--90, 2020.
-
-\bibitem{martin2023strong}
-I. Mart{\'\i}n-Morat{\'o} and A. Mesaros,
-``Strong labeling of sound events using crowdsourced weak labels and annotator competence estimation,''
-IEEE/ACM transactions on audio, speech, and language processing,
-vol.31, pp.902--914, 2023.
-
 \bibitem{schmid2024improving}
 F. Schmid, P. Primus, T. Morocutti, J. Greif, and G. Widmer,
 ``Improving audio spectrogram transformers for sound event detection through multi-stage training,''
@@ -83,14 +65,44 @@ Y. Xiao, H. Yin, J. Bai, and R.K. Das,
 ``Fmsg-jless submission for dcase 2024 task4 on sound event detection with heterogeneous training dataset and potentially missing labels,''
 arXiv:2407.00291, 2024.
 
+\bibitem{turpault2019sound}
+N. Turpault, R. Serizel, A.P. Shah, and J. Salamon,
+``Sound event detection in domestic environments with weakly labeled data and soundscape synthesis,''
+Workshop on Detection and Classification of Acoustic Scenes and Events,
+pp.1--5, 2019.
+
+\bibitem{serizel2020sound}
+R. Serizel, N. Turpault, A. Shah, and J. Salamon,
+``Sound event detection in synthetic domestic environments,''
+Proc.\ ICASSP,
+pp.86--90, 2020.
+
+\bibitem{martin2023strong}
+I. Mart{\'\i}n-Morat{\'o} and A. Mesaros,
+``Strong labeling of sound events using crowdsourced weak labels and annotator competence estimation,''
+IEEE/ACM transactions on audio, speech, and language processing,
+vol.31, pp.902--914, 2023.
+
+\bibitem{bilen2020framework}
+{\c{C}}. Bilen, G. Ferroni, F. Tuveri, J. Azcarreta, and S. Krstulovi{\'c},
+``A framework for the robust evaluation of sound event detection,''
+Proc.\ ICASSP,
+pp.61--65, 2020.
+
+\bibitem{kingma2014adam}
+D.P. Kingma and J. Ba,
+``Adam: A method for stochastic optimization,''
+Proc.\ ICLR,
+pp.1--15, 2015.
+
+\bibitem{chen2022beats}
+S. Chen, Y. Wu, C. Wang, S. Liu, D. Tompkins, Z. Chen, and F. Wei,
+``Beats: Audio pre-training with acoustic tokenizers,''
+arXiv:2212.09058, 2022.
+
 \bibitem{kim2022domain}
 B. Kim, S. Yang, J. Kim, H. Park, J. Lee, and S. Chang,
 ``Domain generalization with relaxed instance frequency-wise normalization for multi-device acoustic scene classification,''
 arXiv:2206.12513, 2022.
-
-\bibitem{ebbers2024sound}
-J. Ebbers, F.G. Germain, G. Wichern, and J.L. Roux,
-``Sound event bounding boxes,''
-arXiv:2406.04212, 2024.
 
 \end{thebibliography}
