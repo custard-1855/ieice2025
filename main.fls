@@ -138,6 +138,13 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd

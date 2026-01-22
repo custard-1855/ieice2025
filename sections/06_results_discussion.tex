@@ -32,10 +32,11 @@ $CMT_{neg}$では負例を導入することでこの問題を解消したが，
 以上の結果から，$CMT_{scale}$における正例と負例の量的バランスの調整が，時間精度とクラス分類精度の双方を安定化させるために有効であったと結論づけられる．\par
 
 \subsection{クラス別CMT}
-ここでCMTについて，クラスごとの精度を評価する．表\ref{table:classWise-PSDS}，\ref{table:classWise-mpAUC}に各クラスにおける$PSDS_2$及びmpAUCの結果を示す．\par
+ここでCMTについて，クラスごとの精度を評価する．表\ref{table:classWise}に各クラスにおける$PSDS_2$及びmpAUCの結果を示す．\par
 本稿の将来的な目標である異常検知において，異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」のクラスに着目する．
-ベースラインのMTと比較して，提案手法である$CMT_{scale}$ は，流水の$PSDS_2$において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度の向上を達成した．
-特定のクラスだけでなく，全体的な傾向としても提案手法による性能向上が確認された．
+ベースラインのMTと比較して，提案手法である$CMT_{scale}$ は，流水の$PSDS_2$において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度の向上を達成した．\par
+また，表\ref{table:classWise}の他手法と比較して{5\%}以上の精度変化があったクラスについて，向上は青，低下は赤で強調した．向上したクラスではある音が長く持続するが，低下したクラスでは瞬間的な音が続く．
+このことから，提案手法は長期的な音が捉えられる代わりに，瞬間的な音を取りこぼす傾向にあると考えられる．
 
 \begin{table}[H]
   \centering
@@ -47,22 +48,21 @@ $CMT_{neg}$では負例を導入することでこの問題を解消したが，
     \hline
     class & MT & CMT & $CMT_{s}$ & class & MT & CMT & $CMT_{s}$ \\
     \hline
-    Alarm\_bell & .868 & .937 & \textbf{.947} & birds\_singing & .971 & .969 & \textbf{.972} \\
-    Blender & .870 & .885 & \textbf{.920} & brakes\_squeak & .416 & .398 & \textbf{.463} \\
-    Cat & .881 & \textbf{.929} & .911 & car & .825 & \textbf{.866} & .817 \\
-    Dishes & .501 & \textbf{.641} & .602 & children voices & \textbf{.916} & .868 & .881 \\
-    Dog & .848 & \textbf{.893} & .883 & cutlery/dishes & .595 & .584 & \textbf{.617} \\
-    Elec\_shaver & .965 & \textbf{.989} & .984 & footsteps & .681 & .696 & \textbf{.710} \\
-    Frying & .958 & .948 & \textbf{.970} & large\_vehicle & .653 & .659 & \textbf{.681} \\
-    Running\_water & .887 & .902 & \textbf{.912} & metro approach & \textbf{.833} & .807 & .782 \\
-    Speech & .775 & .853 & \textbf{.862} & metro leaving & \textbf{.768} & .756 & .740 \\
-    Vacuum\_clean & .901 & .912 & \textbf{.948} & people talking & \textbf{.665} & .662 & .662 \\
-    & & & & wind\_blowing & .599 & .324 & \textbf{.744} \\
+    Alarm\_bell & .868 & .937 & \textbf{.947} & Birds\_singing & .971 & .969 & \textbf{.972} \\
+    \textcolor{RoyalBlue}{\textbf{Blender}} & .870 & .885 & \textbf{.920} & Brakes\_squeak & .416 & .398 & \textbf{.463} \\
+    Cat & .881 & \textbf{.929} & .911 & \textcolor{BrickRed}{\textbf{Car}} & .825 & \textbf{.866} & .817 \\
+    \textcolor{BrickRed}{\textbf{Dishes}} & .501 & \textbf{.641} & .602 & Children voices & \textbf{.916} & .868 & .881 \\
+    Dog & .848 & \textbf{.893} & .883 & Cutlery/dishes & .595 & .584 & \textbf{.617} \\
+    Elec\_shaver & .965 & \textbf{.989} & .984 & Footsteps & .681 & .696 & \textbf{.710} \\
+    Frying & .958 & .948 & \textbf{.970} & Large\_vehicle & .653 & .659 & \textbf{.681} \\
+    Running\_water & .887 & .902 & \textbf{.912} & \textcolor{BrickRed}{\textbf{Metro approach}} & \textbf{.833} & .807 & .782 \\
+    Speech & .775 & .853 & \textbf{.862} & Metro leaving & \textbf{.768} & .756 & .740 \\
+    Vacuum\_clean & .901 & .912 & \textbf{.948} & People talking & \textbf{.665} & .662 & .662 \\
+    & & & & \textcolor{RoyalBlue}{\textbf{Wind\_blowing}} & .599 & .324 & \textbf{.744} \\
     \hline
   \end{tabular}
   \caption{クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}
-  \label{table:classWise-PSDS}
-  \label{table:classWise-mpAUC}
+  \label{table:classWise}
 \end{table}
 
 \subsection{MixStyle}
@@ -106,15 +106,16 @@ $CMT_{neg}$では負例を導入することでこの問題を解消したが，
 
 表\ref{table:mergeAcc}に，MT，CMT，$CMT_{scale}$をMixStyleと併用した場合の結果を示す． 
 MTとCMTはPSDS1及びPSDS2が向上した一方で，mpAUCは低下した．
-これに対し，$CMT_{scale}$は全ての指標において向上が見られた．\par 
+$CMT_{scale}$はMTに比べて精度が向上したが，CMTとの差は僅かだった．
+これはMixStyleの精度への影響がCMTより強いためだと考えられる．\par 
 
-MixStyleの適用により，DESED（合成音・実録音）のみならず，性質の異なるMAESTRO（実録音）に対しても汎化性能の向上が期待されたが，
+表\ref{table:mtAcc}と比較する．MixStyleの適用により，DESED（合成音・実録音）のみならず，性質の異なるMAESTRO（実録音）についても精度向上が期待されたが，
 mpAUCに関しては低下するケースも見られた． 
-PSDS1，2の向上については，MixStyleが特徴空間に摂動を与えることで，TeacherモデルとStudentモデル間により一貫性を学習させた結果であると考えられる．\par
+PSDS1，2の向上については，MixStyleが特徴空間に摂動を与えることで，TeacherモデルとStudentモデル間により一貫性を学習させた結果であると考えられる．
+特にこの一貫性がいずれの半教師あり学習でも効果を発揮し，CMTと$CMT_{scale}$の精度の差をごく僅かにしたと考えられる．\par
 
-\par
-一連の結果より，正例に加え負例を活用する$CMT_{neg}$及び$CMT_{scale}$の有効性が示された．
+一連の結果より，提案手法であるCMTとMixStyleの改良を統合した場合，MTと比較して全ての指標を向上させたが，CMTとの差はごく僅かだった．
+半教師あり学習手法について，正例に加え負例を活用する$CMT_{neg}$及び$CMT_{scale}$の有効性は示されたように見えるが，．
 また，MixStyleと軽量CNNによる重み付けも，精度向上に一定の寄与をすることが確認された．\par 
 
-結論として，提案手法であるCMT，MixStyleの2つを統合したモデルは，MTと比較して全ての指標を向上させた．
  \end{document}

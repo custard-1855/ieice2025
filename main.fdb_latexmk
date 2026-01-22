@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex main"] 1769074633.49367 "main.aux" "main.bbl" "main" 1769074633.98974 0
+["bibtex main"] 1769077578.33105 "main.aux" "main.bbl" "main" 1769077578.852 0
   "./references.bib" 1768642387.97341 9832 82e0dea36cb9bbd8d1409402963bce7e ""
   "./sieicej.bst" 1768640986.36971 40776 7800bda83f5ba6daac2c7311600f8290 ""
-  "main.aux" 1769074633.84949 2644 697b24b85278d65420dfb0e9a5045df0 "latex"
+  "main.aux" 1769077578.71073 2524 637b1a36afb4d6de3fe776c0678594a1 "latex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["dvipdf"] 1769074633.88736 "main.dvi" "main.pdf" "main" 1769074633.99036 0
-  "main.dvi" 1769074633.85028 65268 1f56bb611be424611b2e87e1039c8c58 "latex"
+["dvipdf"] 1769077578.75035 "main.dvi" "main.pdf" "main" 1769077578.85263 0
+  "main.dvi" 1769077578.7117 65640 79512300f0259edd963536658caad18c "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1769074633.50712 "main.tex" "main.dvi" "main" 1769074633.98978 0
+["latex"] 1769077578.34504 "main.tex" "main.dvi" "main" 1769077578.85204 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
@@ -65,12 +65,14 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty" 1738182759 5525 9dced5929f36b19fa837947f5175b331 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty" 1738182759 2846 e26604d3d895e65d874c07f30c291f3f ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/carlisle/scalefnt.sty" 1137109962 1360 df2086bf924b14b72d6121fe9502fcdb ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty" 1720383029 12726 67708fc852a887b2ba598148f60c3756 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1739306980 46850 d87daedc2abdc653769a6f1067849fe0 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontaxes/fontaxes.sty" 1595539507 14310 41fdb35c51be792ddf00696848d0cfef ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/dvips.def" 1663965824 6282 3d1fff8973f8803fd81ea577dda4f3ef ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/color.sty" 1730496337 7245 57f7defed4fb41562dc4b6ca13958ca9 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def" 1717359999 5009 1ca6c92de20f17acac654d4e0598c200 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty" 1717359999 2671 70891d50dac933918b827d326687c6e8 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx" 1667332637 2885 9c645d672ae17285bba324998918efd8 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty" 1580250785 17914 4c28a13fc3d975e6e81c9bea1d697276 ""
@@ -103,6 +105,7 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty" 1576624809 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657483315 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/subfiles/subfiles.sty" 1605478891 5262 70ab9987ec94ed2beeb5c2d951d465f6 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty" 1730496337 14552 27664839421e418b87f56fa4c6f66b1a ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty" 1727642399 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1655411236 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
@@ -111,17 +114,17 @@
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/uplatex.fmt" 1742197789 2051896 42bb734354a8fd00218ce8143aada50e ""
   "/usr/local/texlive/2025/texmf.cnf" 1742196573 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "classes/ieicej.cls" 1768641608.03341 114016 3766ecd3bc3d2f9f6702107687a21cdf ""
-  "main.aux" 1769074633.84949 2644 697b24b85278d65420dfb0e9a5045df0 "latex"
-  "main.bbl" 1769074633.50618 4042 f4c0113280e4b5047132bd78088f2925 "bibtex main"
-  "main.out" 1769074633.76049 0 d41d8cd98f00b204e9800998ecf8427e "latex"
-  "main.tex" 1769074495.68742 3278 98429e0d103758b44833adc6bd2a724a ""
+  "main.aux" 1769077578.71073 2524 637b1a36afb4d6de3fe776c0678594a1 "latex"
+  "main.bbl" 1769077578.34434 4042 f4c0113280e4b5047132bd78088f2925 "bibtex main"
+  "main.out" 1769077578.61841 0 d41d8cd98f00b204e9800998ecf8427e "latex"
+  "main.tex" 1769076963.4073 3317 9fe6c60e4fc7a9cef243120e482032c0 ""
   "sections/00_abstract.tex" 1768991225.88296 1237 ed6893cefb471da0ace26fb2fa9fb3f3 ""
   "sections/01_introduction.tex" 1769066719.54194 2179 198b55b2bbd055d22d39974f0232de2b ""
-  "sections/02_related_research.tex" 1769067350.61062 9229 da02fc0708d57c85fa504b75764f32ec ""
-  "sections/03_baseline.tex" 1769068165.42279 9353 1761b61b9678b3524a5580fc1f2df219 ""
+  "sections/02_related_research.tex" 1769075122.84894 9186 c8af2c010d39e98f15871832c66654fa ""
+  "sections/03_baseline.tex" 1769075450.83314 9261 8e5faaa3a2c3ae92e6cca8789ebb7e24 ""
   "sections/04_proposal.tex" 1769068376.355 6894 e924ed2f4b87e781663e05834c9d1302 ""
   "sections/05_experiment.tex" 1769068847.73666 1146 0011261dbcc18624a00af66c2d8c07c9 ""
-  "sections/06_results_discussion.tex" 1769074630.65391 6813 b5b3d262b7fbedbea6a2c08949e068ff ""
+  "sections/06_results_discussion.tex" 1769077575.45231 7220 2f22528314985d9ef18ef5a40507e307 ""
   "sections/07_tail.tex" 1769072897.53418 1882 1a79c7d0e1d6aeca948f3c3a035f3361 ""
   (generated)
   "main.aux"
