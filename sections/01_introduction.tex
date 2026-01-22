@@ -20,6 +20,3 @@ AALの核心技術である行動認識において，従来主流であった�
 
 そこで本稿では，実環境での堅牢な行動認識を目指し，モデルパラメータを増大させずにSEDの精度を向上させる手法を提案する．
 具体的には，信頼度を用いた半教師あり学習（Confident Mean Teacher; CMT）とドメイン汎化を目的としたMixStyleを改良し，統合した．
-
-評価実験には，データセットとしてDomestic Environment Sound Event Detection Dataset（DESED）に加え，MAESTRO Realを使用した．
-実験の結果，提案手法は先行研究に比べ一部クラスでの精度向上が確認された．CMTを改良したところ，先行研究に比べて精度が向上したが，MixStyleと併用時にはCMTの改良による精度向上は見られなかった．MixStyleとCNNの統合は精度を向上させたが，要因の検証が必要である．\par

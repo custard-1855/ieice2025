@@ -83,6 +83,8 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/import/import.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/import/import.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
@@ -163,6 +165,10 @@ INPUT main.out
 INPUT ./main.out
 INPUT ./main.out
 OUTPUT main.out
+INPUT ./sections/00_abstract.tex
+INPUT sections/00_abstract.tex
+INPUT ./sections/00_abstract.tex
+INPUT sections/00_abstract.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-h.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-h.tfm
@@ -331,7 +337,6 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsyc.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsyc.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-v.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-h.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-ot1.tfm
 INPUT ./sections/07_tail.tex

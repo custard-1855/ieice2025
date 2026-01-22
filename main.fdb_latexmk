@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex main"] 1768989681.97166 "main.aux" "main.bbl" "main" 1768989682.47312 0
+["bibtex main"] 1769074633.49367 "main.aux" "main.bbl" "main" 1769074633.98974 0
   "./references.bib" 1768642387.97341 9832 82e0dea36cb9bbd8d1409402963bce7e ""
   "./sieicej.bst" 1768640986.36971 40776 7800bda83f5ba6daac2c7311600f8290 ""
-  "main.aux" 1768989682.3358 2594 fd70c4ba2a05bc4976c6bf1a1ef0606a "latex"
+  "main.aux" 1769074633.84949 2644 697b24b85278d65420dfb0e9a5045df0 "latex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["dvipdf"] 1768989682.37392 "main.dvi" "main.pdf" "main" 1768989682.47376 0
-  "main.dvi" 1768989682.3367 66920 2b62af76c04fbf04ba71931fc59787d7 "latex"
+["dvipdf"] 1769074633.88736 "main.dvi" "main.pdf" "main" 1769074633.99036 0
+  "main.dvi" 1769074633.85028 65268 1f56bb611be424611b2e87e1039c8c58 "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1768989681.98624 "main.tex" "main.dvi" "main" 1768989682.47316 0
+["latex"] 1769074633.50712 "main.tex" "main.dvi" "main" 1769074633.98978 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
@@ -66,6 +66,7 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty" 1738182759 2846 e26604d3d895e65d874c07f30c291f3f ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/carlisle/scalefnt.sty" 1137109962 1360 df2086bf924b14b72d6121fe9502fcdb ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1739306980 46850 d87daedc2abdc653769a6f1067849fe0 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontaxes/fontaxes.sty" 1595539507 14310 41fdb35c51be792ddf00696848d0cfef ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/dvips.def" 1663965824 6282 3d1fff8973f8803fd81ea577dda4f3ef ""
@@ -110,17 +111,18 @@
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/uplatex.fmt" 1742197789 2051896 42bb734354a8fd00218ce8143aada50e ""
   "/usr/local/texlive/2025/texmf.cnf" 1742196573 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "classes/ieicej.cls" 1768641608.03341 114016 3766ecd3bc3d2f9f6702107687a21cdf ""
-  "main.aux" 1768989682.3358 2594 fd70c4ba2a05bc4976c6bf1a1ef0606a "latex"
-  "main.bbl" 1768989681.98536 4042 f4c0113280e4b5047132bd78088f2925 "bibtex main"
-  "main.out" 1768989682.24697 0 d41d8cd98f00b204e9800998ecf8427e "latex"
-  "main.tex" 1768989591.89392 2610 fc919ac0cfc89f28e4ef568652805533 ""
-  "sections/01_introduction.tex" 1768989181.54966 2705 37d150455c396af045f6c3f0358d3da2 ""
-  "sections/02_related_research.tex" 1768989646.45475 9226 69f089a144957deec0f5e21b7fed384f ""
-  "sections/03_baseline.tex" 1768989666.48678 9231 1607370e4ac8e74f8385d16a78322998 ""
-  "sections/04_proposal.tex" 1768989652.6122 6889 532fa4932d92ed08e64ed4f466756b29 ""
-  "sections/05_experiment.tex" 1768988911.50057 1707 9d66dcf13d2d8eed00aa142b8f18b4fd ""
-  "sections/06_results_discussion.tex" 1768988616.88136 8223 6d29b5d3ed5355fd4e726cf007ec548e ""
-  "sections/07_tail.tex" 1768988648.3485 1919 127d15fe5900f3999ba7aacff20c3394 ""
+  "main.aux" 1769074633.84949 2644 697b24b85278d65420dfb0e9a5045df0 "latex"
+  "main.bbl" 1769074633.50618 4042 f4c0113280e4b5047132bd78088f2925 "bibtex main"
+  "main.out" 1769074633.76049 0 d41d8cd98f00b204e9800998ecf8427e "latex"
+  "main.tex" 1769074495.68742 3278 98429e0d103758b44833adc6bd2a724a ""
+  "sections/00_abstract.tex" 1768991225.88296 1237 ed6893cefb471da0ace26fb2fa9fb3f3 ""
+  "sections/01_introduction.tex" 1769066719.54194 2179 198b55b2bbd055d22d39974f0232de2b ""
+  "sections/02_related_research.tex" 1769067350.61062 9229 da02fc0708d57c85fa504b75764f32ec ""
+  "sections/03_baseline.tex" 1769068165.42279 9353 1761b61b9678b3524a5580fc1f2df219 ""
+  "sections/04_proposal.tex" 1769068376.355 6894 e924ed2f4b87e781663e05834c9d1302 ""
+  "sections/05_experiment.tex" 1769068847.73666 1146 0011261dbcc18624a00af66c2d8c07c9 ""
+  "sections/06_results_discussion.tex" 1769074630.65391 6813 b5b3d262b7fbedbea6a2c08949e068ff ""
+  "sections/07_tail.tex" 1769072897.53418 1882 1a79c7d0e1d6aeca948f3c3a035f3361 ""
   (generated)
   "main.aux"
   "main.dvi"

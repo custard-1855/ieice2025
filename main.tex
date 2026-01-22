@@ -9,6 +9,7 @@
 %\usepackage{bm}
 \usepackage{subfiles}
 \usepackage{url}
+\usepackage{float}
 % ieicej.clsのciteコマンドとhyperrefは互換性がないため、hyperrefのcite関連機能を無効化
 \usepackage[dvipdfmx,hidelinks,unicode,pdfusetitle,hyperfootnotes=false]{hyperref}
 % hyperrefがbibciteを上書きしないようにする
@@ -45,12 +46,14 @@
 \jalcdoi{???????????}% ← このままにしておいてください
 
 \begin{document}
+\subfile{sections/00_abstract.tex}
 
 \begin{keyword}
 %和文キーワード 4〜5語
 \end{keyword}
 \begin{eabstract}
 %英文アブストラクト 100 words
+This study aims for the real-world application of sound event detection (SED) for privacy-preserving elderly monitoring. To enhance accuracy without increasing model parameters, we refined and integrated architectures for confidence-based semi-supervised learning and domain generalization. Experimental results demonstrate that our approach outperforms the reference implementation while maintaining the same model size. Furthermore, we achieved performance improvements over specific aspects of previous research. These results confirm the effectiveness of the proposed method.
 \end{eabstract}
 \begin{ekeyword}
 %英文キーワード
@@ -67,6 +70,7 @@
 
 
 \ack %% 謝辞
+共同研究費のことを記述
 \bibliographystyle{sieicej}
 \bibliography{references}
 \end{document}
