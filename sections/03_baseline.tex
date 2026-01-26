@@ -41,9 +41,9 @@ MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1で�
     \label{評価指標}
 本稿ではDCASE2024に基づき，データセットに応じて異なる評価指標を採用する．
 DESEDではPolyphonic Sound Detection Score（PSDS）\cite{bilen2020framework}のシナリオ1及び2を用い，
-MAESTRO RealではmpAUC（Macro-averaged Partial AUC. AUCはArea Under the Curveの略で, ROC曲線の下部）を主要な指標とする．\par
+MAESTRO RealではmpAUC（Macro-averaged Partial AUC．なお，AUC (Area Under the Curve) はROC (Receiver Operating Characteristic) 曲線の下部）を主要な指標とする．\par
 
-PSDSは，混同行列に基づくROC（Receiver Operating Characteristic）曲線を拡張したPSD-ROC曲線を用いて算出される．
+PSDSは，混同行列に基づくROC曲線を拡張したPSD-ROC曲線を用いて算出される．
 通常のROC曲線は，縦軸に真陽性率（TPR），横軸に偽陽性率（FPR）をとるが，
 PSD-ROC曲線では横軸に単位時間あたりの誤検知数（Effective False Positive Rate）を採用する点が異なる．
 
@@ -59,26 +59,26 @@ PSDSには目的に応じたシナリオが存在する．
 
 \subsection{先行実装モデルの流れ}
 先行実装モデルの処理は学習と検証，評価の三段階に区分される．これ以降，先行実装モデルについて，基本的にDCASE 2024の公式設定に準拠する．\par
-前処理の後，学習を150エポック行う，モデルはラベルごとの予測（弱/強 予測）を出力する．教師あり及び半教師あり学習の損失を計算し，Adam\cite{kingma2014adam}で生徒モデルを，指数移動平均で教師モデルを更新する．\par
+データの前処理の後，学習を150エポック行う．モデルは入力に対し，ラベルごとの予測（弱/強 予測）を出力する．予測と正解ラベルを用いて教師あり及び半教師あり学習の損失を計算し，Adam\cite{kingma2014adam}で生徒モデルを，指数移動平均で教師モデルを更新する．\par
 検証は10エポックごとに行う．学習したモデルで検証用データを入力に推論し，精度を測る．過去の検証時より向上した場合，評価及び推論用に重みパラメータを保持する．評価は評価用データで検証と同様の作業が行われる．\par
 
 \subsection{モデル構成}
 \label{DCASE:モデル構成}
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=150mm]{figures/model.pdf}
-%     \caption{先行研究で使用されたモデル．各段階の次元数は，特徴量の時間長 (フレーム数) と周波数を表す．BEATsによる埋め込みをプーリングや補間によって調整し，CNNの出力と統合．RNN（BiGRU）に入力した後，確率値からクリップ及びフレーム予測を得る．なお，T: 時間長, PT: 事前学習済みモデルとする．}
-%     % 図の説明をより詳細にする．
-%     \label{fig:model}
-% \end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/model.pdf}
+    \caption{先行研究で使用されたモデル．各段階の次元数は，特徴量の時間長 (フレーム数) と周波数を表す．BEATsによる埋め込みをプーリングや補間によって調整し，CNNの出力と統合．RNN（BiGRU）に入力した後，確率値からクリップ及びフレーム予測を得る．なお，T: 時間長, PT: 事前学習済みモデルとする．}
+    % 図の説明をより詳細にする．
+    \label{fig:model}
+\end{figure}
 
 先行実装は図\ref{fig:model}のように，時間周波数領域の局所的な特徴を抽出するCNNと，時系列情報を学習しイベントの時間的変化をモデル化する再帰型ニューラルネットワーク（Recurrent Neural Network; RNN）を組み合わせた，CRNN（Convolutional Recurrent Neural Network）アーキテクチャである．
 特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．\par
 BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．
 
 \subsubsection{CNN}
-CNNは図\ref{fig:cnn}のように7つの畳み込みブロックで構成される．
-特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を調整し，RNNに出力する．
+CNNは7つの畳み込みブロックで構成され，ブロックはConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
+BEATsの出力との統合のため特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を調整し，RNNに出力する．
 
 % \begin{figure}[htbp]
 %     \centering
