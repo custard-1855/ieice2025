@@ -334,6 +334,10 @@ INPUT ./sections/04_proposal.tex
 INPUT sections/04_proposal.tex
 INPUT ./sections/04_proposal.tex
 INPUT sections/04_proposal.tex
+INPUT ./figures/mixstyle.pdf
+INPUT ./figures/mixstyle.pdf
+INPUT figures/mixstyle.pdf
+INPUT extractbb -B cropbox -O figures/mixstyle.pdf
 INPUT ./sections/05_experiment.tex
 INPUT sections/05_experiment.tex
 INPUT ./sections/05_experiment.tex

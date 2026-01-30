@@ -67,7 +67,7 @@ PSDSには目的に応じたシナリオが存在する．
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/model.pdf}
-    \caption{先行研究で使用されたモデル．各段階の次元数は，特徴量の時間長 (フレーム数) と周波数を表す．BEATsによる埋め込みをプーリングや補間によって調整し，CNNの出力と統合．RNN（BiGRU）に入力した後，確率値からクリップ及びフレーム予測を得る．なお，T: 時間長, PT: 事前学習済みモデルとする．}
+    \caption{各段階の次元数は特徴量の時間長 (フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合．RNNに入力し，最終的に予測を得る．なお，T: 時間長, PT: 事前学習モデルとする．}
     % 図の説明をより詳細にする．
     \label{fig:model}
 \end{figure}

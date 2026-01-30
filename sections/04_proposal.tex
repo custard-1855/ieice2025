@@ -24,9 +24,9 @@ CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値
 \section{MixStyle}
 \label{提案手法:MixStyle}
 MixStyleは，画像認識分野においてドメイン汎化のため提案されたデータ拡張手法である．
-画像におけるMixStyleは，空間情報に着目しチャネル方向で統計量を混合する．
+画像におけるMixStyleは空間情報に着目する．チャネル方向で平均と分散 (統計量) を計算し，いずれかを足し合わせることで混合する．
 一方で，音響信号は時間と周波数の次元を持ち，ドメイン情報は主に周波数領域に局在することが示唆されている\cite{kim2022domain}．
-この特性を踏まえ，Xiaoら\cite{xiao2024fmsg}は時間方向の平均と分散を計算し，周波数軸に沿って統計量を混合する手法を提案した．
+この特性を踏まえ，Xiaoら\cite{xiao2024fmsg}は時間方向の統計量を計算し，周波数軸に沿って統計量を混合する手法を提案した．
 これにより，元のデータに含まれる意味的な情報を保持しつつ，新たなドメインスタイルを持つデータを生成し，モデルが特定ドメインに過剰適合することを防ぐ．\par
 
 先行研究\cite{xiao2024fmsg}ではMixStyleと周波数注意機構が結合されたが，具体的な統合プロセスや相互作用に関する詳細な記述が不足している．
@@ -38,14 +38,14 @@ MixStyleは，画像認識分野においてドメイン汎化のため提案さ
 \item 残差接続による原信号のドメイン情報の保持 
 \end{enumerate}
 
-% \begin{figure}[!htbp]
-%     \centering
-%     \includegraphics[width=100mm]{figures/mixstyle.pdf}
-%     \caption{オレンジの領域がCNN，緑がMixStyle，そして赤が残差接続で，それぞれ本文の1から3に対応する．}
-%     \label{fig:mixstyle}
-% \end{figure}
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{figures/mixstyle.pdf}
+    \caption{オレンジの領域がCNN，緑がMixStyle，そして赤が残差接続で，それぞれ本文の1から3に対応する．}
+    \label{fig:mixstyle}
+\end{figure}
 
-MixStyleの適用箇所は\cite{xiao2024fmsg}に準拠し，CNNへの入力直前の特徴量，及び第1・第2畳み込み層の直後の計3箇所とした．図\ref{fig:cnn}ではInput，ブロック1，2の後となる．
+MixStyleの適用箇所は\cite{xiao2024fmsg}に準拠し，CNNへの入力直前の特徴量，及び第1・第2畳み込み層の直後の計3箇所とした．%図\ref{fig:cnn}ではInput，ブロック1，2の後となる．
 ハイパーパラメータは\cite{zhou2021domain}を参考に，適用確率を$p=0.5$，ベータ分布のパラメータを$\alpha=0.1$と設定した．
 混合するスタイルのソースとなるデータは，ミニバッチ内からランダムに選択される．
 本実験では汎化対象としてDESED（合成音）とMAESTRO Real（実録音）を使用しているが，

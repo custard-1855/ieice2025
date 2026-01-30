@@ -7,10 +7,10 @@
 
 \begin{document}
 \begin{tikzpicture}[
-    node distance=0.8cm and 1.5cm,
-    box/.style={draw, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, font=\small},
+    node distance=0.6cm and 1.2cm,
+    box/.style={draw, rounded corners, minimum width=2.0cm, minimum height=0.6cm, align=center, font=\footnotesize},
     process/.style={box, fill=blue!15},
-    cnn/.style={box, fill=orange!25, minimum width=2.8cm},
+    cnn/.style={box, fill=orange!25, minimum width=2.2cm},
     stats/.style={box, fill=green!20},
     output/.style={box, fill=purple!15},
     arrow/.style={-{Stealth[length=2mm]}, thick},
@@ -20,22 +20,22 @@
 
 % --- Input ---
 \node[process] (input) {入力 $\mathbf{X}$\\{\scriptsize (B, C, T, F)}};
-\coordinate[below=0.6cm of input] (split);
+\coordinate[below=0.5cm of input] (split);
 
 % === Left path: CNN Attention ===
-\node[cnn, below left=0.8cm and 0.4cm of split] (pool) {時間平均\\{\scriptsize mean(dim=T)}};
-\node[cnn, below=0.6cm of pool] (cnn) {CNN\\{\scriptsize Conv1D → ReLU → Conv1D}};
-\node[cnn, below=0.6cm of cnn] (sigmoid) {Sigmoid\\{\scriptsize $\rightarrow$ Frequency importance $\mathbf{A}$}};
+\node[cnn, below left=0.6cm and 0.5cm of split] (pool) {時間平均\\{\scriptsize mean(dim=T)}};
+\node[cnn, below=0.5cm of pool] (cnn) {CNN\\{\scriptsize Conv1D}\\{\scriptsize → ReLU}\\{\scriptsize → Conv1D}};
+\node[cnn, below=0.5cm of cnn] (sigmoid) {Sigmoid\\{\scriptsize $\rightarrow$ Frequency}\\{\scriptsize importance $\mathbf{A}$}};
 
 % === Right path: Statistics ===
-\node[stats, below right=0.8cm and 0.4cm of split] (weighted) {重み付統計量\\{\scriptsize $\mu_w, \sigma_w = f(\mathbf{X}, \mathbf{A})$}};
-\node[stats, below=0.6cm of weighted] (mix) {統計量の混合\\{\scriptsize $\tilde{\mu} = \lambda\mu_1 + (1{-}\lambda)\mu_2$}\\{\scriptsize $\tilde{\sigma} = \lambda\sigma_1 + (1{-}\lambda)\sigma_2$}};
+\node[stats, below right=0.6cm and 0.3cm of split] (weighted) {重み付統計量\\{\scriptsize $\mu_w, \sigma_w = f(\mathbf{X}, \mathbf{A})$}};
+\node[stats, below=0.5cm of weighted] (mix) {統計量の混合\\{\scriptsize $\tilde{\mu} = \lambda\mu_1 + (1{-}\lambda)\mu_2$}\\{\scriptsize $\tilde{\sigma} = \lambda\sigma_1 + (1{-}\lambda)\sigma_2$}};
 % 修正箇所: [below=0.6cm of mix] の閉じ括弧を修正
-\node[stats, below=0.6cm of mix] (style) {スタイル生成\\{\scriptsize $\mathbf{X}_{mix} = \frac{\mathbf{X}-\mu}{\sigma} \cdot \tilde{\sigma} + \tilde{\mu}$}};
+\node[stats, below=0.5cm of mix] (style) {スタイル生成\\{\scriptsize $\mathbf{X}_{mix} = \frac{\mathbf{X}-\mu}{\sigma} \cdot \tilde{\sigma} + \tilde{\mu}$}};
 
 % === Output with residual ===
-\node[output, below=6.2cm of split] (residual) {残差接続\\{\scriptsize $\mathbf{Y} = \mathbf{X} + \mathbf{X}_{mix}$}};
-\node[process, below=0.6cm of residual] (output) {出力 $\mathbf{Y}$};
+\node[output, below=5.4cm of split] (residual) {残差接続\\{\scriptsize $\mathbf{Y} = \mathbf{X} + \mathbf{X}_{mix}$}};
+\node[process, below=0.5cm of residual] (output) {出力 $\mathbf{Y}$};
 
 % === Arrows ===
 \draw[arrow] (input) -- (split);
@@ -53,14 +53,14 @@
 \draw[arrow] (style.south) -- ++(0,-0.5) -| (residual.east);
 
 % 残差接続 (大きく迂回させて重複を回避)
-\draw[dasharrow] (input.west) -- ++(-2.5,0) |- node[left, pos=0.25, label] {元の信号} (residual.west);
+\draw[dasharrow] (input.west) -- ++(-2.0,0) |- node[left, pos=0.25, label] {元の信号} (residual.west);
 
 \draw[arrow] (residual) -- (output);
 
 % === Background boxes ===
 \begin{scope}[on background layer]
-    \node[draw=orange!60, fill=orange!5, rounded corners, fit=(pool)(cnn)(sigmoid), inner sep=10pt, label={[font=\footnotesize, orange!80!black]above:(1) Frequency importance learning}] {};
-    \node[draw=green!60, fill=green!5, rounded corners, fit=(weighted)(mix)(style), inner sep=10pt, label={[font=\footnotesize, green!50!black]above:(2) Weighted statistics mixing}] {};
+    \node[draw=orange!60, fill=orange!5, rounded corners, fit=(pool)(cnn)(sigmoid), inner sep=6pt, label={[font=\footnotesize, orange!80!black]above left:(1) Frequency importance learning}] {};
+    \node[draw=green!60, fill=green!5, rounded corners, fit=(weighted)(mix)(style), inner sep=6pt, label={[font=\footnotesize, green!50!black]above right:(2) Weighted statistics mixing}] {};
 \end{scope}
 
 
