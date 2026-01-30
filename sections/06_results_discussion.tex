@@ -26,15 +26,15 @@
 正負例の均衡化処理を行う$CMT_{scale}$は，MTと同等のPSDS1を維持しつつ，PSDS2においてCMTを上回る性能を示した．ただし，mpAUCはMTに及ばなかった．\par
 
 CMTにおけるPSDS1の低下は，非イベント区間の情報（負例）の欠落で時間的な予測が不安定になったためと考えられる．
-$CMT_{neg}$では負例の導入によりこの問題を解決したが，正例に対する負例の割合が過多となり，逆にクラス分類（PSDS2など）の予測が不安定化した．
+$CMT_{neg}$では負例の導入によりこの問題を解決したが，正例に対する負例の割合が過多となり，逆にクラス分類（PSDS2及びmpAUC）の予測が不安定化した．
 よって，$CMT_{scale}$における正負例の量の調整が，PSDS1，2の安定に有効であると言える．\par
 
 \subsection{クラス別CMT}
 \label{classwise}
 ここでCMTについて，クラスごとの精度を見る．表\ref{table:classWise}に各クラスにおけるPSDS2及びmpAUCの結果を示す．\par
 本稿の将来的な目標である異常検知において，異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」に着目する．
-ベースラインのMTと比較して，提案手法である$CMT_{scale}$ は，流水のPSDS2において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度向上を達成した．\par
-また，表\ref{table:classWise}の他手法と比較して{5\%}以上の変化があったクラスについて，向上は青，低下は赤で強調した．向上したクラスは音が長く持続するが，低下したクラスでは瞬間的な音が続く．
+先行実装のMTと比較して，提案手法である$CMT_{scale}$ は，流水のPSDS2において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度向上を達成した．\par
+また，表\ref{table:classWise}では，提案手法とMT及びCMTを比較して{5\%}以上の変化があるクラスについて，向上は青，低下は赤で強調した．向上したクラスは音が長く持続するが，低下したクラスでは瞬間的な音が続く．
 このことから，提案手法は長期的な音が捉えられる代わりに，瞬間的な音を取りこぼすと考えられる．
 
 \begin{table}[H]
@@ -84,17 +84,38 @@ $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例
  ただ，重みづけは実際には働いていない可能性がある．また，従来のMixStyleは混合した特徴量のみを用いるが，提案は残差接続を行う．これが摂動として働き，一貫性の制約を強めた可能性もある． \par
 
  \subsection{CMT+MixStyle}
- \begin{table}[!h]
+%  \begin{table}[!h]
+%  \begin{center}
+%    \begin{tabular}{|l|r|r|r|r|r|}
+%     \hline
+%     MT-type & PSDS1 & PSDS2 & mpAUC \\
+%     \hline
+%     MT   & 0.382 & 0.607 & 0.704 \\
+%     \hline
+%     CMT & 0.387 & 0.637 & 0.722 \\
+%     \hline
+%     $CMT_{scale}$  & 0.393 & 0.632 & 0.727 \\
+%     \hline
+%   \end{tabular}
+%   \caption{CMTとMixStyleを併用した結果}
+%   \label{table:mergeAcc}
+% \end{center}
+% \end{table}
+
+\begin{table}[H]
  \begin{center}
-   \begin{tabular}{|l|r|r|r|r|r|}
+  \begin{tabular}{|l|r|r|r|r|r|}
     \hline
-    MT-type & PSDS1 & PSDS2 & mpAUC \\
+    MT-type    & MixStyle    & PSDS1 & PSDS2 & mpAUC \\
     \hline
-    MT   & 0.382 & 0.607 & 0.704 \\
+    先行実装 (MT)  & -           & 0.369 & 0.581 & 0.720 \\
+    先行実装      & \checkmark  & 0.382 & 0.607 & 0.704 \\
     \hline
-    CMT & 0.387 & 0.637 & 0.722 \\
+    先行研究 (CMT) & -           & 0.297 & 0.60  & 0.689 \\
+    先行研究      & \checkmark  & 0.387 & 0.637 & 0.722 \\
     \hline
-    $CMT_{scale}$  & 0.393 & 0.632 & 0.727 \\
+    提案手法 ($CMT_{scale}$)      & -           & 0.368 & 0.621 & 0.699 \\
+    提案手法      & \checkmark  & 0.393 & 0.632 & 0.727 \\
     \hline
   \end{tabular}
   \caption{CMTとMixStyleを併用した結果}
@@ -102,14 +123,21 @@ $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例
 \end{center}
 \end{table}
 
+
 表\ref{table:mergeAcc}に，各種MTをMixStyleと併用した場合の結果を示す． 
 MTとCMTはPSDS1，2が向上した一方で，mpAUCは低下した．
 $CMT_{scale}$はMTに比べて精度が向上したが，CMTとの差は僅かである．
-これはMixStyleの精度への影響がCMTより強いためだと考えられる．\par 
+これはMixStyleのPSDS1への影響がCMTより強いためだと考えられる．\par 
+% MixStyleの適用を前提として, CMT及びCMT_scaleの精度差を見ると, ごく僅かであり, 
+% MixStyleの精度への影響が強いためであると考えられる. これは, 摂動の変化を与えるMixStyleが, 
+% MTの目的とする一貫性を強める効果を同様に働かせたためと解釈できる.
+% つまり併用した場合, 単独での使用と異なり, 負例の採用や調整より, ドメイン汎化や残差接続kによる摂動の変化の影響が強いと考えられる
+% ??????? 解釈の仕方がまだあるのでは???
 
-表\ref{table:mtAcc}と比較する．MixStyleの適用により，DESED（合成音・実録音）のみならず，性質の異なるMAESTRO（実録音）を含む精度向上が期待されたが，
-MTではmpAUCが低下した． 
-PSDS1，2の向上は，MixStyleが特徴空間に摂動を与え，教師及び生徒モデル間の一貫性を強めたためと考えられる．\par
+MixStyleの適用については，DESED（合成音・実録音）のみならず，性質の異なるMAESTRO（実録音）を含む精度向上が期待されたが，
+MTではmpAUCが低下した．
+特にPSDS1，2の向上は，MixStyleが特徴空間に摂動を与え，教師及び生徒モデル間の一貫性を強めたためと考えられる．\par
+% mpAUCはなぜ低下した? > たまたまかも. 精度の統計的なばらつきを測ってないので分からない
 
 \subsection{まとめ}
 一連の結果より，提案手法であるCMTとMixStyleの改良を統合した場合，MTと比較して全ての指標を向上させたが，CMTとの差はごく僅かだった．

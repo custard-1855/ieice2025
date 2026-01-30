@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  30 JAN 2026 11:42
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  30 JAN 2026 13:35
  restricted system commands enabled.
 **mt_sed.tex
 (./mt_sed.tex
@@ -873,7 +873,7 @@ c, 21 attribute_list, 2 write, 9 user_defined nodes
 /texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf></usr/share/
 fonts/HaranoAjiFonts-20231009/HaranoAjiMincho-Regular.otf></usr/local/texlive/20
 25/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
-Output written on mt_sed.pdf (1 page, 18880 bytes).
+Output written on mt_sed.pdf (1 page, 18876 bytes).
 
 PDF statistics: 39 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream

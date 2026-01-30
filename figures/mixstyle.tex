@@ -31,7 +31,7 @@
 \node[stats, below right=0.6cm and 0.3cm of split] (weighted) {重み付統計量\\{\scriptsize $\mu_w, \sigma_w = f(\mathbf{X}, \mathbf{A})$}};
 \node[stats, below=0.5cm of weighted] (mix) {統計量の混合\\{\scriptsize $\tilde{\mu} = \lambda\mu_1 + (1{-}\lambda)\mu_2$}\\{\scriptsize $\tilde{\sigma} = \lambda\sigma_1 + (1{-}\lambda)\sigma_2$}};
 % 修正箇所: [below=0.6cm of mix] の閉じ括弧を修正
-\node[stats, below=0.5cm of mix] (style) {スタイル生成\\{\scriptsize $\mathbf{X}_{mix} = \frac{\mathbf{X}-\mu}{\sigma} \cdot \tilde{\sigma} + \tilde{\mu}$}};
+\node[stats, below=0.5cm of mix] (style) {サンプル生成\\{\scriptsize $\mathbf{X}_{mix} = \frac{\mathbf{X}-\mu}{\sigma} \cdot \tilde{\sigma} + \tilde{\mu}$}};
 
 % === Output with residual ===
 \node[output, below=5.4cm of split] (residual) {残差接続\\{\scriptsize $\mathbf{Y} = \mathbf{X} + \mathbf{X}_{mix}$}};
