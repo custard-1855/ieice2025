@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  30 JAN 2026 04:41
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  30 JAN 2026 10:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -823,17 +823,19 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 8.0pt on input line 67.
 File: figures/model.pdf Graphic file (type pdf)
 <figures/model.pdf>
+File: figures/cnn_3.pdf Graphic file (type pdf)
+<figures/cnn_3.pdf>
 
 
 [3]
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 6.35065pt on input line 110.
+(Font)              scaled to size 6.35065pt on input line 109.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.6pt on input line 110.
+(Font)              scaled to size 6.6pt on input line 109.
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 5.2922pt on input line 110.
+(Font)              scaled to size 5.2922pt on input line 109.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 110.
+(Font)              scaled to size 5.5pt on input line 109.
 ) (./sections/04_proposal.tex
 
 File: figures/mixstyle.pdf Graphic file (type pdf)
@@ -889,9 +891,9 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 7.0pt on input line 49.
 
 
-[5]) (./sections/07_tail.tex
+[5]) (./sections/07_tail.tex) (./main.bbl
 
-) (./main.bbl)
+)
 
 [6] (./main.aux)
  ***********
@@ -911,12 +913,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14059 strings out of 475301
- 208347 string characters out of 5767575
+ 14068 strings out of 475301
+ 208522 string characters out of 5767575
  621724 words of memory out of 5000000
- 36964 multiletter control sequences out of 15000+600000
+ 36972 multiletter control sequences out of 15000+600000
  617339 words of font info for 187 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 80i,11n,93p,638b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,93p,638b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (6 pages, 67696 bytes).
+Output written on main.dvi (6 pages, 67704 bytes).

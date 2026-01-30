@@ -1,6 +1,7 @@
 \documentclass[main]{subfiles}
 \begin{document}
 
+\section{提案手法}
 \label{提案手法:CMT}
 % \begin{figure}[!htbp]
 %     \centering
@@ -8,7 +9,7 @@
 %     \caption{Mean Teacherの更新の概略．Mean TeacherはDESEDに対して適用し，生徒モデルの重みパラメータの指数移動平均で教師モデルのパラメータを更新する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
 %     \label{fig:meanteacher}
 % \end{figure}
-\section{CMT}
+\subsection{CMT}
 CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値を設ける．
 はじめに弱予測で判定し，閾値を下回った予測は同区間の強予測も含め学習しない．
 次に，閾値を上回る弱予測と同区間の強予測で同様に判定し，イベント種別に応じた窓サイズを持つMedian Filterで平滑化と外れ値の除去を行う． 
@@ -21,7 +22,7 @@ CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値
 これにより，ラベルなしデータにおける「イベントなし」情報を学習する．
 この時，正例と負例のサンプル数の偏りによって精度が低下する恐れがある．そこで，量の少ない方にサンプリングする均衡化処理も導入する．
 
-\section{MixStyle}
+\subsection{MixStyle}
 \label{提案手法:MixStyle}
 MixStyleは，画像認識分野においてドメイン汎化のため提案されたデータ拡張手法である．
 画像におけるMixStyleは空間情報に着目する．チャネル方向で平均と分散 (統計量) を計算し，いずれかを足し合わせることで混合する．

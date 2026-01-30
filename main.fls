@@ -328,6 +328,10 @@ INPUT ./figures/model.pdf
 INPUT ./figures/model.pdf
 INPUT figures/model.pdf
 INPUT extractbb -B cropbox -O figures/model.pdf
+INPUT ./figures/cnn_3.pdf
+INPUT ./figures/cnn_3.pdf
+INPUT figures/cnn_3.pdf
+INPUT extractbb -B cropbox -O figures/cnn_3.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
 INPUT ./sections/04_proposal.tex

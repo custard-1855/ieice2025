@@ -41,7 +41,7 @@ MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1で�
     \label{評価指標}
 本稿ではDCASE2024に基づき，データセットに応じて異なる評価指標を採用する．
 DESEDではPolyphonic Sound Detection Score（PSDS）\cite{bilen2020framework}のシナリオ1及び2を用い，
-MAESTRO RealではmpAUC（Macro-averaged Partial AUC．なお，AUC (Area Under the Curve) はROC (Receiver Operating Characteristic) 曲線の下部）を主要な指標とする．\par
+MAESTRO RealではmpAUC（Macro-averaged Partial AUC．なお，AUC (Area Under the Curve) はROC (Receiver Operating Characteristic) 曲線下部の面積）を主要な指標とする．\par
 
 PSDSは，混同行列に基づくROC曲線を拡張したPSD-ROC曲線を用いて算出される．
 通常のROC曲線は，縦軸に真陽性率（TPR），横軸に偽陽性率（FPR）をとるが，
@@ -54,11 +54,11 @@ PSDSには目的に応じたシナリオが存在する．
 本稿では，時間精度の向上とイベント分類の最適化を段階的に分離することを想定しており，現段階では正確なクラス分類を優先課題としている．
 したがって，$PSDS_2$を最重要指標と位置付けるが，モデルの総合的な挙動を把握するため$PSDS_1$も併せて評価する．\par
 
-一方，MAESTRO Realの評価に用いるmpAUCは，ROC曲線の全領域ではなく，誤検知率が低い領域（低FPR領域）に限定して曲線下面積（AUC）を算出する指標である．
+一方，MAESTRO Realの評価に用いるmpAUCは，ROC曲線の全領域ではなく，誤検知率が低い領域（低FPR領域）に限定してAUCを算出する指標である．
 これは，実用上許容できない高い誤検知率の領域を評価から除外することで，モデルの信頼性をより厳密に評価するためである．
 
 \subsection{先行実装モデルの流れ}
-先行実装モデルの処理は学習と検証，評価の三段階に区分される．これ以降，先行実装モデルについて，基本的にDCASE 2024の公式設定に準拠する．\par
+先行実装モデルの処理は学習と検証，評価の三段階に区分される．
 データの前処理の後，学習を150エポック行う．モデルは入力に対し，ラベルごとの予測（弱/強 予測）を出力する．予測と正解ラベルを用いて教師あり及び半教師あり学習の損失を計算し，Adam\cite{kingma2014adam}で生徒モデルを，指数移動平均で教師モデルを更新する．\par
 検証は10エポックごとに行う．学習したモデルで検証用データを入力に推論し，精度を測る．過去の検証時より向上した場合，評価及び推論用に重みパラメータを保持する．評価は評価用データで検証と同様の作業が行われる．\par
 
@@ -67,25 +67,24 @@ PSDSには目的に応じたシナリオが存在する．
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{figures/model.pdf}
-    \caption{各段階の次元数は特徴量の時間長 (フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合．RNNに入力し，最終的に予測を得る．なお，T: 時間長, PT: 事前学習モデルとする．}
+    \caption{各段階の次元数は特徴量の時間長 (T: フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習モデルを表す．}
     % 図の説明をより詳細にする．
     \label{fig:model}
 \end{figure}
 
 先行実装は図\ref{fig:model}のように，時間周波数領域の局所的な特徴を抽出するCNNと，時系列情報を学習しイベントの時間的変化をモデル化する再帰型ニューラルネットワーク（Recurrent Neural Network; RNN）を組み合わせた，CRNN（Convolutional Recurrent Neural Network）アーキテクチャである．
-特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．\par
-BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．
+特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．
+BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．\par
+なお，特徴量として対数メルスペクトログラムを用いる．また，前処理では汎化性能向上のため，二つのデータを一定の比率で混合するデータ拡張手法のMixupを行う\cite{zhang2017mixup}．
 
 \subsubsection{CNN}
-CNNは7つの畳み込みブロックで構成され，ブロックはConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
-BEATsの出力との統合のため特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を調整し，RNNに出力する．
-
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=100mm]{figures/cnn_3.pdf}
-%     \caption{CNNの構造を示す．畳み込み層を含んだブロックが7つあり，これらは役割に応じて三種類に大別される．各要素の下の数値は特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を表す．}
-%     \label{fig:cnn}
-% \end{figure}
+CNNは図\ref{fig:cnn}のように，7つの畳み込みブロックで構成される．ブロックではConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/cnn_3.pdf}
+    \caption{各要素の下の数値は特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を表す．}
+    \label{fig:cnn}
+\end{figure}
 
 \subsubsection{RNN}
 % (図\ref{fig:rnn}) 
@@ -107,7 +106,7 @@ RNNには双方向Gated Recurrent Unit（Bidirectional GRU; BiGRU）を使用し
 % \end{figure}
 
 \subsection{出力}
-先行実装の出力段はRNNの出力（$\text{Batch} \times \text{Time} \times 384$）を強/弱予測に変換する．
+先行実装の出力段はRNNの出力（$\text{Batch} \times \text{Time} \times 384$．384は周波数の次元数）を強/弱予測に変換する．
 出力は全結合層とSigmoid活性化関数で27クラスに対する強予測に変換され，それらをAttention機構による時間方向に集約して弱予測を得る．
 なお，評価に用いるのは21クラスである．
 

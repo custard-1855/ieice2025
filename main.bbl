@@ -35,6 +35,11 @@ F. Schmid, P. Primus, T. Morocutti, J. Greif, and G. Widmer,
 ``Improving audio spectrogram transformers for sound event detection through multi-stage training,''
 arXiv:2408.00791, 2024.
 
+\bibitem{cornell2024dcase}
+S. Cornell, J. Ebbers, C. Douwes, I. Mart{\'\i}n-Morat{\'o}, M. Harju, A. Mesaros, and R. Serizel,
+``Dcase 2024 task 4: Sound event detection with heterogeneous data and missing labels,''
+arXiv:2406.08056, 2024.
+
 \bibitem{tarvainen2017mean}
 A. Tarvainen and H. Valpola,
 ``Mean teachers are better role models: Weight-averaged consistency targets improve semi-supervised deep learning results,''
@@ -99,6 +104,12 @@ pp.1--15, 2015.
 S. Chen, Y. Wu, C. Wang, S. Liu, D. Tompkins, Z. Chen, and F. Wei,
 ``Beats: Audio pre-training with acoustic tokenizers,''
 arXiv:2212.09058, 2022.
+
+\bibitem{zhang2017mixup}
+H. Zhang, M. Cisse, Y.N. Dauphin, and D. Lopez-Paz,
+``mixup: Beyond empirical risk minimization,''
+Proc.\ ICLR,
+pp.1--13, 2018.
 
 \bibitem{kim2022domain}
 B. Kim, S. Yang, J. Kim, H. Park, J. Lee, and S. Chang,

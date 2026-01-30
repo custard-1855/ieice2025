@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex main"] 1769748097.38474 "main.aux" "main.bbl" "main" 1769748097.94252 0
-  "./references.bib" 1768642387.97341 9832 82e0dea36cb9bbd8d1409402963bce7e ""
+["bibtex main"] 1769769100.12794 "main.aux" "main.bbl" "main" 1769769543.7633 0
+  "./references.bib" 1769767106.59422 10164 afab536e228be3c7bfede35f7020ee5e ""
   "./sieicej.bst" 1768640986.36971 40776 7800bda83f5ba6daac2c7311600f8290 ""
-  "main.aux" 1769748097.79599 3587 faa95ba9711bd067b69c773cb7890943 "latex"
+  "main.aux" 1769769543.61263 4146 722a30b1edf087a734213aabaebf565a "latex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["dvipdf"] 1769748097.83605 "main.dvi" "main.pdf" "main" 1769748097.9432 0
-  "main.dvi" 1769748097.79689 67696 8f27d054d366981325ac6403d1bd470f "latex"
+["dvipdf"] 1769769543.65234 "main.dvi" "main.pdf" "main" 1769769543.764 0
+  "main.dvi" 1769769543.61364 67704 36c7a02d17a939a70b1cd420c79141ae "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1769748097.39838 "main.tex" "main.dvi" "main" 1769748097.94256 0
+["latex"] 1769769543.18396 "main.tex" "main.dvi" "main" 1769769543.76336 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
@@ -118,20 +118,21 @@
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/uplatex.fmt" 1742197789 2051896 42bb734354a8fd00218ce8143aada50e ""
   "/usr/local/texlive/2025/texmf.cnf" 1742196573 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "classes/ieicej.cls" 1768641608.03341 114016 3766ecd3bc3d2f9f6702107687a21cdf ""
+  "figures/cnn_3.pdf" 1768447762.04843 39979 51619a89d99f90cf3e2f5cea988d4b4e ""
   "figures/mixstyle.pdf" 1769746096.5012 65282 fe1c4ae548440c0353d0adc1f3705a35 ""
   "figures/model.pdf" 1768447762.04786 38449 9468cef997fda0661c1f2ca777d5f60e ""
-  "main.aux" 1769748097.79599 3587 faa95ba9711bd067b69c773cb7890943 "latex"
-  "main.bbl" 1769748097.3975 4042 f4c0113280e4b5047132bd78088f2925 "bibtex main"
-  "main.out" 1769748097.67221 0 d41d8cd98f00b204e9800998ecf8427e "latex"
-  "main.tex" 1769610708.33243 4071 7e65e0006a8ff10e16206f76782d84de ""
-  "sections/00_abstract.tex" 1769421565.80916 1077 8bb95ff4992c55934be80a1c01dfb2d4 ""
-  "sections/01_introduction.tex" 1769421197.16058 2179 8397f363b856b9c3bc8a0354f2841214 ""
-  "sections/02_related_research.tex" 1769746714.3324 8979 4edfb4fa2dd870258e1d4e9f3e7539a6 ""
-  "sections/03_baseline.tex" 1769746359.57462 9278 5b689c8f5cdf9ee683e3ee321eb4331e ""
-  "sections/04_proposal.tex" 1769746255.17281 6963 bd74f345d78e662470c367bd36a9ae3b ""
+  "main.aux" 1769769543.61263 4146 722a30b1edf087a734213aabaebf565a "latex"
+  "main.bbl" 1769769100.14494 4436 37877496e0ce5fc31b082d11990c6c1b "bibtex main"
+  "main.out" 1769769543.46918 0 d41d8cd98f00b204e9800998ecf8427e "latex"
+  "main.tex" 1769762764.5769 4048 3050767063f446aa7c49e7f77c464237 ""
+  "sections/00_abstract.tex" 1769763357.52372 1089 0cff7dbb3e9c7cd23a6489b251ca5896 ""
+  "sections/01_introduction.tex" 1769763571.9865 2192 c23cbc2e1d73241cc1c750c0c2209de1 ""
+  "sections/02_related_research.tex" 1769767520.50571 8995 945bc784d7ffeafc2831c35d99f7a91f ""
+  "sections/03_baseline.tex" 1769768611.85267 9151 75458fb1712347b9696672767058b67b ""
+  "sections/04_proposal.tex" 1769768793.71908 6992 4ba1d2afa8cc6da0212857efd2939677 ""
   "sections/05_experiment.tex" 1769068847.73666 1146 0011261dbcc18624a00af66c2d8c07c9 ""
-  "sections/06_results_discussion.tex" 1769423480.40278 7434 791f1aab7bb3f4b320390970962cc519 ""
-  "sections/07_tail.tex" 1769748093.72454 1042 abf717405c119050e55605d85fa3c40f ""
+  "sections/06_results_discussion.tex" 1769769517.00441 6759 ce27b93ce8aeacdab0ebdc74dc43d089 ""
+  "sections/07_tail.tex" 1769768136.96075 932 54527e370676a610bd5c219f199679e5 ""
   (generated)
   "main.aux"
   "main.dvi"
