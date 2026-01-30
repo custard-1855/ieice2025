@@ -4,12 +4,6 @@
 \section{提案手法}
 \subsection{CMT}
 \label{提案手法:CMT}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/mt_sed.pdf}
-    \caption{Mean Teacherの更新の概略．Mean TeacherはDESEDに対して適用し，生徒モデルの重みパラメータの指数移動平均で教師モデルのパラメータを更新する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
-    \label{fig:meanteacher}
-\end{figure}
 CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値を設ける．
 はじめに弱予測で判定し，閾値を下回った予測は同区間の強予測も含め学習しない．
 次に，閾値を上回る弱予測と同区間の強予測で同様に判定し，イベント種別に応じた窓サイズを持つMedian Filterで平滑化と外れ値の除去を行う． 

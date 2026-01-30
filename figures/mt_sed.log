@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  30 JAN 2026 11:39
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  30 JAN 2026 11:42
  restricted system commands enabled.
 **mt_sed.tex
 (./mt_sed.tex
@@ -828,29 +828,24 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 7.69775pt on input line 88.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 7.69775pt on input line 88.
-(load cache: extra_lmroman7-regular.luc)
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 6.73553pt on input line 129.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 6.73553pt on input line 129.
 (load cache: extra_lmroman10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 155.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 155.
+(Font)              scaled to size 9.6222pt on input line 154.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 155.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 155.
+(Font)              scaled to size 9.6222pt on input line 154.
 (load cache: extra_lmroman8-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <8> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 155.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 155.
+(Font)              scaled to size 7.69775pt on input line 154.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <8> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 155.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 155.
+(Font)              scaled to size 7.69775pt on input line 154.
 
 
 [1
@@ -865,25 +860,23 @@ L3 programming layer <2025-01-18>
 )
 
 Here is how much of LuaTeX's memory you used:
- 15910 strings out of 475506
+ 15906 strings out of 475506
  125244,953878 words of node,token memory allocated
  814 words of node memory still in use:
    7 hlist, 1 vlist, 4 rule, 2 glue, 3 kern, 1 glyph, 140 attribute, 48 glue_spe
 c, 21 attribute_list, 2 write, 9 user_defined nodes
-   avail lists: 1:22,2:31142,3:3506,4:1116,5:30,6:11,7:2735,9:1179,11:3
- 38419 multiletter control sequences out of 65536+600000
- 30 fonts using 28255775 bytes
+   avail lists: 1:22,2:30305,3:3473,4:1095,5:28,6:11,7:2603,9:1140,11:3
+ 38415 multiletter control sequences out of 65536+600000
+ 28 fonts using 24341039 bytes
  117i,7n,115p,1829b,880s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/fonts/HaranoAjiFonts-20231009/HaranoAjiGothic-Medium.otf></usr/local
-/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf></usr/local/
-texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/loca
-l/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans9-regular.otf></usr/sha
-re/fonts/HaranoAjiFonts-20231009/HaranoAjiMincho-Regular.otf></usr/local/texlive
-/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
-Output written on mt_sed.pdf (1 page, 24326 bytes).
+/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf></usr/share/
+fonts/HaranoAjiFonts-20231009/HaranoAjiMincho-Regular.otf></usr/local/texlive/20
+25/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf>
+Output written on mt_sed.pdf (1 page, 18880 bytes).
 
-PDF statistics: 53 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+PDF statistics: 39 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

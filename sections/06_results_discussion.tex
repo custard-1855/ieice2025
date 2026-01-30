@@ -4,7 +4,7 @@
 \begin{document}
 \section{結果と考察}
 \subsection{CMT}
-\begin{table}[!h]
+\begin{table}[H]
  \begin{center}
    \begin{tabular}{|l|r|r|r|}
     \hline
@@ -30,6 +30,7 @@ $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例
 よって，$CMT_{scale}$における正負例の量の調整が，PSDS1，2の安定に有効であると言える．\par
 
 \subsection{クラス別CMT}
+\label{classwise}
 ここでCMTについて，クラスごとの精度を見る．表\ref{table:classWise}に各クラスにおけるPSDS2及びmpAUCの結果を示す．\par
 本稿の将来的な目標である異常検知において，異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」に着目する．
 ベースラインのMTと比較して，提案手法である$CMT_{scale}$ は，流水のPSDS2において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度向上を達成した．\par
