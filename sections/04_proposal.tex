@@ -2,14 +2,14 @@
 \begin{document}
 
 \section{提案手法}
-\label{提案手法:CMT}
-% \begin{figure}[!htbp]
-%     \centering
-%     \includegraphics[width=120mm]{figures/mt_sed.pdf}
-%     \caption{Mean Teacherの更新の概略．Mean TeacherはDESEDに対して適用し，生徒モデルの重みパラメータの指数移動平均で教師モデルのパラメータを更新する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
-%     \label{fig:meanteacher}
-% \end{figure}
 \subsection{CMT}
+\label{提案手法:CMT}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/mt_sed.pdf}
+    \caption{Mean Teacherの更新の概略．Mean TeacherはDESEDに対して適用し，生徒モデルの重みパラメータの指数移動平均で教師モデルのパラメータを更新する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
+    \label{fig:meanteacher}
+\end{figure}
 CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値を設ける．
 はじめに弱予測で判定し，閾値を下回った予測は同区間の強予測も含め学習しない．
 次に，閾値を上回る弱予測と同区間の強予測で同様に判定し，イベント種別に応じた窓サイズを持つMedian Filterで平滑化と外れ値の除去を行う． 
@@ -31,7 +31,7 @@ MixStyleは，画像認識分野においてドメイン汎化のため提案さ
 これにより，元のデータに含まれる意味的な情報を保持しつつ，新たなドメインスタイルを持つデータを生成し，モデルが特定ドメインに過剰適合することを防ぐ．\par
 
 先行研究\cite{xiao2024fmsg}ではMixStyleと周波数注意機構が結合されたが，具体的な統合プロセスや相互作用に関する詳細な記述が不足している．
-そこで本稿では，周波数領域におけるドメイン汎化性能をより軽量に高めるため，MixStyleとCNNを明示的に統合する．%図\ref{fig:mixstyle}）
+そこで本稿では，周波数領域におけるドメイン汎化性能をより軽量に高めるため，MixStyleとCNNを明示的に統合する．
 本手法は以下の3段階で構成され，重要な信号情報を損失することなく，効果的なドメイン適応を実現する． 
 \begin{enumerate}
 \item CNNによる重要周波数帯域の特定 
@@ -39,13 +39,13 @@ MixStyleは，画像認識分野においてドメイン汎化のため提案さ
 \item 残差接続による原信号のドメイン情報の保持 
 \end{enumerate}
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\columnwidth]{figures/mixstyle.pdf}
     \caption{オレンジの領域がCNN，緑がMixStyle，そして赤が残差接続で，それぞれ本文の1から3に対応する．}
     \label{fig:mixstyle}
 \end{figure}
-
+具体的なアーキテクチャを図\ref{fig:mixstyle}に示す．
 MixStyleの適用箇所は\cite{xiao2024fmsg}に準拠し，CNNへの入力直前の特徴量，及び第1・第2畳み込み層の直後の計3箇所とした．%図\ref{fig:cnn}ではInput，ブロック1，2の後となる．
 ハイパーパラメータは\cite{zhou2021domain}を参考に，適用確率を$p=0.5$，ベータ分布のパラメータを$\alpha=0.1$と設定した．
 混合するスタイルのソースとなるデータは，ミニバッチ内からランダムに選択される．

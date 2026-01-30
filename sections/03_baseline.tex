@@ -6,36 +6,36 @@
 評価用データセットとしてDomestic Environment Sound Event Detection Dataset (DESED)，
 および MAESTRO Real の21クラスを使用する\cite{turpault2019sound,serizel2020sound,martin2023strong}．\par
 
-これらデータセットのラベルには種類がある．弱ラベルはイベント種別のみを，強ラベルは開始・終了時刻も含み，それぞれクリップとフレームに対応する．\par
+これらデータセットのラベルには種類がある．弱ラベルはイベント種別のみを，強ラベルは開始・終了時刻も含み，それぞれクリップとフレームに対応する．ラベルのないデータもある．\par
 
 データセットに含まれる音声について，DESEDは家庭内の音響イベント検出に向けて，実環境で録音した家庭内の生活音と，そのような環境を再現するために合成された音が含まれる．
 音声データは10秒間のモノラルオーディオで，サンプリングレート 16kHz または 44.1kHzとなっている．
 % モノラル > チャネル数が1
 MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1ではなく，0.8などの連続値 (ソフトラベル) で，強ラベルが付与されている．\par
 
+\begin{table}[H]
+ \begin{center}
+   \begin{tabular}{|l|c|c|}
+    \hline
+    利用段階 & データ種別  & 数[clips] \\
+    \hline
+    訓練 & 強ラベル，実録音 & 1613 \\
+    訓練 & 弱ラベル，実録音 & 1188 \\
+    訓練 & 強ラベル，合成音 & 10000 \\
+    訓練 & ラベルなし，実録音 & 12027 \\
+    検証 & 弱ラベル，実録音 & 129 \\
+    検証 & 強ラベル，合成音 & 2500 \\
+    評価 & 強ラベル，実録音  & 958 \\
+    \hline
+  \end{tabular}
+  \caption{DESEDのデータ数}
+  \label{table:desed}
+\end{center}
+\end{table}
 % そのうち，10（Alarm bell ringing，Blender，Cat，Dishes，Dog，Electric shaver toothbrush，Frying，Running water，Speech，Vacuum cleaner）及び11（Birds singing，Car，People talking，Footsteps，Children voices，Wind blowing，Brakes squeaking，Large vehicle，Cutlery and dishes，Metro approaching，Metro leaving）クラスを使用する．\par
-% DESEDのデータは学習の利用段階とデータの作成法，ラベルで分類される．利用段階には訓練，検証，評価がある．データは実環境の録音か，あるいは合成で作成され，ラベルは強，弱，なしに分類される．
-% ここで，ラベルの強・弱はフレーム・クリップに対応しており，フレームごとにイベントの開始・終了・種類が記録されていれば強ラベル，10秒のクリップに対して含まれるイベントの種類のみであった場合は弱ラベルに分類される．ラベルなしは全くラベルが付加されていないデータを指す．
-% なお，本稿では一部データが取得できず，通常より少ないデータ数で学習を行っている．本稿で使用したDESEDのデータ数は表\ref{table:desed}の通り．\par
-% \begin{table}[htbp]
-%  \begin{center}
-%    \begin{tabular}{|l|c|c|}
-%     \hline
-%     利用段階 & データ種別  & 数[clips] \\
-%     \hline
-%     訓練 & 強ラベル，実録音 & 1613 \\
-%     訓練 & 弱ラベル，実録音 & 1188 \\
-%     訓練 & 強ラベル，合成音 & 10000 \\
-%     訓練 & ラベルなし，実録音 & 12027 \\
-%     検証 & 弱ラベル，実録音 & 129 \\
-%     検証 & 強ラベル，合成音 & 2500 \\
-%     評価 & 強ラベル，実録音  & 958 \\
-%     \hline
-%   \end{tabular}
-%   \caption{データ数}
-%   \label{table:desed}
-% \end{center}
-% \end{table}
+DESEDのデータは学習の利用段階と作成法，ラベルで分類される．利用段階には訓練，検証，評価がある．データは実環境の録音か，あるいは合成で作成される．
+なお，本稿では一部データが取得できていない．使用したデータ数を表\ref{table:desed}に示す．
+MAESTROは訓練用のデータを訓練と検証で 9:1 に分割し，評価には評価用のデータを用いた．
 
 \subsection{評価指標}
     \label{評価指標}
@@ -64,11 +64,10 @@ PSDSには目的に応じたシナリオが存在する．
 
 \subsection{モデル構成}
 \label{DCASE:モデル構成}
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=\columnwidth]{figures/model.pdf}
+    \includegraphics[width=0.8\columnwidth]{figures/model.pdf}
     \caption{各段階の次元数は特徴量の時間長 (T: フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習モデルを表す．}
-    % 図の説明をより詳細にする．
     \label{fig:model}
 \end{figure}
 

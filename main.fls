@@ -324,32 +324,6 @@ INPUT sections/03_baseline.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-h.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
-INPUT ./figures/model.pdf
-INPUT ./figures/model.pdf
-INPUT figures/model.pdf
-INPUT extractbb -B cropbox -O figures/model.pdf
-INPUT ./figures/cnn_3.pdf
-INPUT ./figures/cnn_3.pdf
-INPUT figures/cnn_3.pdf
-INPUT extractbb -B cropbox -O figures/cnn_3.pdf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
-INPUT ./sections/04_proposal.tex
-INPUT sections/04_proposal.tex
-INPUT ./sections/04_proposal.tex
-INPUT sections/04_proposal.tex
-INPUT ./figures/mixstyle.pdf
-INPUT ./figures/mixstyle.pdf
-INPUT figures/mixstyle.pdf
-INPUT extractbb -B cropbox -O figures/mixstyle.pdf
-INPUT ./sections/05_experiment.tex
-INPUT sections/05_experiment.tex
-INPUT ./sections/05_experiment.tex
-INPUT sections/05_experiment.tex
-INPUT ./sections/06_results_discussion.tex
-INPUT sections/06_results_discussion.tex
-INPUT ./sections/06_results_discussion.tex
-INPUT sections/06_results_discussion.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxmi17.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxmi15.tfm
@@ -366,6 +340,36 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsyc.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsyc.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
+INPUT ./figures/model.pdf
+INPUT ./figures/model.pdf
+INPUT figures/model.pdf
+INPUT extractbb -B cropbox -O figures/model.pdf
+INPUT ./figures/cnn_3.pdf
+INPUT ./figures/cnn_3.pdf
+INPUT figures/cnn_3.pdf
+INPUT extractbb -B cropbox -O figures/cnn_3.pdf
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
+INPUT ./sections/04_proposal.tex
+INPUT sections/04_proposal.tex
+INPUT ./sections/04_proposal.tex
+INPUT sections/04_proposal.tex
+INPUT ./figures/mt_sed.pdf
+INPUT ./figures/mt_sed.pdf
+INPUT figures/mt_sed.pdf
+INPUT extractbb -B cropbox -O figures/mt_sed.pdf
+INPUT ./figures/mixstyle.pdf
+INPUT ./figures/mixstyle.pdf
+INPUT figures/mixstyle.pdf
+INPUT extractbb -B cropbox -O figures/mixstyle.pdf
+INPUT ./sections/05_experiment.tex
+INPUT sections/05_experiment.tex
+INPUT ./sections/05_experiment.tex
+INPUT sections/05_experiment.tex
+INPUT ./sections/06_results_discussion.tex
+INPUT sections/06_results_discussion.tex
+INPUT ./sections/06_results_discussion.tex
+INPUT sections/06_results_discussion.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisg-h.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-ot1.tfm
 INPUT ./sections/07_tail.tex

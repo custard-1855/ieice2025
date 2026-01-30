@@ -6,13 +6,13 @@
 \begin{document}
 
 \begin{tikzpicture}[
-    node distance=1.5cm,
+    node distance=1.3cm,
     >={Latex[width=3mm,length=3mm]},
     font=\sffamily\small,
     % スタイル定義
-    data block/.style={rectangle, draw=none, fill=gray!10, text centered, rounded corners, minimum height=0.8cm, minimum width=2.5cm},
+    data block/.style={rectangle, draw=none, fill=gray!10, text centered, rounded corners, minimum height=0.8cm, minimum width=2.2cm},
     model block/.style={rectangle, draw, thick, dashed, inner sep=10pt, rounded corners},
-    layer/.style={rectangle, draw=none, fill=gray!40, minimum height=0.2cm, minimum width=2.5cm},
+    layer/.style={rectangle, draw=none, fill=gray!40, minimum height=0.2cm, minimum width=2.2cm},
     arrow/.style={->, thick, draw=gray!80},
     loss line/.style={<->, thick, densely dotted, draw=red!70},
     ema arrow/.style={->, very thick, draw=orange!80},
@@ -25,20 +25,14 @@
 \definecolor{labelColor}{RGB}{169, 209, 142}   % 緑系
 
 % ==========================
-% 1. 入力データ (左側)
+% 1. Student Model (中央上)
 % ==========================
-\node[data block, fill=labelColor, yshift=1cm] (weak_label) {ラベル付き音声};
-\node[data block, fill=yellow!20, below=0.3cm of weak_label] (unlabeled) {ラベルなし音声};
-
-% ==========================
-% 2. Student Model (中央下)
-% ==========================
-\node[right=3cm of unlabeled, yshift=2cm] (student_center) {};
+\node[yshift=3cm] (student_center) {};
 
 % Studentのレイヤー表現
-\node[layer, fill=studentColor, minimum width=3cm] (s_l1) at (student_center) {};
-\node[layer, fill=studentColor, minimum width=3cm, above=0.15cm of s_l1] (s_l2) {};
-\node[layer, fill=studentColor, minimum width=3cm, above=0.15cm of s_l2] (s_l3) {};
+\node[layer, fill=studentColor, minimum width=2.7cm] (s_l1) at (student_center) {};
+\node[layer, fill=studentColor, minimum width=2.7cm, above=0.15cm of s_l1] (s_l2) {};
+\node[layer, fill=studentColor, minimum width=2.7cm, above=0.15cm of s_l2] (s_l3) {};
 % Dropoutの灰色バー (Student) - 新しい独立した棒
 \node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l1.west)+(0.5,0)$) {};
 \node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(s_l1.west)+(1.5,0)$) {};
@@ -54,14 +48,14 @@
 \node[model block, draw=studentColor!80, fit=(s_l1)(s_l3), label={[text=studentColor!80]below:\textbf{Student Model}}] (student_box) {};
 
 % ==========================
-% 3. Teacher Model (右側下)
+% 2. Teacher Model (右側上)
 % ==========================
-\node[right=6cm of student_center] (teacher_center) {};
+\node[right=5.5cm of student_center] (teacher_center) {};
 
 % Teacherのレイヤー表現
-\node[layer, fill=teacherColor, minimum width=3cm] (t_l1) at (teacher_center) {};
-\node[layer, fill=teacherColor, minimum width=3cm, above=0.15cm of t_l1] (t_l2) {};
-\node[layer, fill=teacherColor, minimum width=3cm, above=0.15cm of t_l2] (t_l3) {};
+\node[layer, fill=teacherColor, minimum width=2.7cm] (t_l1) at (teacher_center) {};
+\node[layer, fill=teacherColor, minimum width=2.7cm, above=0.15cm of t_l1] (t_l2) {};
+\node[layer, fill=teacherColor, minimum width=2.7cm, above=0.15cm of t_l2] (t_l3) {};
 % Dropoutの灰色バー (Teacher) - Studentと同じ位置
 \node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l1.west)+(0.5,0)$) {};
 \node[layer, fill=gray!60, minimum width=0.15cm, minimum height=0.2cm] at ($(t_l1.west)+(1.5,0)$) {};
@@ -77,10 +71,16 @@
 \node[model block, draw=teacherColor!80, fit=(t_l1)(t_l3), label={[text=teacherColor!80, name=teacher_label]below:\textbf{Teacher Model}}] (teacher_box) {};
 
 % ==========================
+% 3. 入力データ (下側)
+% ==========================
+\node[data block, fill=labelColor, below=1.2cm of student_box] (weak_label) {ラベル付き音声};
+\node[data block, fill=yellow!20, right=0.8cm of weak_label] (unlabeled) {ラベルなし音声};
+
+% ==========================
 % 4. 出力: フレームレベル (Frame-level)
 % ==========================
 % Student Frame Output
-\node[above=1.5cm of student_box] (s_frame_base) {};
+\node[above=0.6cm of student_box] (s_frame_base) {};
 \foreach \x in {-1.2, -0.9, ..., 1.2} {
     \draw[fill=studentColor, draw=none] ($(s_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
 }
@@ -88,7 +88,7 @@
 \node[label text, left=1.4cm of s_frame_base] (s_frame_lbl) {強予測 確率};
 
 % Teacher Frame Output
-\node[above=1.5cm of teacher_box] (t_frame_base) {};
+\node[above=0.6cm of teacher_box] (t_frame_base) {};
 \foreach \x in {-1.2, -0.9, ..., 1.2} {
     \draw[fill=teacherColor, draw=none] ($(t_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
 }
@@ -105,7 +105,7 @@
 % 6. 出力: クリップレベル (Clip-level)
 % ==========================
 % Student Clip Output (Bar chart)
-\node[above=1.4cm of s_frame_base] (s_clip_base) {};
+\node[above=1.2cm of s_frame_base] (s_clip_base) {};
 \draw[fill=studentColor, draw=none] ($(s_clip_base)+(-1,0)$) rectangle ++(0.3, 0.8);
 \draw[fill=studentColor, draw=none] ($(s_clip_base)+(-0.5,0)$) rectangle ++(0.3, 0.2);
 \draw[fill=studentColor, draw=none] ($(s_clip_base)+(0,0)$) rectangle ++(0.3, 0.9);
@@ -114,7 +114,7 @@
 \node[label text, left=1.4cm of s_clip_base] (s_clip_lbl) {弱予測 確率};
 
 % Teacher Clip Output
-\node[above=1.4cm of t_frame_base] (t_clip_base) {};
+\node[above=1.2cm of t_frame_base] (t_clip_base) {};
 \draw[fill=teacherColor, draw=none] ($(t_clip_base)+(-1,0)$) rectangle ++(0.3, 0.8);
 \draw[fill=teacherColor, draw=none] ($(t_clip_base)+(-0.5,0)$) rectangle ++(0.3, 0.25);
 \draw[fill=teacherColor, draw=none] ($(t_clip_base)+(0,0)$) rectangle ++(0.3, 0.85);
@@ -125,7 +125,7 @@
 % 7. 正解ラベル (Ground Truth)
 % ==========================
 \node[above=1.0cm of s_clip_base] (gt_base) {};
-\node[data block, fill=labelColor!30, minimum width=2.5cm, minimum height=0.6cm] at (gt_base) (gt_box) {正解ラベル (Tags)};
+\node[data block, fill=labelColor!30, minimum width=2.2cm, minimum height=0.6cm] at (gt_base) (gt_box) {正解ラベル (Tags)};
 \node[above=0cm of gt_box, font=\scriptsize] {Dog, Car (時間情報なし)};
 
 % ==========================
@@ -137,11 +137,15 @@
 % 8. 矢印と接続
 % ==========================
 
-% Input -> Models
-\draw[arrow] (weak_label.east) -- ++(0.3,0) |- (student_box.west);
-\draw[arrow] (unlabeled.east) -- ++(0.8,0) |- (student_box.west);
-\coordinate (teacher_input) at ($(teacher_box.south west)+(0.3,-0.8)$);
-\draw[arrow] (unlabeled.east) -- ++(0.8,0) |- (teacher_input) -- ($(teacher_box.south west)+(0.3,0)$);
+%Input -> Models
+\draw[arrow] (weak_label.north) -- ($(student_box.south)+(0,-0.3)$);
+% ラベルなし音声から両モデルへの分岐（線を結合）
+\coordinate (split_point) at ($(unlabeled.north)+(0,0.3)$);
+\draw[thick, draw=gray!80] (unlabeled.north) -- (split_point) -| ($(student_box.south)+(0.5,-0.3)$);
+\draw[thick, draw=gray!80] (split_point) -| ($(teacher_box.south)+(0,-0.3)$);
+% 最終接続点に矢印を追加
+\draw[arrow] ($($(student_box.south)+(0.5,-0.3)$)-(0,0.1)$) -- ($(student_box.south)+(0.5,-0.3)$);
+\draw[arrow] ($($(teacher_box.south)+(0,-0.3)$)-(0,0.1)$) -- ($(teacher_box.south)+(0,-0.3)$);
 
 % Models -> Outputs
 \draw[arrow] (student_box.north) -- (s_frame_base.south);
