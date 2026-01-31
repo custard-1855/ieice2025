@@ -706,7 +706,7 @@ FUNCTION {format.title}
       #0 'title.true :=
     }
     {
-      "``" title "t" change.case$ *
+      "``" title * 
       #0 misc.bool =
         {
           title empty$
@@ -983,7 +983,7 @@ FUNCTION {format.btitle}
 {
   after.author 'output.state :=
   #1 'title.true :=
-  "``" title "t" change.case$ *
+  "``" title *
   title empty$
     {
       is.kanji.entry

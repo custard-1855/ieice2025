@@ -2,7 +2,7 @@
 
 \bibitem{cornell2024dcase}
 S. Cornell, J. Ebbers, C. Douwes, I. Mart{\'\i}n-Morat{\'o}, M. Harju, A. Mesaros, and R. Serizel,
-``Dcase 2024 task 4: Sound event detection with heterogeneous data and missing labels,''
+``DCASE 2024 task 4: Sound event detection with heterogeneous data and missing labels,''
 arXiv:2406.08056, 2024.
 
 \bibitem{blackman2016ambient}
@@ -19,7 +19,7 @@ vol.17, p.1256682, 2023.
 
 \bibitem{bouchabou2021survey}
 D. Bouchabou, S.M. Nguyen, C. Lohr, B. LeDuc, and I. Kanellos,
-``A survey of human activity recognition in smart homes based on iot sensors algorithms: Taxonomies, challenges, and opportunities with deep learning,''
+``A survey of human activity recognition in smart homes based on {IoT} sensors algorithms: Taxonomies, challenges, and opportunities with deep learning,''
 Sensors,
 vol.21, no.18, p.6037, 2021.
 
@@ -55,7 +55,7 @@ pp.1--5, 2023.
 
 \bibitem{11036061}
 Z. Niu, Q. Wu, and Y. Hu,
-``Sat-sed: Semi-supervised sound event detection by pseudo-labeling with self-adaptive threshold strategy,''
+``SAT-SED: Semi-Supervised Sound Event Detection by Pseudo-Labeling with Self-Adaptive Threshold Strategy,''
 2025 IEEE 6th International Seminar on Artificial Intelligence, Networking and Information Technology (AINIT),
 pp.1743--1748, 2025.
 
@@ -67,7 +67,7 @@ pp.1--15, 2021.
 
 \bibitem{xiao2024fmsg}
 Y. Xiao, H. Yin, J. Bai, and R.K. Das,
-``Fmsg-jless submission for dcase 2024 task4 on sound event detection with heterogeneous training dataset and potentially missing labels,''
+``FMSG-JLESS submission for DCASE 2024 task4 on sound event detection with heterogeneous training dataset and potentially missing labels,''
 arXiv:2407.00291, 2024.
 
 \bibitem{turpault2019sound}
