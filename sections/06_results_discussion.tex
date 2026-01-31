@@ -22,28 +22,22 @@
 \end{table}
 
 表\ref{table:mtAcc}に各手法の精度比較を示す．MTと比較して，CMTはPSDS2が向上したが，PSDS1及びmpAUCは低下した．
-対して正負例を学習する$CMT_{neg}$は，CMTで見られたPSDS1の低下は改善されたものの，その他の指標は精度が悪化した．
-正負例の均衡化処理を行う$CMT_{scale}$は，MTと同等のPSDS1を維持しつつ，PSDS2においてCMTを上回る性能を示した．ただし，mpAUCはMTに及ばなかった．\par
+対して正負例を学習する$CMT_{neg}$は，CMTにおけるPSDS1の低下を改善したが，他の精度は悪化した．
+正負例を均衡化する$CMT_{scale}$は，MTと同等のPSDS1を維持しつつ，CMTを上回るPSDS2を示した．ただし，mpAUCはMTに及ばなかった．\par
 
 CMTにおけるPSDS1の低下は，非イベント区間の情報（負例）の欠落で時間的な予測が不安定になったためと考えられる．
 $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例に対する負例の割合が過多となり，逆にクラス分類（PSDS2及びmpAUC）の予測が不安定化した．
-よって，$CMT_{scale}$における正負例の量の調整が，PSDS1，2の安定に有効であると言える．\par
-
+よって，負例の使用と正負例の量の調整が，PSDS1，2の安定に有効である．\par
+%微妙に表現が納得いかない
 \subsection{クラス別CMT}
 \label{classwise}
-ここでCMTについて，クラスごとの精度を見る．表\ref{table:classWise}に各クラスにおけるPSDS2及びmpAUCの結果を示す．\par
-本稿の将来的な目標である異常検知において，異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」に着目する．
-先行実装のMTと比較して，提案手法である$CMT_{scale}$ は，流水のPSDS2において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度向上を達成した．\par
-また，表\ref{table:classWise}では，提案手法とMT及びCMTを比較して{5\%}以上の変化があるクラスについて，向上は青，低下は赤で強調した．向上したクラスは音が長く持続するが，低下したクラスでは瞬間的な音が続く．
-このことから，提案手法は長期的な音が捉えられる代わりに，瞬間的な音を取りこぼすと考えられる．
-
 \begin{table}[H]
   \centering
   \footnotesize
   \setlength{\tabcolsep}{3pt}
   \begin{tabular}{|l|c|c|c||l|c|c|c|}
     \hline
-    \multicolumn{4}{|c||}{PSDS（DESED）} & \multicolumn{4}{c|}{mpAUC（MAESTRO）} \\
+    \multicolumn{4}{|c||}{PSD2（DESED）} & \multicolumn{4}{c|}{mpAUC（MAESTRO）} \\
     \hline
     class & MT & CMT & $CMT_{s}$ & class & MT & CMT & $CMT_{s}$ \\
     \hline
@@ -63,6 +57,14 @@ $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例
   \caption{クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}
   \label{table:classWise}
 \end{table}
+
+CMTにおけるクラスごとの精度を表\ref{table:classWise}に示す．
+本稿の将来的な目標である異常検知において，異常発生の重要な文脈となる「流水（Running water）」と「足音（Footsteps）」に着目する．
+MTと比較して，提案手法である$CMT_{scale}$ は，流水のPSDS2において$0.88$から$0.91$へ，足音のmpAUCにおいて$0.68$から$0.71$へと，それぞれ精度を向上達成した．\par
+また，表\ref{table:classWise}では，提案手法とMT及びCMTを比較して{5\%}以上の変化があるクラスについて，向上は青，低下は赤で強調した．向上クラスは音が長く持続するが，低下クラスでは瞬間的な音が続く．
+このことから，提案手法は長期的な音が捉えられる代わりに，瞬間的な音を取りこぼすと考えられる．
+
+
 
 \subsection{MixStyle}
 \begin{table}[!h]
@@ -127,7 +129,7 @@ $CMT_{neg}$では負例の導入によりこの問題を解決したが，正例
 表\ref{table:mergeAcc}に，各種MTをMixStyleと併用した場合の結果を示す． 
 MTとCMTはPSDS1，2が向上した一方で，mpAUCは低下した．
 $CMT_{scale}$はMTに比べて精度が向上したが，CMTとの差は僅かである．
-これはMixStyleのPSDS1への影響がCMTより強いためだと考えられる．\par 
+これはMixStyleの精度への影響がCMTより強いためだと考えられる．\par 
 % MixStyleの適用を前提として, CMT及びCMT_scaleの精度差を見ると, ごく僅かであり, 
 % MixStyleの精度への影響が強いためであると考えられる. これは, 摂動の変化を与えるMixStyleが, 
 % MTの目的とする一貫性を強める効果を同様に働かせたためと解釈できる.

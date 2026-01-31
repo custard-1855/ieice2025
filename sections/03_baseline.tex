@@ -16,6 +16,8 @@ MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1で�
 
 \begin{table}[H]
  \begin{center}
+   \renewcommand{\arraystretch}{0.85}
+   \small
    \begin{tabular}{|l|c|c|}
     \hline
     利用段階 & データ種別  & 数[clips] \\
@@ -65,24 +67,25 @@ PSDSには目的に応じたシナリオが存在する．
 
 \subsection{モデル構成}
 \label{DCASE:モデル構成}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\columnwidth]{figures/model.pdf}
-    \caption{各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}
-    \label{fig:model}
-\end{figure}
-
 先行実装は図\ref{fig:model}のように，時間周波数領域の局所的な特徴を抽出するCNNと，時系列情報を学習しイベントの時間的変化をモデル化する再帰型ニューラルネットワーク（Recurrent Neural Network; RNN）を組み合わせた，CRNN（Convolutional Recurrent Neural Network）アーキテクチャである．
 特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．
 BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．\par
 なお，特徴量として対数メルスペクトログラムを用いる．また，前処理では汎化性能向上のため，二つのデータを一定の比率で混合するデータ拡張手法のMixupを行う\cite{zhang2017mixup}．
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/model.pdf}
+    \caption{各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}
+    \label{fig:model}
+\end{figure}
+
 
 \subsubsection{CNN}
 CNNは図\ref{fig:cnn}のように，7つの畳み込みブロックで構成される．
 各ブロックではConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\columnwidth]{figures/cnn_3.pdf}
+    \includegraphics[width=0.8\columnwidth]{figures/cnn_3.pdf}
     \caption{各ブロックの下の数値は特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を表す．}
     \label{fig:cnn}
 \end{figure}

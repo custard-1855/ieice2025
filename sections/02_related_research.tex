@@ -59,12 +59,12 @@ DCASE 2024 Task 4 (DCASE 2024)は， 大規模な未ラベルデータを用い�
 提案では，DCASE 2024の評価基準モデルを先行実装\footnote{\url{https://github.com/DCASE-REPO/DESED_task/tree/master/recipes/dcase2024_task4_baseline}}とする．
 なお，本稿は基本的に先行実装の設定に準拠する\cite{cornell2024dcase}．\par
 先行実装は半教師あり学習手法としてMean Teacher (MT) を用いる．図\ref{fig:meanteacher}にMTの概略を示す．
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\columnwidth]{figures/mt_sed.pdf}
-    \caption{MTの更新の概略．DESEDに対して適用する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
-    \label{fig:meanteacher}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.9\columnwidth]{figures/mt_sed.pdf}
+%     \caption{MTの更新の概略．DESEDに対して適用する．Model内の灰色部は，モデルの一部にDropOutが適用され，ノイズ (摂動)として働くことを表す．}
+%     \label{fig:meanteacher}
+% \end{figure}
 
 
 これは通常のモデルを「生徒」，生徒モデルの重みパラメータの指数移動平均を「教師」と定義し，入力にノイズが加わろうと教師と生徒の予測は同様という仮定の下，両予測の差を一貫性損失として扱う．この損失は平均二乗誤差で求められる．
