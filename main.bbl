@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{cornell2024dcase}
+S. Cornell, J. Ebbers, C. Douwes, I. Mart{\'\i}n-Morat{\'o}, M. Harju, A. Mesaros, and R. Serizel,
+``Dcase 2024 task 4: Sound event detection with heterogeneous data and missing labels,''
+arXiv:2406.08056, 2024.
+
 \bibitem{blackman2016ambient}
 S. Blackman, C. Matlo, C. Bobrovitskiy, A. Waldoch, M.L. Fang, P. Jackson, A. Mihailidis, L. Nyg{\aa}rd, A. Astell, and A. Sixsmith,
 ``Ambient assisted living technologies for aging well: a scoping review,''
@@ -34,11 +39,6 @@ vol.38, no.5, pp.67--83, 2021.
 F. Schmid, P. Primus, T. Morocutti, J. Greif, and G. Widmer,
 ``Improving audio spectrogram transformers for sound event detection through multi-stage training,''
 arXiv:2408.00791, 2024.
-
-\bibitem{cornell2024dcase}
-S. Cornell, J. Ebbers, C. Douwes, I. Mart{\'\i}n-Morat{\'o}, M. Harju, A. Mesaros, and R. Serizel,
-``Dcase 2024 task 4: Sound event detection with heterogeneous data and missing labels,''
-arXiv:2406.08056, 2024.
 
 \bibitem{tarvainen2017mean}
 A. Tarvainen and H. Valpola,

@@ -8,7 +8,7 @@ Database file #1: references.bib
 You've used 20 entries,
             4010 wiz_defined-function locations,
             940 strings with 9756 characters,
-and the built_in function-call counts, 55665 in all, are:
+and the built_in function-call counts, 55685 in all, are:
 = -- 7663
 > -- 287
 < -- 0
@@ -22,15 +22,15 @@ change.case$ -- 20
 chr.to.int$ -- 0
 cite$ -- 20
 duplicate$ -- 444
-empty$ -- 4225
+empty$ -- 4235
 format.name$ -- 356
-if$ -- 14275
+if$ -- 14280
 int.to.chr$ -- 0
 int.to.str$ -- 20
 missing$ -- 15
 newline$ -- 119
 num.names$ -- 20
-pop$ -- 246
+pop$ -- 256
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
@@ -46,4 +46,4 @@ warning$ -- 0
 while$ -- 340
 width$ -- 22
 write$ -- 178
-is.kanji.str$ -- 2024
+is.kanji.str$ -- 2019
