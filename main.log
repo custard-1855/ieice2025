@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  31 JAN 2026 06:59
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  31 JAN 2026 07:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -826,6 +826,11 @@ File: figures/mt_sed.pdf Graphic file (type pdf)
 <figures/mt_sed.pdf>
 ) (./sections/03_baseline.tex
 
+
+Overfull \hbox (1.60188pt too wide) in paragraph at lines 7--7
+[][]\OT1/ntxtlf/m/n/7 https://researchportal.tuni.fi/en/datasets/maestro-real-multi-annotator-estimated-
+ []
+
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
 (Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
@@ -935,6 +940,6 @@ Here is how much of TeX's memory you used:
  36985 multiletter control sequences out of 15000+600000
  617339 words of font info for 187 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 80i,11n,93p,495b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,93p,495b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (7 pages, 70952 bytes).
+Output written on main.dvi (7 pages, 71432 bytes).
