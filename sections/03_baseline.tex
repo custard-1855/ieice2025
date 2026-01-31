@@ -37,12 +37,12 @@ MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1で�
 \end{table}
 % そのうち，10（Alarm bell ringing，Blender，Cat，Dishes，Dog，Electric shaver toothbrush，Frying，Running water，Speech，Vacuum cleaner）及び11（Birds singing，Car，People talking，Footsteps，Children voices，Wind blowing，Brakes squeaking，Large vehicle，Cutlery and dishes，Metro approaching，Metro leaving）クラスを使用する．\par
 DESEDのデータは学習の利用段階と作成法，ラベルで分類される．利用段階には訓練，検証，評価がある．データは実環境の録音か，あるいは合成で作成される．
-なお，本稿では一部データが取得できていない．使用したデータ数を表\ref{table:desed}に示す．\par
+なお，本研究では一部データが取得できていない．使用したデータ数を表\ref{table:desed}に示す．\par
 MAESTRO Realは6426クリップが含まれており，訓練用のデータを訓練と検証で9:1に分割し，評価には評価用のデータを用いた．
 
 \subsection{評価指標}
     \label{評価指標}
-本稿ではDCASE2024に基づき，データセットに応じて異なる評価指標を採用する．
+本研究ではDCASE2024に基づき，データセットに応じて異なる評価指標を採用する．
 DESEDではPolyphonic Sound Detection Score（PSDS）\cite{bilen2020framework}のシナリオ1及び2を用い，
 MAESTRO RealではmpAUC（Macro-averaged Partial AUC．なお，AUC (Area Under the Curve) はROC (Receiver Operating Characteristic) 曲線下部の面積）を主要な指標とする．\par
 
@@ -54,7 +54,7 @@ PSDSには目的に応じたシナリオが存在する．
 シナリオ1（PSDS1）は時間的な正確さを重視し，イベントの検知区間が正解と厳密に一致することを求める一方，クラス分類の誤りには比較的寛容である．
 対照的に，シナリオ2（PSDS2）はイベントのクラス分類性能を重視し，時間的なズレに対する許容範囲が広く設定されている．
 
-本稿では，時間精度の向上とイベント分類の最適化を段階的に分離することを想定しており，現段階では正確なクラス分類を優先課題としている．
+本研究では，時間精度の向上とイベント分類の最適化を段階的に分離することを想定しており，現段階では正確なクラス分類を優先課題としている．
 したがって，PSDS2を最重要指標と位置付けるが，モデルの総合的な挙動を把握するためPSDS1も併せて評価する．\par
 
 一方，MAESTRO Realの評価に用いるmpAUCは，ROC曲線の全領域ではなく，誤検知率が低い領域（低FPR領域）に限定してAUCを算出する指標である．
