@@ -30,12 +30,14 @@
 \citation{kingma2014adam}
 \citation{chen2022beats}
 \citation{zhang2017mixup}
+\citation{xiao2023multi}
+\citation{xiao2023multi}
 \newlabel{DCASE:モデル構成}{{3.\,4}{4}{モデル構成}{subsection.3.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}}{4}{figure.3}\protected@file@percent }
 \newlabel{fig:model}{{3}{4}{各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 各ブロックの下の数値は特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を表す．}}{4}{figure.4}\protected@file@percent }
-\newlabel{fig:cnn}{{4}{4}{各ブロックの下の数値は特徴量の次元数（バッチ数，チャネル数，時間長 (フレーム数) ，周波数）を表す．}{figure.4}{}}
-\newlabel{提案手法:CMT}{{4.\,1}{4}{CMT}{subsection.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces CNNの概略．各ブロック下の数値は特徴量の次元数を表す．}}{4}{figure.4}\protected@file@percent }
+\newlabel{fig:cnn}{{4}{4}{CNNの概略．各ブロック下の数値は特徴量の次元数を表す．}{figure.4}{}}
+\newlabel{提案手法:CMT}{{4.\,1}{4}{CMT\cite {xiao2023multi}}{subsection.4.1}{}}
 \citation{kim2022domain}
 \citation{xiao2024fmsg}
 \citation{xiao2024fmsg}
@@ -49,7 +51,7 @@
 \bibdata{references}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Mean Teacher比較}}{6}{table.2}\protected@file@percent }
 \newlabel{table:mtAcc}{{2}{6}{Mean Teacher比較}{table.2}{}}
-\newlabel{classwise}{{6.\,2}{6}{クラス別CMT}{subsection.6.2}{}}
+\newlabel{classwise}{{6.\,1.\,1}{6}{クラス別CMT}{subsubsection.6.1.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}}{6}{table.3}\protected@file@percent }
 \newlabel{table:classWise}{{3}{6}{クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}{table.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces MixStyle+CNN}}{6}{table.4}\protected@file@percent }
