@@ -158,7 +158,7 @@
 % ==========================
 
 % Classification Cost
-\draw[loss line] (s_clip_lbl.north) to[bend left=20] node[left, font=\bfseries, text=red!70] {分類損失} (gt_box.west);
+\draw[loss line] (s_clip_lbl.north) to[bend left=20] node[left, font=\bfseries, text=red!70] {通常の損失} (gt_box.west);
 
 % Consistency Cost (中央に1本: 弱予測と強予測の間)
 \coordinate (consistency_left) at ($(s_clip_base)!0.5!(s_frame_base) + (1.5,0)$);

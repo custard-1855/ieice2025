@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  31 JAN 2026 06:08
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  31 JAN 2026 06:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -783,46 +783,49 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 
 
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 59.
+(Font)              scaled to size 7.69775pt on input line 46.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.0pt on input line 59.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 59.
+(Font)              scaled to size 8.0pt on input line 46.
+File: figures/sed.pdf Graphic file (type pdf)
+<figures/sed.pdf>
+LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
+(Font)              scaled to size 4.8111pt on input line 63.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.0pt on input line 63.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 63.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtt.fd
 File: ot1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/ntxtt/m/n' will be
-(Font)              scaled to size 7.0pt on input line 59.
+(Font)              scaled to size 7.0pt on input line 63.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.3pt on input line 59.
+(Font)              scaled to size 7.3pt on input line 63.
 
-Overfull \hbox (2.3743pt too wide) in paragraph at lines 59--59
+Overfull \hbox (2.3743pt too wide) in paragraph at lines 63--63
 [][][]$\OT1/ntxtt/m/n/7 https : / / github . com / DCASE-[]REPO / DESED _ task / tree / master / recipes /
  []
 
 
-LaTeX Warning: Reference `fig:meanteacher' on page 2 undefined on input line 61.
 
+[2]
+File: figures/mt_sed.pdf Graphic file (type pdf)
+<figures/mt_sed.pdf>
+) (./sections/03_baseline.tex
 
-
-[2]) (./sections/03_baseline.tex
-LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 17.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 17.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
 (Font)              scaled to size 8.0pt on input line 21.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
@@ -857,11 +860,11 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 6.0pt on input line 21.
 
 
+[3]
 File: figures/model.pdf Graphic file (type pdf)
 <figures/model.pdf>
 
 
-[3]
 File: figures/cnn_3.pdf Graphic file (type pdf)
 <figures/cnn_3.pdf>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
@@ -874,12 +877,14 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 5.5pt on input line 113.
 ) (./sections/04_proposal.tex
 
+[4]
 File: figures/mixstyle.pdf Graphic file (type pdf)
 <figures/mixstyle.pdf>
 
 
-[4]) (./sections/05_experiment.tex) (./sections/06_results_discussion.tex
+) (./sections/05_experiment.tex) (./sections/06_results_discussion.tex
 
+[5]
 LaTeX Font Info:    Font shape `JT2/mc/b/n' in size <7> not available
 (Font)              Font shape `JT2/mc/bx/n' tried instead on input line 44.
 LaTeX Font Info:    Font shape `JT2/mc/bx/n' in size <7> not available
@@ -893,15 +898,20 @@ LaTeX Font Info:    Font shape `JY2/mc/bx/n' in size <7> not available
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 7.0pt on input line 44.
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[5]) (./sections/07_tail.tex) (./main.bbl
+) (./sections/07_tail.tex) (./main.bbl
 
-)
+[6])
 
-[6] (./main.aux)
+
+
+[7
+
+] (./main.aux)
  ***********
 pLaTeX2e <2023-02-14u04>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -915,19 +925,16 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14069 strings out of 475301
- 208501 string characters out of 5767575
- 620749 words of memory out of 5000000
- 36973 multiletter control sequences out of 15000+600000
+ 14083 strings out of 475301
+ 208781 string characters out of 5767575
+ 624788 words of memory out of 5000000
+ 36985 multiletter control sequences out of 15000+600000
  617339 words of font info for 187 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 80i,11n,93p,482b,612s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,93p,495b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (6 pages, 69116 bytes).
+Output written on main.dvi (7 pages, 70952 bytes).
