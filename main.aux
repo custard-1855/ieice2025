@@ -25,10 +25,10 @@
 \citation{martin2023strong}
 \citation{bilen2020framework}
 \citation{bilen2020framework}
+\citation{kingma2014adam}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces DESEDのデータ数}}{3}{table.1}\protected@file@percent }
 \newlabel{table:desed}{{1}{3}{DESEDのデータ数}{table.1}{}}
 \newlabel{評価指標}{{3.\,2}{3}{評価指標}{subsection.3.2}{}}
-\citation{kingma2014adam}
 \citation{chen2022beats}
 \citation{zhang2017mixup}
 \citation{xiao2023multi}
@@ -37,8 +37,8 @@
 \citation{xiao2024fmsg}
 \citation{xiao2024fmsg}
 \newlabel{DCASE:モデル構成}{{3.\,4}{4}{モデル構成}{subsection.3.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}}{4}{figure.3}\protected@file@percent }
-\newlabel{fig:model}{{3}{4}{各段階の次元数は特徴量の時間長 (T，フレーム数) と周波数を表す．BEATsの出力を調整してCNNの出力と統合した後，RNNに入力し，最終的に予測を得る．なお，PTは事前学習済みモデルを表す．}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces BEATsの出力を調整してCNNの出力と統合してRNNに入力し，最終的に予測を得る．Tはフレーム数，PTは事前学習済みモデル．}}{4}{figure.3}\protected@file@percent }
+\newlabel{fig:model}{{3}{4}{BEATsの出力を調整してCNNの出力と統合してRNNに入力し，最終的に予測を得る．Tはフレーム数，PTは事前学習済みモデル．}{figure.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces CNNの概略．各ブロック下は特徴量の次元数．}}{4}{figure.4}\protected@file@percent }
 \newlabel{fig:cnn}{{4}{4}{CNNの概略．各ブロック下は特徴量の次元数．}{figure.4}{}}
 \newlabel{提案手法:CMT}{{4.\,1}{4}{CMT\cite {xiao2023multi}}{subsection.4.1}{}}
@@ -50,6 +50,7 @@
 \newlabel{実験}{{5.}{5}{実験}{section.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Mean Teacher比較}}{5}{table.2}\protected@file@percent }
 \newlabel{table:mtAcc}{{2}{5}{Mean Teacher比較}{table.2}{}}
+\newlabel{classwise}{{6.\,1.\,1}{5}{クラス別CMT}{subsubsection.6.1.1}{}}
 \bibstyle{sieicej}
 \bibdata{references}
 \bibcite{cornell2024dcase}{1}
@@ -60,17 +61,16 @@
 \bibcite{mesaros2021sound}{6}
 \bibcite{schmid2024improving}{7}
 \bibcite{tarvainen2017mean}{8}
-\newlabel{classwise}{{6.\,1.\,1}{6}{クラス別CMT}{subsubsection.6.1.1}{}}
+\bibcite{xiao2023multi}{9}
+\bibcite{11036061}{10}
+\bibcite{zhou2021domain}{11}
+\bibcite{xiao2024fmsg}{12}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}}{6}{table.3}\protected@file@percent }
 \newlabel{table:classWise}{{3}{6}{クラス別精度比較（$CMT_{s}$は$CMT_{scale}$の略）}{table.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces MixStyle+CNN}}{6}{table.4}\protected@file@percent }
 \newlabel{table:mixstyle}{{4}{6}{MixStyle+CNN}{table.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces CMT+MixStyle}}{6}{table.5}\protected@file@percent }
 \newlabel{table:mergeAcc}{{5}{6}{CMT+MixStyle}{table.5}{}}
-\bibcite{xiao2023multi}{9}
-\bibcite{11036061}{10}
-\bibcite{zhou2021domain}{11}
-\bibcite{xiao2024fmsg}{12}
 \bibcite{turpault2019sound}{13}
 \bibcite{serizel2020sound}{14}
 \bibcite{martin2023strong}{15}
