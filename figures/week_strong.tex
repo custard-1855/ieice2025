@@ -1,0 +1,49 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{luatexja}
+\usepackage{luatexja-preset}
+\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric}
+
+\begin{document}
+
+\tikzset{
+    output box/.style={rectangle, draw, thick, fill=white, minimum width=5cm, align=center, font=\small\sffamily},
+    event line/.style={draw, line width=2.5pt, color=#1, |-|},
+    label text/.style={font=\small\sffamily\bfseries},
+    axis text/.style={font=\scriptsize\sffamily}
+}
+
+\begin{tikzpicture}[>=Stealth, node distance=1.2cm]
+% 時間軸を中央付近に配置 (x=3 から x=9 の 6cm幅)
+\coordinate (frame_axis_start) at (3, 1.5);
+\draw[->, thick] (frame_axis_start) -- ++(6.5,0) node[right, axis text] {時間};
+
+% Frame-level
+\node[label text, anchor=west] at (0.5, 2.5) {\textbf{強予測}};
+\node[axis text, anchor=west] at (0.5, 2.2) {(時間精度あり)};
+
+% Event A: Dog (x=3.5 から 6.0)
+\draw[event line=red] (3.5, 2.2) -- (6.0, 2.2) 
+    node[midway, above, font=\sffamily\bfseries\scriptsize, color=red] {足音};
+\draw[dashed, red!50] (3.5, 2.2) -- (3.5, 1.5) node[below, black, axis text] {開始};
+\draw[dashed, red!50] (6.0, 2.2) -- (6.0, 1.5) node[below, black, axis text] {終了};
+
+% Event B: Car (x=6.5 から 7.5)
+\draw[event line=blue] (6.5, 2.8) -- (7.5, 2.8)
+    node[midway, above, font=\sffamily\bfseries\scriptsize, color=blue] {開閉};
+\draw[dashed, blue!50] (6.5, 2.8) -- (6.5, 1.5);
+\draw[dashed, blue!50] (7.5, 2.8) -- (7.5, 1.5);
+
+% Clip-level
+\node[label text, anchor=west] at (0.5, 3.7) {\textbf{弱予測}};
+\node[axis text, anchor=west] at (0.5, 3.4) {(時間精度なし)};
+
+% クリップ予測の範囲（Time軸全体に対応）- 数直線の上に配置
+\draw[event line=violet, line width=2pt] (3, 3.4) -- (9, 3.4);
+
+% DogとCarのラベルをクリップ予測バーの上に表示
+\node[font=\sffamily\bfseries\scriptsize, color=violet] at (6, 3.4) [above] {足音, 扉の開閉};
+
+\end{tikzpicture}
+\end{document}

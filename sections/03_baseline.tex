@@ -3,14 +3,14 @@
 
 \section{先行実装}
 \subsection{データセット}
-評価用データセットとしてDomestic Environment Sound Event Detection Dataset (DESED)\footnote{https://github.com/turpaultn/DESED}の10クラス\cite{turpault2019sound,serizel2020sound}，
-及びMAESTRO Real\footnote{https://researchportal.tuni.fi/en/datasets/maestro-real-multi-annotator-estimated-strong-labels/}の11クラス\cite{martin2023strong}の計21クラスを使用する．
-クラスの一覧は\ref{classwise}節の表\ref{table:classWise}に示す．\par
+評価用データセットとしてDomestic Environment Sound Event Detection Dataset (DESED)\footnote{https://github.com/turpaultn/DESED}\cite{turpault2019sound,serizel2020sound}の10クラス，
+及びMAESTRO Real\footnote{https://researchportal.tuni.fi/en/datasets/maestro-real-multi-annotator-estimated-strong-labels/}\cite{martin2023strong}の11クラス，計21クラスを使用する．
+クラス一覧は\ref{classwise}節の表\ref{table:classWise}に示す．\par
 
-\ref{section:sed}節で述べたように，データのラベルには種類がある．10秒の音声に対して，弱ラベルはイベント種別のみを示し，強ラベルはそれらの開始・終了時刻も示す．また，ラベルのないデータもある．\par
+\ref{section:sed}節で述べたように，データのラベルには種類がある．なお，ラベルのないデータもある．\par
 
-データセットに含まれる音声について，DESEDは家庭内の音響イベント検出に向けて，実環境で録音した家庭内の生活音と，そのような環境を再現するために合成された音が含まれる．
-音声データは10秒間のモノラルオーディオで，サンプリングレート 16kHz または 44.1kHzとなっている．
+データセットに含まれる音声について，DESEDは家庭内の音響イベント検出に向けて，実環境で録音した家庭内の生活音と，環境の再現を目的とする合成音が含まれる．
+音声は10秒間のモノラルオーディオで，サンプリングレート 16kHz または 44.1kHzとなっている．
 % モノラル > チャネル数が1
 MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1ではなく，0.8などの連続値 (ソフトラベル) で，強ラベルが付与されている．\par
 
@@ -36,9 +36,9 @@ MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1で�
 \end{center}
 \end{table}
 % そのうち，10（Alarm bell ringing，Blender，Cat，Dishes，Dog，Electric shaver toothbrush，Frying，Running water，Speech，Vacuum cleaner）及び11（Birds singing，Car，People talking，Footsteps，Children voices，Wind blowing，Brakes squeaking，Large vehicle，Cutlery and dishes，Metro approaching，Metro leaving）クラスを使用する．\par
-DESEDのデータは学習の利用段階と作成法，ラベルで分類される．利用段階には訓練，検証，評価がある．データは実環境の録音か，あるいは合成で作成される．
+DESEDのデータは学習段階と作成法，ラベルで分類される．段階には訓練，検証，評価がある．
 なお，本研究では一部データが取得できていない．使用したデータ数を表\ref{table:desed}に示す．\par
-MAESTRO Realは6426クリップが含まれており，訓練用のデータを訓練と検証で9:1に分割し，評価には評価用のデータを用いた．
+MAESTRO Realは6426クリップが含まれており，訓練データを訓練と検証で9:1に分割し，評価には評価データを用いた．
 
 \subsection{評価指標}
     \label{評価指標}
@@ -67,11 +67,6 @@ PSDSには目的に応じたシナリオが存在する．
 
 \subsection{モデル構成}
 \label{DCASE:モデル構成}
-先行実装は図\ref{fig:model}のように，時間周波数領域の局所的な特徴を抽出するCNNと，時系列情報を学習しイベントの時間的変化をモデル化する再帰型ニューラルネットワーク（Recurrent Neural Network; RNN）を組み合わせた，CRNN（Convolutional Recurrent Neural Network）アーキテクチャである．
-特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．
-BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．\par
-なお，特徴量は対数メルスペクトログラムを用い，その次元はバッチサイズ$B$，チャネル数$C$，時間 (フレーム数) $T$，周波数$F$である．また，前処理では汎化性能向上のため，二つのデータを一定の比率で混合するデータ拡張手法のMixupを行う\cite{zhang2017mixup}．
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/model.pdf}
@@ -79,16 +74,23 @@ BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を
     \label{fig:model}
 \end{figure}
 
+先行実装は図\ref{fig:model}のように，時間周波数領域の局所的な特徴を抽出するCNNと，時系列情報を学習しイベントの時間的変化をモデル化する再帰型ニューラルネットワーク（Recurrent Neural Network; RNN）を組み合わせた，CRNN（Convolutional Recurrent Neural Network）アーキテクチャである．
+特徴抽出器として事前学習されたBEATs（Bidirectional Encoder representation from Audio Transformers）\cite{chen2022beats} を用いて，学習コストを抑制しながらタスクに有効な特徴表現を獲得する．
+BEATsへの入力はCNNと次元数が異なるが，出力は時間解像度を補間することでCNNと統合される．\par
+なお，特徴量は対数メルスペクトログラムを用い，その次元はバッチサイズ$B$，チャネル数$C$，時間 (フレーム数) $T$，周波数$F$である．また，前処理では汎化性能向上のため，二つのデータを一定の比率で混合するデータ拡張手法のMixupを行う\cite{zhang2017mixup}．
+
+
 
 \subsubsection{CNN}
-CNNは図\ref{fig:cnn}のように，7つの畳み込みブロックで構成される．
-各ブロックではConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
-\begin{figure}[htbp]
+\begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\columnwidth]{figures/cnn_3.pdf}
-    \caption{CNNの概略．各ブロック下の数値は特徴量の次元数を表す．}
+    \caption{CNNの概略．各ブロック下は特徴量の次元数．}
     \label{fig:cnn}
 \end{figure}
+
+CNNは図\ref{fig:cnn}のように，7つの畳み込みブロックで構成される．
+各ブロックではConv2D，Batch Normalization，ReLU，Dropout，及びMaxPool2Dを順に積層する．
 
 \subsubsection{RNN}
 % (図\ref{fig:rnn}) 

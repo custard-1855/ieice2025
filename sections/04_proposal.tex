@@ -25,13 +25,6 @@ CMTはMTの教師予測に対し，クリップ及びフレーム単位で閾値
 
 \subsection{MixStyle}
 \label{提案手法:MixStyle}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.6\columnwidth]{figures/mixstyle.pdf}
-    \caption{オレンジの領域がCNN，緑がMixStyle，そして赤が残差接続で，それぞれ本文の1から3に対応する．}
-    \label{fig:mixstyle}
-\end{figure}
-
 MixStyleは，画像認識におけるドメイン汎化のために提案されたデータ拡張手法である．
 画像分野では空間情報に着目し，チャネルごとの平均と標準偏差をドメイン固有のスタイル統計量として抽出し，他データと混合する．
 一方で，音響信号は時間と周波数の次元を持ち，ドメイン情報は主に周波数領域に局在することが示唆されている\cite{kim2022domain}．
@@ -46,6 +39,12 @@ MixStyleは，画像認識におけるドメイン汎化のために提案され
 \item 重要度を考慮した重み付き統計量の混合 
 \item 残差接続による原信号のドメイン情報の保持 
 \end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{figures/mixstyle.pdf}
+    \caption{オレンジの領域がCNN，緑がMixStyle，そして赤が残差接続で，それぞれ本文の1から3に対応する．}
+    \label{fig:mixstyle}
+\end{figure}
 具体的なアーキテクチャを図\ref{fig:mixstyle}に示す．
 MixStyleの適用は\cite{xiao2024fmsg}に倣い，CNNへの入力直前，及び第1・第2畳み込み層直後の特徴量を対象とした．%図\ref{fig:cnn}ではInput，ブロック1，2の後となる．
 ハイパーパラメータは\cite{zhou2021domain}を参照し，適用確率を$p=0.5$，ベータ分布のパラメータを$\alpha=0.1$に設定した．

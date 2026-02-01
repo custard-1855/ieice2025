@@ -1,18 +1,18 @@
 # Fdb version 4
-["bibtex main"] 1769848257.61019 "main.aux" "main.bbl" "main" 1769848258.21888 0
-  "./references.bib" 1769848249.7768 10166 07f2bf69b22c1b8064a4265bc69c2a66 ""
+["bibtex main"] 1769936898.75799 "main.aux" "main.bbl" "main" 1769936899.36419 0
+  "./references.bib" 1769848653.54692 10166 7190576e56d3b59d7800b19343e34d39 ""
   "./sieicej.bst" 1769848249.77688 40743 8941495aa6a5b68c0ba934fc67de7039 ""
-  "main.aux" 1769848258.06976 5834 daadfbb3ffeb6310b912c1920e51fdb4 "latex"
+  "main.aux" 1769936899.21815 5370 9dbecb6def1e1c80ab807aa5c07c69af "latex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["dvipdf"] 1769848258.10982 "main.dvi" "main.pdf" "main" 1769848258.21959 0
-  "main.dvi" 1769848258.0709 71984 8c83c97f14d40f3d61610c2196f3cb90 "latex"
+["dvipdf"] 1769936899.25697 "main.dvi" "main.pdf" "main" 1769936899.36487 0
+  "main.dvi" 1769936899.21913 70648 7e94a3e2de0aed47c5f17bc0073f0e3f "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1769848257.62397 "main.tex" "main.dvi" "main" 1769848258.21893 0
+["latex"] 1769936898.7721 "main.tex" "main.dvi" "main" 1769936899.36423 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
@@ -122,16 +122,16 @@
   "figures/mixstyle.pdf" 1769780144.39547 65325 67c49ca6ef0c271d1c5168bde1810632 ""
   "figures/model.pdf" 1768447762.04786 38449 9468cef997fda0661c1f2ca777d5f60e ""
   "figures/mt_sed.pdf" 1769842341.96505 18997 79038fe4606e383cbbd2ccf921382a10 ""
-  "figures/sed.pdf" 1768447762.05713 388167 5a3112a65443d68d9bf8d02ca0823ab3 ""
-  "main.aux" 1769848258.06976 5834 daadfbb3ffeb6310b912c1920e51fdb4 "latex"
-  "main.bbl" 1769848257.62288 4438 d3dc5a582920e4e692f51761fd1c5cb4 "bibtex main"
-  "main.out" 1769848257.90017 0 d41d8cd98f00b204e9800998ecf8427e "latex"
+  "figures/week_strong.pdf" 1769935981.04701 13926 5875fe1bfab3af2cc7448943dbcc8df2 ""
+  "main.aux" 1769936899.21815 5370 9dbecb6def1e1c80ab807aa5c07c69af "latex"
+  "main.bbl" 1769936898.77135 4438 695a6d5eaf0729aaef6eb29c11b30e59 "bibtex main"
+  "main.out" 1769936899.0472 0 d41d8cd98f00b204e9800998ecf8427e "latex"
   "main.tex" 1769845041.92352 3934 8f9bfd42a83688b9001286a120caa3f1 ""
-  "sections/00_abstract.tex" 1769846653.89728 1200 82a25c30b1dd011bd6718eebf7cca457 ""
-  "sections/01_introduction.tex" 1769846653.89734 2239 d0729e631b364c8cdc31fcd534d92e8e ""
-  "sections/02_related_research.tex" 1769846653.89731 9392 c729a1969fced84e1668f35e6def5d61 ""
-  "sections/03_baseline.tex" 1769847666.56182 9125 66e50fe61e558c531fd32945a7e32ad9 ""
-  "sections/04_proposal.tex" 1769846851.35223 7670 64b276f8c3b03d1b17cacc28b384fa1f ""
+  "sections/00_abstract.tex" 1769929330.20995 843 e205a0e0183ae3531d2cd6b38c2ce759 ""
+  "sections/01_introduction.tex" 1769933214.56984 2246 6c21e4eb984730993752f75a8930c40b ""
+  "sections/02_related_research.tex" 1769936895.57857 8970 42752bd640f1432f612c5be4a5e017fe ""
+  "sections/03_baseline.tex" 1769936721.23866 8832 a4f53089967971e156c90e2a8a3c88c8 ""
+  "sections/04_proposal.tex" 1769936769.85485 7669 b0f702b6878ff2b9e1895b22af635fcf ""
   "sections/05_experiment.tex" 1769846968.94375 1072 69656b41c4c53da63894deea3f8b2ccf ""
   "sections/06_results_discussion.tex" 1769847588.90695 8151 366b5a6845466170028b0194bface3fe ""
   "sections/07_tail.tex" 1769846653.89751 942 a2cb54607de5d7ea41400078d6fee652 ""
