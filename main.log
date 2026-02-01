@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  1 FEB 2026 10:23
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  1 FEB 2026 14:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -783,39 +783,39 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 
 
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 57.
+(Font)              scaled to size 7.69775pt on input line 56.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 57.
+(Font)              scaled to size 8.0pt on input line 56.
 File: figures/mt_sed.pdf Graphic file (type pdf)
 <figures/mt_sed.pdf>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 70.
+(Font)              scaled to size 4.8111pt on input line 69.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.0pt on input line 70.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 70.
+(Font)              scaled to size 5.0pt on input line 69.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 69.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtt.fd
 File: ot1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/ntxtt/m/n' will be
-(Font)              scaled to size 7.0pt on input line 70.
+(Font)              scaled to size 7.0pt on input line 69.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.3pt on input line 70.
+(Font)              scaled to size 7.3pt on input line 69.
 
-Overfull \hbox (2.3743pt too wide) in paragraph at lines 70--70
+Overfull \hbox (2.3743pt too wide) in paragraph at lines 69--69
 [][][]$\OT1/ntxtt/m/n/7 https : / / github . com / DCASE-[]REPO / DESED _ task / tree / master / recipes /
  []
 
@@ -881,8 +881,12 @@ File: figures/mixstyle.pdf Graphic file (type pdf)
 <figures/mixstyle.pdf>
 
 
-[4]) (./sections/05_experiment.tex) (./sections/06_results_discussion.tex
+[4]) (./sections/05_experiment.tex
+LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
+(Font)              scaled to size 7.0pt on input line 14.
 
+
+) (./sections/06_results_discussion.tex
 LaTeX Font Info:    Font shape `JT2/mc/b/n' in size <7> not available
 (Font)              Font shape `JT2/mc/bx/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `JT2/mc/bx/n' in size <7> not available
@@ -919,12 +923,12 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14076 strings out of 475301
- 208652 string characters out of 5767575
- 620749 words of memory out of 5000000
- 36979 multiletter control sequences out of 15000+600000
- 617339 words of font info for 187 fonts, out of 8000000 for 9000
+ 14080 strings out of 475301
+ 208740 string characters out of 5767575
+ 621749 words of memory out of 5000000
+ 36983 multiletter control sequences out of 15000+600000
+ 617715 words of font info for 188 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 80i,12n,93p,471b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,12n,93p,471b,600s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (6 pages, 67896 bytes).
+Output written on main.dvi (6 pages, 68564 bytes).

@@ -42,21 +42,20 @@ SEDはクラス識別と時間区間検出を同時に行う技術であり， �
 本タスクでは10秒間の音響データを「クリップ」，その最小単位を「フレーム」と定義する．
 ラベル形式には，イベントの有無のみを示す「弱ラベル」と，開始・終了時刻を含む「強ラベル」の2種類が存在する．
 モデルはこれらを入力として受け取り，イベント種別及び時間区間の推定を行う．
-なお，本稿ではラベルの定義に準じ，それぞれの予測結果を「弱予測」，「強予測」と呼称する．
+なお，本稿ではラベルの定義に準じ，それぞれの予測結果を「弱予測」，「強予測」と呼称する．%図\ref{fig:weak_strong}に概略を示す．
 
 % \begin{figure}[!htbp]
 %     \centering
-%     \includegraphics[width=80mm]{figures/week_strong.pdf}
-%     \caption{10秒の音声入力を対象とした予測の概略．弱予測はイベントの有無を，強予測は区間も含み推定する．}
-%     % 図の説明をより詳細にする．
-%     \label{fig:sed}
+%     \includegraphics[width=0.8\columnwidth]{figures/week_strong.pdf}
+%     \caption{予測の概略．強予測は区間も推定する．}
+%     \label{fig:weak_strong}
 % \end{figure}
 
 
 \subsection{先行研究}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\columnwidth]{figures/mt_sed.pdf}
+    \includegraphics[width=0.8\columnwidth]{figures/mt_sed.pdf}
     \caption{MTの更新の概略．DESEDに対して適用する．Model内の灰色部はDropOutによる摂動を表す．}
     \label{fig:meanteacher}
 \end{figure}

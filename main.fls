@@ -366,6 +366,7 @@ INPUT ./sections/05_experiment.tex
 INPUT sections/05_experiment.tex
 INPUT ./sections/05_experiment.tex
 INPUT sections/05_experiment.tex
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 INPUT ./sections/06_results_discussion.tex
 INPUT sections/06_results_discussion.tex
 INPUT ./sections/06_results_discussion.tex
