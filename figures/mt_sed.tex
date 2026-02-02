@@ -71,27 +71,39 @@
 \node[model block, draw=teacherColor!80, fit=(t_l1)(t_l3), label={[text=teacherColor!80, name=teacher_label]below:\textbf{Teacher Model}}] (teacher_box) {};
 
 % ==========================
-% 3. 入力データ (下側)
+% 3. 入力データ (下側、中央配置)
 % ==========================
-\node[data block, fill=labelColor, below=1.2cm of student_box] (weak_label) {ラベル付き音声};
-\node[data block, fill=yellow!20, right=0.8cm of weak_label] (unlabeled) {ラベルなし音声};
+\coordinate (center_point) at ($(student_box)!0.5!(teacher_box)$);
+\node[data block, fill=labelColor, below=1.2cm+20pt of center_point] (all_label) {弱・強・未ラベル音声};
 
 % ==========================
 % 4. 出力: フレームレベル (Frame-level)
 % ==========================
 % Student Frame Output
 \node[above=0.6cm of student_box] (s_frame_base) {};
-\foreach \x in {-1.2, -0.9, ..., 1.2} {
-    \draw[fill=studentColor, draw=none] ($(s_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
-}
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(-1.2,0)$) rectangle ++(0.25, 0.6);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(-0.9,0)$) rectangle ++(0.25, 0.4);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(-0.6,0)$) rectangle ++(0.25, 0.7);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(-0.3,0)$) rectangle ++(0.25, 0.3);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(0,0)$) rectangle ++(0.25, 0.8);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(0.3,0)$) rectangle ++(0.25, 0.5);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(0.6,0)$) rectangle ++(0.25, 0.6);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(0.9,0)$) rectangle ++(0.25, 0.4);
+\draw[fill=studentColor, draw=none] ($(s_frame_base)+(1.2,0)$) rectangle ++(0.25, 0.7);
 \draw[gray] ($(s_frame_base)+(-1.3,0)$) -- ($(s_frame_base)+(1.55,0)$);
-\node[label text, left=1.4cm of s_frame_base] (s_frame_lbl) {強予測 確率};
+\node[label text, left=1.4cm of s_frame_base] (s_frame_lbl) {強予測};
 
 % Teacher Frame Output
 \node[above=0.6cm of teacher_box] (t_frame_base) {};
-\foreach \x in {-1.2, -0.9, ..., 1.2} {
-    \draw[fill=teacherColor, draw=none] ($(t_frame_base)+(\x,0)$) rectangle ++(0.25, {rand*0.3+0.4});
-}
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(-1.2,0)$) rectangle ++(0.25, 0.5);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(-0.9,0)$) rectangle ++(0.25, 0.7);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(-0.6,0)$) rectangle ++(0.25, 0.4);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(-0.3,0)$) rectangle ++(0.25, 0.6);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(0,0)$) rectangle ++(0.25, 0.8);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(0.3,0)$) rectangle ++(0.25, 0.3);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(0.6,0)$) rectangle ++(0.25, 0.7);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(0.9,0)$) rectangle ++(0.25, 0.5);
+\draw[fill=teacherColor, draw=none] ($(t_frame_base)+(1.2,0)$) rectangle ++(0.25, 0.4);
 \draw[gray] ($(t_frame_base)+(-1.3,0)$) -- ($(t_frame_base)+(1.55,0)$);
 
 % ==========================
@@ -111,7 +123,7 @@
 \draw[fill=studentColor, draw=none] ($(s_clip_base)+(0,0)$) rectangle ++(0.3, 0.9);
 \draw[fill=studentColor, draw=none] ($(s_clip_base)+(0.5,0)$) rectangle ++(0.3, 0.4);
 \draw[gray] ($(s_clip_base)+(-1.2,0)$) -- ($(s_clip_base)+(1.2,0)$);
-\node[label text, left=1.4cm of s_clip_base] (s_clip_lbl) {弱予測 確率};
+\node[label text, left=1.4cm of s_clip_base] (s_clip_lbl) {弱予測};
 
 % Teacher Clip Output
 \node[above=1.2cm of t_frame_base] (t_clip_base) {};
@@ -136,14 +148,13 @@
 % 8. 矢印と接続
 % ==========================
 
-%Input -> Models
-\draw[arrow] (weak_label.north) -- ($(student_box.south)+(0,-0.3)$);
-% ラベルなし音声から両モデルへの分岐（線を結合）
-\coordinate (split_point) at ($(unlabeled.north)+(0,0.3)$);
-\draw[thick, draw=gray!80] (unlabeled.north) -- (split_point) -| ($(student_box.south)+(0.5,-0.3)$);
+% 統合された入力データから両モデルへの分岐
+\coordinate (split_point) at ($(all_label.north)+(0,0.3)$);
+\draw[thick, draw=gray!80] (all_label.north) -- (split_point);
+\draw[thick, draw=gray!80] (split_point) -| ($(student_box.south)+(-0.5,-0.3)$);
 \draw[thick, draw=gray!80] (split_point) -| ($(teacher_box.south)+(0,-0.3)$);
 % 最終接続点に矢印を追加
-\draw[arrow] ($($(student_box.south)+(0.5,-0.3)$)-(0,0.1)$) -- ($(student_box.south)+(0.5,-0.3)$);
+\draw[arrow] ($($(student_box.south)+(-0.5,-0.3)$)-(0,0.1)$) -- ($(student_box.south)+(-0.5,-0.3)$);
 \draw[arrow] ($($(teacher_box.south)+(0,-0.3)$)-(0,0.1)$) -- ($(teacher_box.south)+(0,-0.3)$);
 
 % Models -> Outputs
@@ -161,8 +172,8 @@
 \draw[loss line] (s_clip_lbl.north) to[bend left=20] node[left, font=\bfseries, text=red!70] {通常の損失} (gt_box.west);
 
 % Consistency Cost (中央に1本: 弱予測と強予測の間)
-\coordinate (consistency_left) at ($(s_clip_base)!0.5!(s_frame_base) + (1.5,0)$);
-\coordinate (consistency_right) at ($(t_clip_base)!0.5!(t_frame_base) + (-1.5,0)$);
+\coordinate (consistency_left) at ($(s_clip_base)!0.5!(s_frame_base) + (1.5,5pt)$);
+\coordinate (consistency_right) at ($(t_clip_base)!0.5!(t_frame_base) + (-1.5,5pt)$);
 \draw[loss line] (consistency_left) -- node[above, font=\bfseries, text=red!70, fill=white] {一貫性損失} (consistency_right);
 
 \end{tikzpicture}

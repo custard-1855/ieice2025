@@ -304,6 +304,10 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-ot1
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-v.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/uptex-fonts/jis/upjisr-h.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
+INPUT ./figures/week_strong.pdf
+INPUT ./figures/week_strong.pdf
+INPUT figures/week_strong.pdf
+INPUT extractbb -B cropbox -O figures/week_strong.pdf
 INPUT ./figures/mt_sed.pdf
 INPUT ./figures/mt_sed.pdf
 INPUT figures/mt_sed.pdf

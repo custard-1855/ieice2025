@@ -5,13 +5,13 @@
 \subsection{データセット}
 評価用データセットとしてDomestic Environment Sound Event Detection Dataset (DESED)\footnote{https://github.com/turpaultn/DESED}\cite{turpault2019sound,serizel2020sound}の10クラスと，
 MAESTRO Real\footnote{https://researchportal.tuni.fi/en/datasets/maestro-real-multi-annotator-estimated-strong-labels/}\cite{martin2023strong}の11クラス，計21クラスを使用する．
-クラス一覧は\ref{classwise}節の表\ref{table:classWise}に示す．また，\ref{section:sed}節で述べたように，データのラベルには種類がある．なお，ラベルのないデータもある．\par
+クラス一覧は\ref{classwise}節の表\ref{table:classWise}に示す．また，\ref{section:sed}節で述べたように，データのラベルには種類がある．\par
 
 データセットに含まれる音声について，DESEDは家庭内の音響イベント検出に向けて，実環境で録音した家庭内の生活音と，環境の再現を目的とする合成音が含まれる．
 音声は10秒間のモノラルオーディオで，サンプリングレート 16kHz または 44.1kHzとなっている．
 % モノラル > チャネル数が1
 MAESTRO Realは実環境の$3-5$分の音が含まれる．ラベルは0か1ではなく，0.8などの連続値 (ソフトラベル) で，強ラベルが付与されている．\par
-DESEDのデータは学習段階と作成法，ラベルで分類される．段階には訓練，検証，評価がある．
+DESEDのデータは学習の利用段階と作成法，ラベルで分類される．利用段階には訓練，検証，評価がある．
 なお，本研究では一部データが取得できていない．使用したデータ数を表\ref{table:desed}に示す．\par
 MAESTRO Realは6426クリップが含まれており，訓練データを訓練と検証で9:1に分割し，評価には評価データを用いた．
 \begin{table}[H]
@@ -56,8 +56,9 @@ PSDSには目的に応じたシナリオが存在する．
 これは，実用上許容できない高い誤検知率の領域を評価から除外することで，モデルの信頼性をより厳密に評価するためである．
 
 \subsection{先行実装モデルの流れ}
-モデルの流れは学習と検証，評価に区分される．
-データの前処理の後，学習を150エポック行う．モデルは入力に対し，強及び弱予測を出力する．予測とラベルによって損失を計算し，Adam\cite{kingma2014adam}で生徒を，移動指数平均で教師を更新する．\par
+先行実装モデルの処理は学習と検証，評価の三段階に区分される．
+データの前処理の後，学習を150エポック行う．モデルは強，弱，未ラベルデータを入力として強予測を出力し，その時間平均が弱予測となる．
+予測とラベルによって損失を計算し，Adam\cite{kingma2014adam}で生徒を，移動指数平均で教師を更新する．\par
 検証は10エポックごとに行う．学習したモデルで検証用データを入力に推論し，精度を測る．過去の検証より精度が向上した場合，重みパラメータを保持する．
 学習後は評価用データで推論させ，各指標を確認する．\par
 
@@ -107,6 +108,6 @@ RNNには双方向Gated Recurrent Unit（Bidirectional GRU; BiGRU）を使用し
 
 \subsection{出力}
 先行実装の出力段はRNNの出力（$\text{Batch} \times \text{Time} \times 384$，384は周波数の次元数）を強/弱予測に変換する．
-出力は全結合層とSigmoid関数で強予測に変換され，それらをAttention機構で時間方向に集約することで弱予測を得る．
+出力は全結合層とSigmoid関数で強予測に変換され，それらを注意機構で時間方向に集約することで弱予測を得る．
 
 \end{document}
