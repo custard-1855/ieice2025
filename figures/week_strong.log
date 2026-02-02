@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  1 FEB 2026 08:52
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.3.17)  2 FEB 2026 11:58
  restricted system commands enabled.
 **week_strong.tex
 (./week_strong.tex
@@ -1066,7 +1066,7 @@ Here is how much of LuaTeX's memory you used:
  814 words of node memory still in use:
    7 hlist, 1 vlist, 4 rule, 2 glue, 3 kern, 1 glyph, 140 attribute, 48 glue_spe
 c, 21 attribute_list, 2 write, 9 user_defined nodes
-   avail lists: 1:21,2:7637,3:635,4:357,5:26,6:2,7:725,9:357
+   avail lists: 1:21,2:8237,3:653,4:357,5:26,6:2,7:821,9:393
  40884 multiletter control sequences out of 65536+600000
  41 fonts using 58921751 bytes
  117i,7n,122p,1862b,734s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1074,7 +1074,7 @@ c, 21 attribute_list, 2 write, 9 user_defined nodes
 /usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.otf>
 </usr/share/fonts/HaranoAjiFonts-20231009/HaranoAjiGothic-Medium.otf></usr/share
 /fonts/HaranoAjiFonts-20231009/HaranoAjiMincho-Regular.otf>
-Output written on week_strong.pdf (1 page, 13926 bytes).
+Output written on week_strong.pdf (1 page, 15366 bytes).
 
 PDF statistics: 39 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream

@@ -25,7 +25,7 @@
 
 % Event A: Dog (x=3.5 から 6.0)
 \draw[event line=red] (3.5, 2.2) -- (6.0, 2.2) 
-    node[midway, above, font=\sffamily\bfseries\scriptsize, color=red] {足音};
+    node[midway, above, font=\sffamily\bfseries\scriptsize, color=red] {足音 (フレーム単位)};
 \draw[dashed, red!50] (3.5, 2.2) -- (3.5, 1.5) node[below, black, axis text] {開始};
 \draw[dashed, red!50] (6.0, 2.2) -- (6.0, 1.5) node[below, black, axis text] {終了};
 
@@ -43,7 +43,7 @@
 \draw[event line=violet, line width=2pt] (3, 3.4) -- (9, 3.4);
 
 % DogとCarのラベルをクリップ予測バーの上に表示
-\node[font=\sffamily\bfseries\scriptsize, color=violet] at (6, 3.4) [above] {足音, 扉の開閉};
+\node[font=\sffamily\bfseries\scriptsize, color=violet] at (6, 3.4) [above] {足音, 扉の開閉 (クリップ単位)};
 
 \end{tikzpicture}
 \end{document}
