@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  2 FEB 2026 11:27
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  2 FEB 2026 11:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -870,13 +870,13 @@ File: figures/model.pdf Graphic file (type pdf)
 File: figures/cnn_3.pdf Graphic file (type pdf)
 <figures/cnn_3.pdf>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 6.35065pt on input line 109.
+(Font)              scaled to size 6.35065pt on input line 110.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.6pt on input line 109.
+(Font)              scaled to size 6.6pt on input line 110.
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 5.2922pt on input line 109.
+(Font)              scaled to size 5.2922pt on input line 110.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 109.
+(Font)              scaled to size 5.5pt on input line 110.
 
 
 ) (./sections/04_proposal.tex
@@ -933,4 +933,4 @@ Here is how much of TeX's memory you used:
  36 hyphenation exceptions out of 8191
  80i,12n,93p,439b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (6 pages, 69728 bytes).
+Output written on main.dvi (6 pages, 69724 bytes).
