@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  5 FEB 2026 06:33
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.uptex) (TeX Live 2025) (preloaded format=uplatex 2025.3.17)  5 FEB 2026 10:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -783,41 +783,41 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 
 
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 51.
+(Font)              scaled to size 7.69775pt on input line 50.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 51.
+(Font)              scaled to size 8.0pt on input line 50.
 File: figures/week_strong.pdf Graphic file (type pdf)
 <figures/week_strong.pdf>
 File: figures/mt_sed.pdf Graphic file (type pdf)
 <figures/mt_sed.pdf>
 LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 74.
+(Font)              scaled to size 4.8111pt on input line 73.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.0pt on input line 74.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 74.
+(Font)              scaled to size 5.0pt on input line 73.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtt on input line 73.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/newtx/ot1ntxtt.fd
 File: ot1ntxtt.fd 2012/04/20 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/ntxtt/m/n' will be
-(Font)              scaled to size 7.0pt on input line 74.
+(Font)              scaled to size 7.0pt on input line 73.
 LaTeX Font Info:    Font shape `OT1/minntx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `OML/ntxmi/m/it' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `LMS/ntxsy/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `LMX/ntxexx/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `U/ntxmia/m/it' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `U/ntxsym/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `U/ntxsyc/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
-(Font)              scaled to size 7.3pt on input line 74.
+(Font)              scaled to size 7.3pt on input line 73.
 
-Overfull \hbox (2.3743pt too wide) in paragraph at lines 74--74
+Overfull \hbox (2.3743pt too wide) in paragraph at lines 73--73
 [][][]$\OT1/ntxtt/m/n/7 https : / / github . com / DCASE-[]REPO / DESED _ task / tree / master / recipes /
  []
 
@@ -934,4 +934,4 @@ Here is how much of TeX's memory you used:
  36 hyphenation exceptions out of 8191
  80i,12n,93p,439b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (6 pages, 70792 bytes).
+Output written on main.dvi (6 pages, 70840 bytes).
