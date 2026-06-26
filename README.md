@@ -1,3 +1,3 @@
-# README for your project 
-
-This is a blank README file. You can add your project description here.
+# これは何?
+2026年3月 沖縄で行われたNS研究会に提出した原稿です.
+研究室向けに公開します.
